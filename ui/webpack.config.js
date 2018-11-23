@@ -10,6 +10,18 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 loader: "babel-loader",
                 options: { presets: ["@babel/env"] }
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    "style-loader", // creates style nodes from JS strings
+                    {
+                        loader: "css-loader", // translates CSS into CommonJS
+                        options: { 
+                            modules: true
+                        }
+                    }
+                ]
             }
         ]
     },
