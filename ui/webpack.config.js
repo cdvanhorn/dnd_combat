@@ -13,5 +13,10 @@ module.exports = {
             }
         ]
     },
-    resolve: { extensions: ["*", ".js", ".jsx"] }
+    devtool: 'inline-source-map',
+    devServer: {
+        contentBase: path.join(__dirname, "public/"),
+        port: 3000,
+        publicPath: "http://localhost:3000/dist/"
+    },  
 };
