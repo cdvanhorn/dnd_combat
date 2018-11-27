@@ -12,7 +12,7 @@ module.exports = {
                 options: { presets: ["@babel/env"] }
             },
             {
-                test: /\.css$/,
+                test: /\.s?css$/,
                 use: [
                     "style-loader", // creates style nodes from JS strings
                     {
@@ -20,7 +20,8 @@ module.exports = {
                         options: { 
                             modules: true
                         }
-                    }
+                    },
+                    "sass-loader"
                 ]
             }
         ]

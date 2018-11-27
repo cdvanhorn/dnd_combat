@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Button } from 'react-toolbox/lib/button';
+import Application from "./Application.js"
 
 ReactDOM.render(
-    <Button label="Hello World!" raised primary/>,
+    <Application />,
     document.getElementById('root')
 );
