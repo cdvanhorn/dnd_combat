@@ -2,13 +2,14 @@ import React from "react";
 import { Layout, Panel, NavDrawer, Sidebar } from "react-toolbox/lib/layout";
 import { IconButton } from "react-toolbox/lib/button";
 import { AppBar } from "react-toolbox/lib/app_bar";
+import Navigation from "./Navigation.js";
 
 class Application extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             drawerActive: false,
-            sidebarPinned: true
+            sidebarPinned: false
         };
         this.toggleDrawerActive = this.toggleDrawerActive.bind(this);
         this.toggleSidebarPinned = this.toggleSidebarPinned.bind(this);
@@ -44,9 +45,7 @@ class Application extends React.Component {
                 <NavDrawer active={this.state.drawerActive}
                     permanentAt='xxl'
                     onOverlayClick={ this.toggleDrawerActive }>
-                    <p>
-                        Navigation, account switcher, etc. go here.
-                    </p>
+                    <Navigation app={this}/>
                 </NavDrawer>
                 <Panel>
                     <AppBar leftIcon='menu' onLeftIconClick={this.toggleDrawerActive} />
