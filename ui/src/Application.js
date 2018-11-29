@@ -9,7 +9,8 @@ class Application extends React.Component {
         super(props);
         this.state = {
             drawerActive: false,
-            sidebarPinned: false
+            sidebarPinned: false,
+            activePage: "Combat"
         };
         this.toggleDrawerActive = this.toggleDrawerActive.bind(this);
         this.toggleSidebarPinned = this.toggleSidebarPinned.bind(this);
@@ -39,7 +40,24 @@ class Application extends React.Component {
         }));
     }
 
+    setActivePage(newPage) {
+        this.setState(state => ({
+            activePage: newPage
+        }));
+    }
+
+    setActivePageHome() {
+        this.setActivePage("Combat");
+    }
+
     render() {
+        let content;
+        if (!React.isValidElement(this.state.activePage)) {
+            content = <h1>Unknown Page, {this.state.activePage}</h1>;
+        } else {
+            content = React.createElement(this.state.activePage, {app: this}, null);
+        }
+
         return (
             <Layout>
                 <NavDrawer active={this.state.drawerActive}
@@ -50,8 +68,7 @@ class Application extends React.Component {
                 <Panel>
                     <AppBar leftIcon='menu' onLeftIconClick={this.toggleDrawerActive} />
                     <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem' }}>
-                        <h1>Main Content</h1>
-                        <p>Main content goes here.</p>
+                        {content}
                     </div>
                 </Panel>
                 <Sidebar pinned={ this.state.sidebarPinned } width={ 5 }>

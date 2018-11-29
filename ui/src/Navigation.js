@@ -9,7 +9,7 @@ class Navigation extends React.Component {
     render() {
         return (
             <List selectable ripple>
-                <ListSubHeader caption='CoMBAt Menu' />
+                <ListSubHeader caption='ComBAt Menu' />
                 <ListItem
                     leftIcon="face"
                     caption="Player Characters"
