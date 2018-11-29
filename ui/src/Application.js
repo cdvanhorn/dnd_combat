@@ -14,6 +14,8 @@ class Application extends React.Component {
         };
         this.toggleDrawerActive = this.toggleDrawerActive.bind(this);
         this.toggleSidebarPinned = this.toggleSidebarPinned.bind(this);
+        this.setActivePage = this.setActivePage.bind(this);
+        this.setActivePageHome = this.setActivePageHome.bind(this);
     }
 
     toggleDrawerActive() {
@@ -42,7 +44,8 @@ class Application extends React.Component {
 
     setActivePage(newPage) {
         this.setState(state => ({
-            activePage: newPage
+            activePage: newPage,
+            drawerActive: false
         }));
     }
 
