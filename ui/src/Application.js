@@ -3,6 +3,7 @@ import { Layout, Panel, NavDrawer, Sidebar } from "react-toolbox/lib/layout";
 import { IconButton } from "react-toolbox/lib/button";
 import { AppBar } from "react-toolbox/lib/app_bar";
 import Navigation from "./Navigation.js";
+import Characters from "./Characters.js";
 
 class Application extends React.Component {
     constructor(props) {
@@ -10,7 +11,7 @@ class Application extends React.Component {
         this.state = {
             drawerActive: false,
             sidebarPinned: false,
-            activePage: "Combat"
+            activePage: "Characters"
         };
         this.toggleDrawerActive = this.toggleDrawerActive.bind(this);
         this.toggleSidebarPinned = this.toggleSidebarPinned.bind(this);
@@ -55,11 +56,12 @@ class Application extends React.Component {
 
     render() {
         let content;
-        if (!React.isValidElement(this.state.activePage)) {
-            content = <h1>Unknown Page, {this.state.activePage}</h1>;
+        if (this.state.activePage == "Characters") {
+            content = React.createElement(Characters, {app: this}, null);
         } else {
-            content = React.createElement(this.state.activePage, {app: this}, null);
+            content = <h1>Unknown Page, {this.state.activePage}</h1>;
         }
+        
 
         return (
             <Layout>
@@ -70,7 +72,7 @@ class Application extends React.Component {
                 </NavDrawer>
                 <Panel>
                     <AppBar leftIcon='menu' onLeftIconClick={this.toggleDrawerActive} />
-                    <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem' }}>
+                    <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem', flexDirection: 'row'}}>
                         {content}
                     </div>
                 </Panel>
