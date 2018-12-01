@@ -8,10 +8,15 @@ import Characters from "./Characters.js";
 class Application extends React.Component {
     constructor(props) {
         super(props);
+        let defaultPage = "Combat";
+        let defaultTitle = "Combat Tracker";
         this.state = {
             drawerActive: false,
             sidebarPinned: false,
-            activePage: "Characters"
+            activePage: defaultPage,
+            title: defaultTitle,
+            defaultPage: defaultPage,
+            defaultTitle: defaultTitle
         };
         this.toggleDrawerActive = this.toggleDrawerActive.bind(this);
         this.toggleSidebarPinned = this.toggleSidebarPinned.bind(this);
@@ -43,15 +48,16 @@ class Application extends React.Component {
         }));
     }
 
-    setActivePage(newPage) {
+    setActivePage(newPage, title) {
         this.setState(state => ({
             activePage: newPage,
-            drawerActive: false
+            drawerActive: false,
+            title: title
         }));
     }
 
     setActivePageHome() {
-        this.setActivePage("Combat");
+        this.setActivePage(this.state.defaultPage, this.state.defaultTitle);
     }
 
     render() {
@@ -71,7 +77,7 @@ class Application extends React.Component {
                     <Navigation app={this}/>
                 </NavDrawer>
                 <Panel>
-                    <AppBar leftIcon='menu' onLeftIconClick={this.toggleDrawerActive} />
+                    <AppBar leftIcon='menu' onLeftIconClick={this.toggleDrawerActive} title={this.state.title}/>
                     <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem', flexDirection: 'row'}}>
                         {content}
                     </div>

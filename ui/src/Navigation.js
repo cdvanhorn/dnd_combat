@@ -14,7 +14,7 @@ class Navigation extends React.Component {
                     leftIcon="face"
                     caption="Player Characters"
                     legend="Edit Player Characters"
-                    onClick={(e) => this.props.app.setActivePage("Characters", e)}
+                    onClick={(e) => this.props.app.setActivePage("Characters", "Player Characters", e)}
                 />
             </List>
         );
