@@ -3,34 +3,32 @@ import { Input } from "react-toolbox/lib/input";
 import { List, ListItem, ListSubHeader, ListDivider } from "react-toolbox/lib/list";
 import { Button } from "react-toolbox/lib/button";
 
+import { connect } from "react-redux";
+import { setPlayerCharacterSearch } from "./redux/actions";
+
 class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            needle: null
+            filter: ''
         };
         this.filterList = this.filterList.bind(this);
     }
 
     filterList(e) {
-        this.setState({needle: e});
+        this.setState({filter: e});
+        this.props.setPlayerCharacterSearch(e);
     }
 
     render() {
         return (
             <div>
                 <div>
-                    <Input type='text' label='Search' icon='search' name='search' value={this.state.needle} onChange={this.filterList} />
+                    <Input type='text' label='Search' icon='search' name='search' value={this.state.filter} onChange={this.filterList} />
                 </div>
                 <div>
                     <List selectable ripple>
                         <ListDivider />
-                        <ListItem
-                            leftIcon="broken_image"
-                            caption="Character Name"
-                            legend="Race Class Level"
-                            rightActions={[<Button primary raised icon='security' label='Add'/>]}
-                        />
                         {/* only add if list editable */}
                         <ListDivider />
                         <ListItem caption='Add Player Character' leftIcon='add_circle' />
@@ -41,4 +39,8 @@ class Search extends React.Component {
     }
 }
 
-export default Search;
+export default connect(
+    null,
+    { setPlayerCharacterSearch }
+)(Search);
+//export default Search;
