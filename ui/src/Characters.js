@@ -1,6 +1,24 @@
 import React from "react";
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
+import Search from './Search.js';
+
+class PlayerCharacterDetails extends React.Component {
+    render() {
+        return (
+            <p>Player Character Details</p>
+        );
+    }
+}
+
+class PlayerCharacterSearch extends React.Component {
+    render() {
+        return (
+            <Search />
+        );
+    }
+}
+
 class Characters extends React.Component {
     constructor(props) {
         super(props);
@@ -10,8 +28,11 @@ class Characters extends React.Component {
         return (
             <Grid fluid>
                 <Row>
-                    <Col xs={6} md={3}>
-                        Hello, world!
+                    <Col sm={4}>
+                        <PlayerCharacterSearch />
+                    </Col>
+                    <Col sm={8}>
+                        <PlayerCharacterDetails />
                     </Col>
                 </Row>
             </Grid>
