@@ -23,7 +23,9 @@ class Search extends React.Component {
                         <ListDivider />
                         {/* only add if list editable */}
                         <ListDivider />
-                        <ListItem caption='Add Player Character' leftIcon='add_circle' />
+                        <ListItem caption='Create'
+                            leftIcon='add_circle'
+                            onClick={this.props.create}/>
                     </List>
                 </div>
             </div>
