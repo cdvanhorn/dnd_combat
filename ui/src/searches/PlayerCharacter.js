@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { ListItem } from "react-toolbox/lib/list";
 
 import Search from '../Search.js';
 import { setPlayerCharacterSearch, selectPlayerCharacter } from "../redux/actions";
@@ -19,10 +20,9 @@ class PlayerCharacterSearch extends React.Component {
 
     render() {
         return (
-            <Search 
-                filterList={this.filterList}
-                filter={this.props.player_character_search}
-                create={this.onCreate} />
+            <Search filterList={this.filterList} filter={this.props.player_character_search} create={this.onCreate}>
+                <ListItem caption="test" />
+            </Search>
         );
     }
 }

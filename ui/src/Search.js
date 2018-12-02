@@ -1,13 +1,19 @@
 import React from "react";
 import { Input } from "react-toolbox/lib/input";
 import { List, ListItem, ListDivider } from "react-toolbox/lib/list";
+import { connect } from "react-redux";
+
+const mapStateToProps = state => {
+    return { "can_edit": state.ui.can_edit };
+};
 
 class Search extends React.Component {
-    /*constructor(props) {
-        super(props);
-    }*/
-
     render() {
+        let create_list_item;
+        if(this.props.can_edit) {
+            create_list_item = <ListItem caption='Create' leftIcon='add_circle' onClick={this.props.create}/>;
+        }
+
         return (
             <div>
                 <div>
@@ -21,11 +27,9 @@ class Search extends React.Component {
                 <div>
                     <List selectable ripple>
                         <ListDivider />
-                        {/* only add if list editable */}
+                        {this.props.children}
                         <ListDivider />
-                        <ListItem caption='Create'
-                            leftIcon='add_circle'
-                            onClick={this.props.create}/>
+                        { create_list_item }
                     </List>
                 </div>
             </div>
@@ -33,4 +37,4 @@ class Search extends React.Component {
     }
 }
 
-export default Search;
+export default connect(mapStateToProps)(Search);

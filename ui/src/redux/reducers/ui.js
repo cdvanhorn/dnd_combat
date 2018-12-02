@@ -2,7 +2,8 @@ import { UI_PLAYER_CHARACTER_SEARCH, UI_PLAYER_CHARACTER_SELECT } from "../actio
 
 const initialState = {
     player_character_search: '',
-    selected_pc_id: null
+    selected_pc_id: null,
+    can_edit: true
 };
 
 export default function(state = initialState, action) {
