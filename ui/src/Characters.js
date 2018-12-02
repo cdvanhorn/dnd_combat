@@ -1,20 +1,11 @@
 import React from "react";
 import { Grid, Row, Col } from 'react-flexbox-grid';
-
-import Search from './Search.js';
+import PlayerCharacterSearch from './searches/PlayerCharacter.js';
 
 class PlayerCharacterDetails extends React.Component {
     render() {
         return (
             <p>Player Character Details</p>
-        );
-    }
-}
-
-class PlayerCharacterSearch extends React.Component {
-    render() {
-        return (
-            <Search />
         );
     }
 }
