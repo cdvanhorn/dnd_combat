@@ -24,7 +24,12 @@ class Search extends React.Component {
         return (
             <div>
                 <div>
-                    <Input type='text' label='Search' icon='search' name='search' value={this.props.player_character_search} onChange={this.filterList} />
+                    <Input type='text'
+                        label='Search'
+                        icon='search'
+                        name='search'
+                        value={this.props.player_character_search}
+                        onChange={this.filterList} />
                 </div>
                 <div>
                     <List selectable ripple>
