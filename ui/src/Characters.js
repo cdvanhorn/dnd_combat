@@ -1,14 +1,8 @@
 import React from "react";
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import PlayerCharacterSearch from './searches/PlayerCharacter.js';
+import PlayerCharacterDetails from './details/PlayerCharacter.js';
 
-class PlayerCharacterDetails extends React.Component {
-    render() {
-        return (
-            <p>Player Character Details</p>
-        );
-    }
-}
 
 class Characters extends React.Component {
     constructor(props) {
