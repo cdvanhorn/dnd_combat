@@ -6,17 +6,17 @@ import { Button } from "react-toolbox/lib/button";
 import { connect } from "react-redux";
 import { setPlayerCharacterSearch } from "./redux/actions";
 
+const mapStateToProps = state => {
+    return { "player_character_search": state.ui.player_character_search };
+};
+
 class Search extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            filter: ''
-        };
         this.filterList = this.filterList.bind(this);
     }
 
     filterList(e) {
-        this.setState({filter: e});
         this.props.setPlayerCharacterSearch(e);
     }
 
@@ -24,7 +24,7 @@ class Search extends React.Component {
         return (
             <div>
                 <div>
-                    <Input type='text' label='Search' icon='search' name='search' value={this.state.filter} onChange={this.filterList} />
+                    <Input type='text' label='Search' icon='search' name='search' value={this.props.player_character_search} onChange={this.filterList} />
                 </div>
                 <div>
                     <List selectable ripple>
@@ -40,7 +40,7 @@ class Search extends React.Component {
 }
 
 export default connect(
-    null,
+    mapStateToProps,
     { setPlayerCharacterSearch }
 )(Search);
 //export default Search;
