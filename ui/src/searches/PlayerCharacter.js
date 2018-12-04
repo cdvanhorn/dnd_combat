@@ -7,7 +7,11 @@ import { setPlayerCharacterSearch, selectPlayerCharacter } from "../redux/action
 import { fetchPlayerCharacters } from "../redux/actions/pcs.js";
 
 const mapStateToProps = state => {
-    return { "player_character_search": state.ui.player_character_search };
+    return { 
+        "player_character_search": state.ui.player_character_search,
+        "player_characters": state.pcs.items,
+        "is_fetching": state.pcs.is_fetching
+    };
 };
 
 class PlayerCharacterSearch extends React.Component {
@@ -21,13 +25,22 @@ class PlayerCharacterSearch extends React.Component {
 
     componentDidMount = () => {
         //get the player characters
-        this.props.fetchPlayerCharacters('foo');
+        this.props.fetchPlayerCharacters('http://localhost:3001/pcs');
+    }
+
+    componentWillUnmount = () => {
+        //clear character list?
+        console.log("character search unmount");
     }
 
     render() {
         return (
             <Search filterList={this.filterList} filter={this.props.player_character_search} create={this.onCreate}>
-                <ListItem caption="test" />
+                {
+                    this.props.player_characters.map( (item, index) => {
+                        return (<ListItem caption={item.name} />);
+                    })
+                }
             </Search>
         );
     }

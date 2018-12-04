@@ -1,4 +1,4 @@
-import { PCS_REQUEST_PLAYER_CHARACTERS } from "../actionTypes.js";
+import { PCS_REQUEST_PLAYER_CHARACTERS, PCS_RECEIVE_PLAYER_CHARACTERS } from "../actionTypes.js";
 
 const initialState = {
     items: [],
@@ -12,6 +12,13 @@ export default function(state = initialState, action) {
             return { 
                 ...state,
                 is_fetching: payload.is_fetching
+            };
+        case PCS_RECEIVE_PLAYER_CHARACTERS:
+            payload = action.payload;
+            return {
+                ...state,
+                is_fetching: payload.is_fetching,
+                items: payload.items
             };
         default:
             return state;
