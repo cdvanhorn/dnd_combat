@@ -35,7 +35,13 @@ class PlayerCharacterSearch extends React.Component {
 
     render() {
         return (
-            <Search filterList={this.filterList} filter={this.props.player_character_search} create={this.onCreate}>
+            <Search
+                filterList={this.filterList}
+                filter={this.props.player_character_search}
+                create={this.onCreate}
+                loading={this.props.is_fetching}
+                loadingText = "Loading Characters"
+            >
                 {
                     this.props.player_characters.map( (item, index) => {
                         return (<ListItem caption={item.name} />);

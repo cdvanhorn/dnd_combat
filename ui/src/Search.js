@@ -14,6 +14,13 @@ class Search extends React.Component {
             create_list_item = <ListItem caption='Create' leftIcon='add_circle' onClick={this.props.create}/>;
         }
 
+        let list_content;
+        if(this.props.loading) {
+            list_content = <ListItem caption={this.props.loadingText + '...'} />;
+        } else {
+            list_content = this.props.children;
+        }
+
         return (
             <div>
                 <div>
@@ -27,7 +34,7 @@ class Search extends React.Component {
                 <div>
                     <List selectable ripple>
                         <ListDivider />
-                        {this.props.children}
+                        {list_content}
                         <ListDivider />
                         { create_list_item }
                     </List>
