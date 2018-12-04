@@ -1,0 +1,26 @@
+{
+    "pcs": [
+        {
+            "id": 1,
+            "name": "Steve Stephen Stevenson",
+            "race_id": 1,
+            "class_id": 1
+        }
+    ],
+    "classes": [
+        {
+            "id": 1,
+            "name": "Fighter"
+        }
+    ],
+    "races": [
+        {
+            "id": 1,
+            "name": "Human"
+        },
+        {
+            "id": 2,
+            "name": "Dwarf"
+        }
+    ]
+}
