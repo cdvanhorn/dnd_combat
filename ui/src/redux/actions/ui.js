@@ -1,4 +1,4 @@
-import { UI_PLAYER_CHARACTER_SEARCH, UI_PLAYER_CHARACTER_SELECT } from "./actionTypes";
+import { UI_PLAYER_CHARACTER_SEARCH, UI_PLAYER_CHARACTER_SELECT } from "../actionTypes.js";
 
 export const setPlayerCharacterSearch = filter => ({
     type: UI_PLAYER_CHARACTER_SEARCH,
