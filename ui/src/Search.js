@@ -14,9 +14,14 @@ class Search extends React.Component {
             create_list_item = <ListItem caption='Create' leftIcon='add_circle' onClick={this.props.create}/>;
         }
 
+        let loading_text = 'Loading';
+        if(this.props.loadingText) {
+            loading_text = this.props.loadingText;
+        }
+
         let list_content;
         if(this.props.loading) {
-            list_content = <ListItem caption={this.props.loadingText + '...'} />;
+            list_content = <ListItem caption={loading_text + '...'} leftIcon='cloud_download'/>;
         } else {
             list_content = this.props.children;
         }
