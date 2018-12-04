@@ -21,7 +21,7 @@ class Search extends React.Component {
 
         let list_content;
         if(this.props.loading) {
-            list_content = <ListItem caption={loading_text + '...'} leftIcon='cloud_download'/>;
+            list_content = <ListItem caption={loading_text + '...'} leftIcon='cloud_download' disabled={true}/>;
         } else {
             list_content = this.props.children;
         }
@@ -34,7 +34,8 @@ class Search extends React.Component {
                         icon='search'
                         name='search'
                         value={this.props.filter}
-                        onChange={this.props.filterList} />
+                        onChange={this.props.filterList} 
+                        disabled={this.props.loading} />
                 </div>
                 <div>
                     <List selectable ripple>
