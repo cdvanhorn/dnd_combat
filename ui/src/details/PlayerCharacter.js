@@ -21,12 +21,16 @@ function CharacterForm(props) {
                 auto
                 source={props.races}
                 value={props.character.race_id}
+                labelKey={"name"}
+                valueKey={"id"}
             />
             <Dropdown
                 label="Class"
                 auto
                 source={props.classes}
                 value={props.character.class_id}
+                labelKey={"name"}
+                valueKey={"id"}
             />
         </div>
     )
@@ -38,8 +42,8 @@ class PlayerCharacterDetails extends React.Component {
         if(this.props.selected_pc_id == CREATE_PLAYER_CHARACTER_ID) {
             content = CharacterForm({
                 character: {id: 1, name: "Steve Stephen Stevenson", race_id: 1, class_id: 1},
-                races: [{value: 1, label: "Human"}],
-                classes: [{value: 1, label: "Fighter"}]
+                races: [{id: 1, name: "Human"}],
+                classes: [{id: 1, name: "Fighter"}]
             });
         } else {
             //check for valid pc id, display details
