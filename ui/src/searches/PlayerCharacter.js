@@ -8,7 +8,7 @@ import {
     setPlayerCharacterSearch,
     selectPlayerCharacter,
     CREATE_PLAYER_CHARACTER_ID
-} from "../redux/actions/pcs.js";
+} from "../redux/actions/playerCharacters.js";
 
 const mapStateToProps = state => {
     return { 
