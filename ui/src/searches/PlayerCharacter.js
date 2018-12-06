@@ -6,7 +6,8 @@ import Search from '../Search.js';
 import { 
     fetchPlayerCharacters,
     setPlayerCharacterSearch,
-    selectPlayerCharacter
+    selectPlayerCharacter,
+    CREATE_PLAYER_CHARACTER_ID
 } from "../redux/actions/pcs.js";
 
 const mapStateToProps = state => {
@@ -23,11 +24,11 @@ class PlayerCharacterSearch extends React.Component {
     }
 
     onCreate = (e) => {
-        this.props.selectPlayerCharacter('create');
+        this.props.selectPlayerCharacter(CREATE_PLAYER_CHARACTER_ID);
     }
 
     componentDidMount = () => {
-        //get the player characters
+        //get the player characters to populate the list
         this.props.fetchPlayerCharacters('http://localhost:3001/pcs');
     }
 

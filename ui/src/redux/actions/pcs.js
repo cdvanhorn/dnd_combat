@@ -6,6 +6,8 @@ import {
     PCS_UI_PLAYER_CHARACTER_SELECT
 } from "../actionTypes.js";
 
+export const CREATE_PLAYER_CHARACTER_ID = "create";
+
 export const setPlayerCharacterSearch = filter => ({
     type: PCS_UI_PLAYER_CHARACTER_SEARCH,
     payload: { filter }
