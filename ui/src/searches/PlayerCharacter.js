@@ -3,14 +3,17 @@ import { connect } from "react-redux";
 import { ListItem } from "react-toolbox/lib/list";
 
 import Search from '../Search.js';
-import { setPlayerCharacterSearch, selectPlayerCharacter } from "../redux/actions/ui.js";
-import { fetchPlayerCharacters } from "../redux/actions/pcs.js";
+import { 
+    fetchPlayerCharacters,
+    setPlayerCharacterSearch,
+    selectPlayerCharacter
+} from "../redux/actions/pcs.js";
 
 const mapStateToProps = state => {
     return { 
-        "player_character_search": state.ui.player_character_search,
+        "player_character_search": state.pcs.ui_player_character_search,
         "player_characters": state.pcs.items,
-        "is_fetching": state.pcs.is_fetching
+        "is_fetching": state.pcs.ui_is_fetching
     };
 };
 
@@ -54,5 +57,9 @@ class PlayerCharacterSearch extends React.Component {
 
 export default connect(
     mapStateToProps,
-    { setPlayerCharacterSearch, selectPlayerCharacter, fetchPlayerCharacters }
+    {
+        setPlayerCharacterSearch,
+        selectPlayerCharacter,
+        fetchPlayerCharacters
+    }
 )(PlayerCharacterSearch);

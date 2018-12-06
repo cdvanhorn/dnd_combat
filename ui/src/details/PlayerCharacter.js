@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => {
-    return { "selected_pc_id": state.ui.selected_pc_id };
+    return { "selected_pc_id": state.pcs.ui_selected_pc_id };
 };
 
 class PlayerCharacterDetails extends React.Component {
