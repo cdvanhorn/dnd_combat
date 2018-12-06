@@ -7,11 +7,13 @@ import {Dropdown} from "react-toolbox/lib/dropdown";
 
 import { CREATE_PLAYER_CHARACTER_ID } from "../redux/actions/playerCharacters.js";
 import {fetchClasses} from "../redux/actions/classes.js";
+import {fetchRaces} from "../redux/actions/races.js";
 
 const mapStateToProps = state => {
     return { 
         "selected_pc_id": state.pcs.ui_selected_pc_id,
-        "classes": state.classes.items
+        "classes": state.classes.items,
+        "races": state.races.items
     };
 };
 
@@ -44,11 +46,12 @@ class PlayerCharacterDetails extends React.Component {
     componentDidMount = () => {
         //get the player characters to populate the list
         this.props.fetchClasses('http://localhost:3001/classes');
+        this.props.fetchRaces('http://localhost:3001/races');
     }
 
     componentWillUnmount = () => {
         //clear character list?
-        console.log("character search unmount");
+        console.log("player character details unmount");
     }
 
     render() {
@@ -56,7 +59,7 @@ class PlayerCharacterDetails extends React.Component {
         if(this.props.selected_pc_id == CREATE_PLAYER_CHARACTER_ID) {
             content = CharacterForm({
                 character: {id: 1, name: "Steve Stephen Stevenson", race_id: 1, class_id: 1},
-                races: [{id: 1, name: "Human"}],
+                races: this.props.races,
                 classes: this.props.classes
             });
         } else {
@@ -75,6 +78,7 @@ class PlayerCharacterDetails extends React.Component {
 export default connect(
     mapStateToProps,
     {
-        fetchClasses
+        fetchClasses,
+        fetchRaces
     }
 )(PlayerCharacterDetails);
