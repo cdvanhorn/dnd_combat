@@ -27,6 +27,10 @@ class PlayerCharacterSearch extends React.Component {
         this.props.selectPlayerCharacter(CREATE_PLAYER_CHARACTER_ID);
     }
 
+    selectCharacter = (id) => {
+        this.props.selectPlayerCharacter(id);
+    }
+
     componentDidMount = () => {
         //get the player characters to populate the list
         this.props.fetchPlayerCharacters('http://localhost:3001/pcs');
@@ -47,8 +51,15 @@ class PlayerCharacterSearch extends React.Component {
                 loadingText = "Loading Characters"
             >
                 {
-                    this.props.player_characters.map( (item, index) => {
-                        return (<ListItem caption={item.name} />);
+                    this.props.player_characters.map( (item) => {
+                        return (
+                            <ListItem
+                                caption={item.name}
+                                onClick={(e) => this.selectCharacter(item.id, e)}
+                                key={item.id}
+                                selectabe={true}
+                            />
+                        );
                     })
                 }
             </Search>
