@@ -4,7 +4,14 @@
             "id": 1,
             "name": "Steve Stephen Stevenson",
             "race_id": 1,
-            "class_id": 1
+            "class_id": 1,
+            "level": 1,
+            "strength": 18,
+            "constitution": 18,
+            "dexterity": 18,
+            "wisdom": 18,
+            "intelligence": 18,
+            "charisma": 18
         }
     ],
     "classes": [
