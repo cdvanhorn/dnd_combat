@@ -1,9 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import {Avatar} from "react-toolbox/lib/avatar";
-import {Input} from "react-toolbox/lib/input";
-import {Dropdown} from "react-toolbox/lib/dropdown";
+import {PlayerCharacterForm} from "../forms/PlayerCharacter.js";
 
 import { CREATE_PLAYER_CHARACTER_ID } from "../redux/actions/playerCharacters.js";
 import {fetchClasses} from "../redux/actions/classes.js";
@@ -18,31 +16,6 @@ const mapStateToProps = state => {
     };
 };
 
-function CharacterForm(props) {
-    return (
-        <div>
-            <Avatar title={props.character.name} />
-            <Input type='text' label='Character Name' name='name' value={props.character.name}/>
-            <Dropdown
-                label="Race"
-                auto
-                source={props.races}
-                value={props.character.race_id}
-                labelKey={"name"}
-                valueKey={"id"}
-            />
-            <Dropdown
-                label="Class"
-                auto
-                source={props.classes}
-                value={props.character.class_id}
-                labelKey={"name"}
-                valueKey={"id"}
-            />
-        </div>
-    )
-}
-
 class PlayerCharacterDetails extends React.Component {
     componentDidMount = () => {
         //get the player characters to populate the list
@@ -56,19 +29,19 @@ class PlayerCharacterDetails extends React.Component {
     }
 
     render() {
-        let content = <p>Select a Player Character</p>;
-        if(this.props.selected_pc_id == CREATE_PLAYER_CHARACTER_ID) {
-            content = CharacterForm({
-                character: {},
-                races: this.props.races,
-                classes: this.props.classes
-            });
-        } else if(this.props.selected_pc_id){
-            content = CharacterForm({
-                character: this.props.characters.find((char) => char.id === this.props.selected_pc_id),
-                races: this.props.races,
-                classes: this.props.classes
-            });
+        //try and find the character
+        let character;
+        if(this.props.selected_pc_id && this.props.selected_pc_id !== CREATE_PLAYER_CHARACTER_ID) {
+            character = this.props.characters.find((char) => char.id === this.props.selected_pc_id);
+        }
+
+        let content;
+        if(character) {
+            content = <PlayerCharacterForm character={character} />;
+        } else if(this.props.selected_pc_id == CREATE_PLAYER_CHARACTER_ID) {
+            content = <PlayerCharacterForm />;
+        } else {
+            content = <p>Select a Player Character</p>;
         }
 
         return (
