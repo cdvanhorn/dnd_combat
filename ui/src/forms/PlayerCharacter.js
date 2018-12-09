@@ -8,18 +8,35 @@ export class PlayerCharacterForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            character: {
-                name: "Banana"
-            }
+            character: {}
         };
+        if(props.character) {
+            this.state.character = Object.assign(props.character, this.state.character);
+        }
+    }
+
+    handleChange = (name, value) => {
+        this.setState({
+            character: Object.assign(this.state.character, {[name]: value})
+        });
+    }
+
+    handleSubmit = (event) => {
+        console.log("submission bitches");
     }
 
     render() {
         let character = this.state.character;
         return (
-            <form>
-                <Avatar title={character.name} />
-                <Input type='text' label='Character Name' name='name' value={character.name}/>
+            <form onSubmit={this.handleSubmit}>
+                <Avatar title={character.name}/>
+                <Input
+                    type='text'
+                    label='Character Name'
+                    name='name'
+                    value={character.name}
+                    onChange={this.handleChange.bind(this, 'name')}
+                />
                 {/*
                 <Dropdown
                     label="Race"
