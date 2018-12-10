@@ -8,13 +8,13 @@ class Characters extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            pc_selected: ""
+            pc_selected: {}
         };
     }
 
-    selectCharacter = (id) => {
+    selectCharacter = (character) => {
         this.setState({
-            pc_selected: id
+            pc_selected: character
         });
     }
 
@@ -28,7 +28,7 @@ class Characters extends React.Component {
                     </Col>
                     <Col sm={8}>
                         <PlayerCharacterDetails 
-                            selectedPlayerCharacterId={this.state.pc_selected} />
+                            selectedPlayerCharacter={this.state.pc_selected} />
                     </Col>
                 </Row>
             </Grid>

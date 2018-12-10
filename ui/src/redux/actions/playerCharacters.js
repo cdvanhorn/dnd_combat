@@ -4,8 +4,6 @@ import {
     PCS_RECEIVE_PLAYER_CHARACTERS
 } from "../actionTypes.js";
 
-export const CREATE_PLAYER_CHARACTER_ID = "create";
-
 export const requestPlayerCharacters = fetching => ({
     type: PCS_REQUEST_PLAYER_CHARACTERS,
     payload: {

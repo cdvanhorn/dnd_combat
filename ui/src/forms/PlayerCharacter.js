@@ -6,16 +6,6 @@ import {Input} from "react-toolbox/lib/input";
 import {Dropdown} from "react-toolbox/lib/dropdown";
 
 export class PlayerCharacterForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            character: {}
-        };
-        if(props.character) {
-            this.state.character = Object.assign(props.character, this.state.character);
-        }
-    }
-
     handleChange = (name, value) => {
         this.setState({
             character: Object.assign(this.state.character, {[name]: value})
@@ -28,7 +18,13 @@ export class PlayerCharacterForm extends React.Component {
     }
 
     render() {
-        let character = this.state.character;
+        let character = this.props.character;
+        return (
+            <div>
+                <p>{character.name}</p>
+            </div>
+        );
+        /*
         return (
             <form onSubmit={this.handleSubmit}>
                 <Avatar title={character.name}/>
@@ -39,7 +35,6 @@ export class PlayerCharacterForm extends React.Component {
                     value={character.name}
                     onChange={this.handleChange.bind(this, 'name')}
                 />
-                {/*
                 <Dropdown
                     label="Race"
                     auto
@@ -56,9 +51,9 @@ export class PlayerCharacterForm extends React.Component {
                     labelKey={"name"}
                     valueKey={"id"}
                 />
-                */}
                 <Button type='submit' icon='save' label='Save' raised primary />
             </form>
         )
+        */
     }
 }

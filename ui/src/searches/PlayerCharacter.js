@@ -4,9 +4,10 @@ import { ListItem } from "react-toolbox/lib/list";
 
 import Search from '../Search.js';
 import { 
-    fetchPlayerCharacters,
-    CREATE_PLAYER_CHARACTER_ID
+    fetchPlayerCharacters
 } from "../redux/actions/playerCharacters.js";
+
+import {PlayerCharacter} from "../models/PlayerCharacter.js";
 
 const mapStateToProps = state => {
     return { 
@@ -31,11 +32,13 @@ class PlayerCharacterSearch extends React.Component {
     }
 
     onCreate = (e) => {
-        this.props.selectCharacter(CREATE_PLAYER_CHARACTER_ID);
+        this.props.selectCharacter(new PlayerCharacter());
     }
 
-    handleClick = (id, e) => {
-        this.props.selectCharacter(id);
+    handleClick = (character, e) => {
+        let pc = new PlayerCharacter();
+        pc.fromJson(character);
+        this.props.selectCharacter(pc);
     }
 
     componentDidMount = () => {
@@ -66,7 +69,7 @@ class PlayerCharacterSearch extends React.Component {
                         return (
                             <ListItem
                                 caption={item.name}
-                                onClick={this.handleClick.bind(this, item.id)}
+                                onClick={this.handleClick.bind(this, item)}
                                 key={item.id}
                                 selectabe={true}
                             />
