@@ -21,7 +21,6 @@ class PlayerCharacterList extends React.Component {
 
     componentDidMount = () => {
         //get the player characters to populate the list
-        console.log("fetching players");
         this.props.fetchPlayerCharacters('http://localhost:3001/pcs');
     }
 
@@ -66,9 +65,9 @@ class PlayerCharacterList extends React.Component {
                 <div>
                     <List selectable ripple>
                         <ListDivider />
-                        {list_content}
-                        <ListDivider />
                         { create_list_item }
+                        <ListDivider />
+                        {list_content}
                     </List>
                 </div>
             </div>
