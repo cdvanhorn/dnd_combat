@@ -7,7 +7,6 @@ import {fetchRaces} from "../redux/actions/races.js";
 
 const mapStateToProps = state => {
     return {
-        "characters": state.pcs.items,
         "classes": state.classes.items,
         "races": state.races.items
     };
@@ -30,9 +29,13 @@ class PlayerCharacterDetails extends React.Component {
     }
 
     render() {
+        console.log("detail render");
         return (
             <div>
-                <PlayerCharacterForm character={this.props.selectedPlayerCharacter} />
+                <PlayerCharacterForm 
+                    character={this.props.selectedPlayerCharacter}
+                    updateCharacter={this.props.updateCharacter}    
+                />
             </div>
         );
     }

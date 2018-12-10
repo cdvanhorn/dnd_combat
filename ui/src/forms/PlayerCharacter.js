@@ -6,10 +6,13 @@ import {Input} from "react-toolbox/lib/input";
 import {Dropdown} from "react-toolbox/lib/dropdown";
 
 export class PlayerCharacterForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
     handleChange = (name, value) => {
-        this.setState({
-            character: Object.assign(this.state.character, {[name]: value})
-        });
+        this.props.updateCharacter(name, value);
     }
 
     handleSubmit = (event) => {
@@ -18,11 +21,22 @@ export class PlayerCharacterForm extends React.Component {
     }
 
     render() {
+        console.log("render");
         let character = this.props.character;
+        if(!character.hasOwnProperty('name')) {
+            return (<p>Select a Character</p>);
+        }
         return (
-            <div>
-                <p>{character.name}</p>
-            </div>
+            <form onSubmit={this.handleSubmit}>
+                <Avatar title={character.name}/>
+                <Input
+                    type='text'
+                    label='Character Name'
+                    name='name'
+                    value={character.name}
+                    onChange={this.handleChange.bind(this, 'name')}
+                />
+            </form>
         );
         /*
         return (

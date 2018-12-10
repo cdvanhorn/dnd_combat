@@ -10,6 +10,7 @@ class Characters extends React.Component {
         this.state = {
             pc_selected: {}
         };
+        this.updateCharacter = this.updateCharacter.bind(this);
     }
 
     selectCharacter = (character) => {
@@ -18,7 +19,14 @@ class Characters extends React.Component {
         });
     }
 
+    updateCharacter = (field, value) => {
+        this.setState({
+            pc_selected: Object.assign(this.state.pc_selected, {[field]: value})
+        })
+    }
+
     render() {
+        console.log("main render");
         return (
             <Grid fluid>
                 <Row>
@@ -28,7 +36,9 @@ class Characters extends React.Component {
                     </Col>
                     <Col sm={8}>
                         <PlayerCharacterDetails 
-                            selectedPlayerCharacter={this.state.pc_selected} />
+                            selectedPlayerCharacter={this.state.pc_selected}
+                            updateCharacter={this.updateCharacter}   
+                        />
                     </Col>
                 </Row>
             </Grid>
