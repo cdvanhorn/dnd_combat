@@ -24,8 +24,7 @@ class PlayerCharacterSearch extends React.Component {
     }
 
     onCreate = (e) => {
-        //this.props.selectPlayerCharacter(CREATE_PLAYER_CHARACTER_ID);
-        console.log("create");
+        this.props.selectCharacter(CREATE_PLAYER_CHARACTER_ID)
     }
 
     componentDidMount = () => {
