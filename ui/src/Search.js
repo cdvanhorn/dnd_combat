@@ -8,6 +8,15 @@ const mapStateToProps = state => {
 };
 
 class Search extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange = (value) => {
+        this.props.filterList(value);
+    }
+
     render() {
         let create_list_item;
         if(this.props.can_edit) {
@@ -34,7 +43,7 @@ class Search extends React.Component {
                         icon='search'
                         name='search'
                         value={this.props.filter}
-                        onChange={this.props.filterList} 
+                        onChange={this.handleChange} 
                         disabled={this.props.loading} />
                 </div>
                 <div>
