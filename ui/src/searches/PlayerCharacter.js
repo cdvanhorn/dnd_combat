@@ -31,7 +31,11 @@ class PlayerCharacterSearch extends React.Component {
     }
 
     onCreate = (e) => {
-        this.props.selectCharacter(CREATE_PLAYER_CHARACTER_ID)
+        this.props.selectCharacter(CREATE_PLAYER_CHARACTER_ID);
+    }
+
+    handleClick = (id, e) => {
+        this.props.selectCharacter(id);
     }
 
     componentDidMount = () => {
@@ -62,7 +66,7 @@ class PlayerCharacterSearch extends React.Component {
                         return (
                             <ListItem
                                 caption={item.name}
-                                onClick={(e) => this.props.selectCharacter(item.id, e)}
+                                onClick={this.handleClick.bind(this, item.id)}
                                 key={item.id}
                                 selectabe={true}
                             />
