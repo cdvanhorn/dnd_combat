@@ -6,6 +6,7 @@ import {PlayerCharacterForm} from "../forms/PlayerCharacter.js";
 import { CREATE_PLAYER_CHARACTER_ID } from "../redux/actions/playerCharacters.js";
 import {fetchClasses} from "../redux/actions/classes.js";
 import {fetchRaces} from "../redux/actions/races.js";
+import {PlayerCharacter} from "../models/PlayerCharacter.js";
 
 const mapStateToProps = state => {
     return {
@@ -29,16 +30,15 @@ class PlayerCharacterDetails extends React.Component {
 
     render() {
         //try and find the character
-        let character;
+        let character = new PlayerCharacter();
         if(this.props.selectedPlayerCharacterId && this.props.selectedPlayerCharacterId !== CREATE_PLAYER_CHARACTER_ID) {
-            character = this.props.characters.find((char) => char.id === this.props.selectedPlayerCharacterId);
+            let character_json = this.props.characters.find((char) => char.id === this.props.selectedPlayerCharacterId);
+            character.fromJson(character_json);
         }
 
         let content;
-        if(character) {
+        if(character.id || this.props.selectedPlayerCharacterId == CREATE_PLAYER_CHARACTER_ID) {
             content = <PlayerCharacterForm character={character} />;
-        } else if(this.props.selectedPlayerCharacterId == CREATE_PLAYER_CHARACTER_ID) {
-            content = <PlayerCharacterForm />;
         } else {
             content = <p>Select a Player Character</p>;
         }

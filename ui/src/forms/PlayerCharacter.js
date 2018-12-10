@@ -1,6 +1,7 @@
 import React from "react";
 
 import {Avatar} from "react-toolbox/lib/avatar";
+import {Button} from "react-toolbox/lib/button";
 import {Input} from "react-toolbox/lib/input";
 import {Dropdown} from "react-toolbox/lib/dropdown";
 
@@ -22,7 +23,8 @@ export class PlayerCharacterForm extends React.Component {
     }
 
     handleSubmit = (event) => {
-        console.log("submission bitches");
+        console.log(this.state.character);
+        event.preventDefault();
     }
 
     render() {
@@ -55,6 +57,7 @@ export class PlayerCharacterForm extends React.Component {
                     valueKey={"id"}
                 />
                 */}
+                <Button type='submit' icon='save' label='Save' raised primary />
             </form>
         )
     }
