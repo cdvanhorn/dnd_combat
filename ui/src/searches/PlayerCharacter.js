@@ -1,17 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { ListItem } from "react-toolbox/lib/list";
 
 import Search from '../Search.js';
-import { 
-    fetchPlayerCharacters
-} from "../redux/actions/playerCharacters.js";
-
 import {PlayerCharacter} from "../models/PlayerCharacter.js";
+import PlayerCharacterList from "../searches/PlayerCharacterList.js";
 
 const mapStateToProps = state => {
-    return { 
-        "player_characters": state.pcs.items,
+    return {
         "is_fetching": state.pcs.ui_is_fetching
     };
 };
@@ -28,7 +23,6 @@ class PlayerCharacterSearch extends React.Component {
         this.setState({
             pc_filter: e
         });
-        this.props.fetchPlayerCharacters('http://localhost:3001/pcs?q=' + e);
     }
 
     onCreate = (e) => {
@@ -41,49 +35,22 @@ class PlayerCharacterSearch extends React.Component {
         this.props.selectCharacter(pc);
     }
 
-    componentDidMount = () => {
-        //get the player characters to populate the list
-        if(this.state.pc_filter) {
-            this.props.fetchPlayerCharacters('http://localhost:3001/pcs?q=' + this.state.pc_filter);
-        } else {
-            this.props.fetchPlayerCharacters('http://localhost:3001/pcs');
-        }
-    }
-
-    componentWillUnmount = () => {
-        //clear character list?
-        console.log("character search unmount");
-    }
-
     render() {
         return (
-            <Search
-                filterList={this.filterList}
-                filter={this.state.pc_filter}
-                create={this.onCreate}
-                loading={this.props.is_fetching}
-                loadingText = "Loading Characters"
-            >
-                {
-                    this.props.player_characters.map( (item) => {
-                        return (
-                            <ListItem
-                                caption={item.name}
-                                onClick={this.handleClick.bind(this, item)}
-                                key={item.id}
-                                selectabe={true}
-                            />
-                        );
-                    })
-                }
-            </Search>
+            <div>
+                <Search
+                    filterList={this.filterList}
+                    filter={this.state.pc_filter}
+                    loading={this.props.is_fetching}
+                />
+                <PlayerCharacterList
+                    filter={this.state.pc_filter}
+                    create={this.onCreate}
+                    listClick={this.handleClick}
+                />
+            </div>
         );
     }
 }
 
-export default connect(
-    mapStateToProps,
-    {
-        fetchPlayerCharacters
-    }
-)(PlayerCharacterSearch);
+export default connect(mapStateToProps)(PlayerCharacterSearch);
