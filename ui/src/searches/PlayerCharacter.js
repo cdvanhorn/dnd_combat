@@ -24,11 +24,8 @@ class PlayerCharacterSearch extends React.Component {
     }
 
     onCreate = (e) => {
-        this.props.selectPlayerCharacter(CREATE_PLAYER_CHARACTER_ID);
-    }
-
-    selectCharacter = (id) => {
-        this.props.selectPlayerCharacter(id);
+        //this.props.selectPlayerCharacter(CREATE_PLAYER_CHARACTER_ID);
+        console.log("create");
     }
 
     componentDidMount = () => {
@@ -55,7 +52,7 @@ class PlayerCharacterSearch extends React.Component {
                         return (
                             <ListItem
                                 caption={item.name}
-                                onClick={(e) => this.selectCharacter(item.id, e)}
+                                onClick={(e) => this.props.selectCharacter(item.id, e)}
                                 key={item.id}
                                 selectabe={true}
                             />
@@ -71,7 +68,6 @@ export default connect(
     mapStateToProps,
     {
         setPlayerCharacterSearch,
-        selectPlayerCharacter,
         fetchPlayerCharacters
     }
 )(PlayerCharacterSearch);

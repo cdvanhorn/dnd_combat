@@ -7,7 +7,6 @@ import {
 
 const initialState = {
     ui_player_character_search: '',
-    ui_selected_pc_id: null,
     ui_is_fetching: false,
     items: []
 };
@@ -19,12 +18,6 @@ export default function(state = initialState, action) {
             return { 
                 ...state,
                 ui_player_character_search: payload.filter
-            };
-        case PCS_UI_PLAYER_CHARACTER_SELECT:
-            payload = action.payload;
-            return {
-                ...state,
-                ui_selected_pc_id: payload.selected_id
             };
         case PCS_REQUEST_PLAYER_CHARACTERS:
             payload = action.payload;

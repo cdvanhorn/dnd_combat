@@ -8,8 +8,7 @@ import {fetchClasses} from "../redux/actions/classes.js";
 import {fetchRaces} from "../redux/actions/races.js";
 
 const mapStateToProps = state => {
-    return { 
-        "selected_pc_id": state.pcs.ui_selected_pc_id,
+    return {
         "characters": state.pcs.items,
         "classes": state.classes.items,
         "races": state.races.items
@@ -31,14 +30,14 @@ class PlayerCharacterDetails extends React.Component {
     render() {
         //try and find the character
         let character;
-        if(this.props.selected_pc_id && this.props.selected_pc_id !== CREATE_PLAYER_CHARACTER_ID) {
-            character = this.props.characters.find((char) => char.id === this.props.selected_pc_id);
+        if(this.props.selectedPlayerCharacterId && this.props.selectedPlayerCharacterId !== CREATE_PLAYER_CHARACTER_ID) {
+            character = this.props.characters.find((char) => char.id === this.props.selectedPlayerCharacterId);
         }
 
         let content;
         if(character) {
             content = <PlayerCharacterForm character={character} />;
-        } else if(this.props.selected_pc_id == CREATE_PLAYER_CHARACTER_ID) {
+        } else if(this.props.selectedPlayerCharacterId == CREATE_PLAYER_CHARACTER_ID) {
             content = <PlayerCharacterForm />;
         } else {
             content = <p>Select a Player Character</p>;
