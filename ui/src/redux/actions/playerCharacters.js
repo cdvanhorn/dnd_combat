@@ -1,16 +1,10 @@
 import fetch from "cross-fetch";
 import {
     PCS_REQUEST_PLAYER_CHARACTERS,
-    PCS_RECEIVE_PLAYER_CHARACTERS,
-    PCS_UI_PLAYER_CHARACTER_SEARCH
+    PCS_RECEIVE_PLAYER_CHARACTERS
 } from "../actionTypes.js";
 
 export const CREATE_PLAYER_CHARACTER_ID = "create";
-
-export const setPlayerCharacterSearch = filter => ({
-    type: PCS_UI_PLAYER_CHARACTER_SEARCH,
-    payload: { filter }
-});
 
 export const requestPlayerCharacters = fetching => ({
     type: PCS_REQUEST_PLAYER_CHARACTERS,

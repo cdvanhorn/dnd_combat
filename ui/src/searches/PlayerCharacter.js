@@ -5,22 +5,29 @@ import { ListItem } from "react-toolbox/lib/list";
 import Search from '../Search.js';
 import { 
     fetchPlayerCharacters,
-    setPlayerCharacterSearch,
-    selectPlayerCharacter,
     CREATE_PLAYER_CHARACTER_ID
 } from "../redux/actions/playerCharacters.js";
 
 const mapStateToProps = state => {
     return { 
-        "player_character_search": state.pcs.ui_player_character_search,
         "player_characters": state.pcs.items,
         "is_fetching": state.pcs.ui_is_fetching
     };
 };
 
 class PlayerCharacterSearch extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            pc_filter: ""
+        };
+    }
+
     filterList = (e) => {
-        this.props.setPlayerCharacterSearch(e);
+        this.setState({
+            pc_filter: e
+        });
+        this.props.fetchPlayerCharacters('http://localhost:3001/pcs?q=' + e);
     }
 
     onCreate = (e) => {
@@ -29,7 +36,11 @@ class PlayerCharacterSearch extends React.Component {
 
     componentDidMount = () => {
         //get the player characters to populate the list
-        this.props.fetchPlayerCharacters('http://localhost:3001/pcs');
+        if(this.state.pc_filter) {
+            this.props.fetchPlayerCharacters('http://localhost:3001/pcs?q=' + this.state.pc_filter);
+        } else {
+            this.props.fetchPlayerCharacters('http://localhost:3001/pcs');
+        }
     }
 
     componentWillUnmount = () => {
@@ -41,7 +52,7 @@ class PlayerCharacterSearch extends React.Component {
         return (
             <Search
                 filterList={this.filterList}
-                filter={this.props.player_character_search}
+                filter={this.state.pc_filter}
                 create={this.onCreate}
                 loading={this.props.is_fetching}
                 loadingText = "Loading Characters"
@@ -66,7 +77,6 @@ class PlayerCharacterSearch extends React.Component {
 export default connect(
     mapStateToProps,
     {
-        setPlayerCharacterSearch,
         fetchPlayerCharacters
     }
 )(PlayerCharacterSearch);
