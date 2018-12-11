@@ -29,12 +29,10 @@ class PlayerCharacterDetails extends React.Component {
     }
 
     render() {
-        console.log("detail render");
         return (
             <div>
                 <PlayerCharacterForm 
-                    character={this.props.selectedPlayerCharacter}
-                    updateCharacter={this.props.updateCharacter}    
+                    character={this.props.selectedPlayerCharacter}   
                 />
             </div>
         );

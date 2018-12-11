@@ -4,15 +4,20 @@ import {Avatar} from "react-toolbox/lib/avatar";
 import {Button} from "react-toolbox/lib/button";
 import {Input} from "react-toolbox/lib/input";
 import {Dropdown} from "react-toolbox/lib/dropdown";
+import { PlayerCharacter } from "../models/PlayerCharacter";
 
 export class PlayerCharacterForm extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            character: this.props.character
+        };
+        //Object.assign(this.state.pc_selected, {[field]: value})
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange = (name, value) => {
-        this.props.updateCharacter(name, value);
+        console.log(name + " " + value);
     }
 
     handleSubmit = (event) => {
@@ -21,19 +26,18 @@ export class PlayerCharacterForm extends React.Component {
     }
 
     render() {
-        console.log("render");
-        let character = this.props.character;
-        if(!character.hasOwnProperty('name')) {
+        console.log(this.state.character);
+        if(!this.state.character.hasOwnProperty('name')) {
             return (<p>Select a Character</p>);
         }
         return (
             <form onSubmit={this.handleSubmit}>
-                <Avatar title={character.name}/>
+                <Avatar title={this.state.character.name}/>
                 <Input
                     type='text'
                     label='Character Name'
                     name='name'
-                    value={character.name}
+                    value={this.state.character.name}
                     onChange={this.handleChange.bind(this, 'name')}
                 />
             </form>
