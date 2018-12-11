@@ -1,7 +1,8 @@
 import { 
     PCS_REQUEST_PLAYER_CHARACTERS,
     PCS_RECEIVE_PLAYER_CHARACTERS,
-    PCS_SELECT_PLAYER_CHARACTER
+    PCS_SELECT_PLAYER_CHARACTER,
+    PCS_UPDATE_SELECTED_PLAYER_CHARACTER
 } from "../actionTypes.js";
 
 const initialState = {
@@ -30,6 +31,12 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 ui_selected_character: payload.character
+            };
+        case PCS_UPDATE_SELECTED_PLAYER_CHARACTER:
+            payload = action.payload;
+            return {
+                ...state,
+                ui_selected_character: Object.assign(state.ui_selected_character, {[payload.field]: payload.value})
             };
         default:
             return state;

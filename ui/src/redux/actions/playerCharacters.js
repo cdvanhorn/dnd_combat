@@ -2,8 +2,17 @@ import fetch from "cross-fetch";
 import {
     PCS_REQUEST_PLAYER_CHARACTERS,
     PCS_RECEIVE_PLAYER_CHARACTERS,
-    PCS_SELECT_PLAYER_CHARACTER
+    PCS_SELECT_PLAYER_CHARACTER,
+    PCS_UPDATE_SELECTED_PLAYER_CHARACTER
 } from "../actionTypes.js";
+
+export const updateSelectedPlayerCharacter = (field, value) => ({
+    type: PCS_UPDATE_SELECTED_PLAYER_CHARACTER,
+    payload: {
+        "field": field,
+        "value": value
+    }
+});
 
 export const selectPlayerCharacter = character => ({
     type: PCS_SELECT_PLAYER_CHARACTER,

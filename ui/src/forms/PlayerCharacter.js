@@ -5,7 +5,8 @@ import {Avatar} from "react-toolbox/lib/avatar";
 import {Button} from "react-toolbox/lib/button";
 import {Input} from "react-toolbox/lib/input";
 import {Dropdown} from "react-toolbox/lib/dropdown";
-import { PlayerCharacter } from "../models/PlayerCharacter";
+
+import {updateSelectedPlayerCharacter} from "../redux/actions/playerCharacters.js";
 
 const mapStateToProps = state => {
     return {
@@ -16,21 +17,37 @@ const mapStateToProps = state => {
 class PlayerCharacterForm extends React.Component {
     constructor(props) {
         super(props);
-        //Object.assign(this.state.pc_selected, {[field]: value})
-        console.log(props);
+        this.state = {}
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange = (name, value) => {
-        console.log(name + " " + value);
+        this.props.updateSelectedPlayerCharacter(name, value);
+
+        //update which fields are dirty
+        if(this.state[this.props.character.id]) {
+            this.setState({
+                [this.props.character.id]: Object.assign(this.state[this.props.character.id], {[name]: true})
+            })
+        } else {
+            this.setState({
+                [this.props.character.id]: {[name]: true}
+            })
+        }
     }
 
     handleSubmit = (event) => {
-        console.log(this.state.character);
+        console.log(this.props.character);
         event.preventDefault();
     }
 
     render() {
+        //is something dirty if so activate save button
+        let disabled = true;
+        if(this.state[this.props.character.id]) {
+            disabled = !Object.keys(this.state[this.props.character.id]).length > 0;
+        }
+
         if(!this.props.character.hasOwnProperty('name')) {
             return (<p>Select a Character</p>);
         }
@@ -44,6 +61,7 @@ class PlayerCharacterForm extends React.Component {
                     value={this.props.character.name}
                     onChange={this.handleChange.bind(this, 'name')}
                 />
+                <Button type='submit' icon='save' label='Save' raised primary disabled={disabled}/>
             </form>
         );
         /*
@@ -73,11 +91,16 @@ class PlayerCharacterForm extends React.Component {
                     labelKey={"name"}
                     valueKey={"id"}
                 />
-                <Button type='submit' icon='save' label='Save' raised primary />
+                
             </form>
         )
         */
     }
 }
 
-export default connect(mapStateToProps)(PlayerCharacterForm);
+export default connect(
+    mapStateToProps,
+    {
+        updateSelectedPlayerCharacter
+    }
+)(PlayerCharacterForm);
