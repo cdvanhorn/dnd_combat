@@ -7,15 +7,6 @@ import PlayerCharacterDetails from './details/PlayerCharacter.js';
 class Characters extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            pc_selected: {}
-        };
-    }
-
-    selectCharacter = (character) => {
-        this.setState({
-            pc_selected: character
-        });
     }
 
     render() {
@@ -23,13 +14,10 @@ class Characters extends React.Component {
             <Grid fluid>
                 <Row>
                     <Col sm={4}>
-                        <PlayerCharacterSearch 
-                            selectCharacter={this.selectCharacter} />
+                        <PlayerCharacterSearch />
                     </Col>
                     <Col sm={8}>
-                        <PlayerCharacterDetails 
-                            selectedPlayerCharacter={this.state.pc_selected}
-                        />
+                        <PlayerCharacterDetails />
                     </Col>
                 </Row>
             </Grid>

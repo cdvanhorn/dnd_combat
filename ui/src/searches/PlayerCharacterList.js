@@ -3,8 +3,10 @@ import { List, ListItem, ListDivider } from "react-toolbox/lib/list";
 import { connect } from "react-redux";
 
 import { 
-    fetchPlayerCharacters
+    fetchPlayerCharacters,
+    selectPlayerCharacter
 } from "../redux/actions/playerCharacters.js";
+import {PlayerCharacter} from "../models/PlayerCharacter.js";
 
 const mapStateToProps = state => {
     return { 
@@ -24,11 +26,21 @@ class PlayerCharacterList extends React.Component {
         this.props.fetchPlayerCharacters('http://localhost:3001/pcs');
     }
 
+    onCreate = (e) => {
+        this.props.selectPlayerCharacter(new PlayerCharacter());
+    }
+
+    listClick = (character) => {
+        let pc = new PlayerCharacter();
+        pc.fromJson(character);
+        this.props.selectPlayerCharacter(pc);
+    }
+
     render() {
         //add a create link
         let create_list_item;
         if(this.props.can_edit) {
-            create_list_item = <ListItem caption='Create' leftIcon='add_circle' onClick={this.props.create}/>;
+            create_list_item = <ListItem caption='Create' leftIcon='add_circle' onClick={this.onCreate}/>;
         }
 
         //filter the list items
@@ -52,7 +64,7 @@ class PlayerCharacterList extends React.Component {
                 return (
                     <ListItem
                         caption={item.name}
-                        onClick={this.props.listClick.bind(this, item)}
+                        onClick={this.listClick.bind(this, item)}
                         key={item.id}
                         selectabe={true}
                     />
@@ -78,6 +90,7 @@ class PlayerCharacterList extends React.Component {
 export default connect(
     mapStateToProps,
     {
-        fetchPlayerCharacters
+        fetchPlayerCharacters,
+        selectPlayerCharacter
     }
 )(PlayerCharacterList);

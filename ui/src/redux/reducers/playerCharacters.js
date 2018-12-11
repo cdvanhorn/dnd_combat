@@ -1,11 +1,13 @@
 import { 
     PCS_REQUEST_PLAYER_CHARACTERS,
-    PCS_RECEIVE_PLAYER_CHARACTERS
+    PCS_RECEIVE_PLAYER_CHARACTERS,
+    PCS_SELECT_PLAYER_CHARACTER
 } from "../actionTypes.js";
 
 const initialState = {
     ui_is_fetching: false,
-    items: []
+    items: [],
+    ui_selected_character: {}
 };
 
 export default function(state = initialState, action) {
@@ -22,6 +24,12 @@ export default function(state = initialState, action) {
                 ...state,
                 ui_is_fetching: payload.is_fetching,
                 items: payload.items
+            };
+        case PCS_SELECT_PLAYER_CHARACTER:
+            payload = action.payload;
+            return {
+                ...state,
+                ui_selected_character: payload.character
             };
         default:
             return state;

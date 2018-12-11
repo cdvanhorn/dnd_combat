@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import {Avatar} from "react-toolbox/lib/avatar";
 import {Button} from "react-toolbox/lib/button";
@@ -6,13 +7,17 @@ import {Input} from "react-toolbox/lib/input";
 import {Dropdown} from "react-toolbox/lib/dropdown";
 import { PlayerCharacter } from "../models/PlayerCharacter";
 
-export class PlayerCharacterForm extends React.Component {
+const mapStateToProps = state => {
+    return {
+        "character": state.pcs.ui_selected_character
+    };
+};
+
+class PlayerCharacterForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            character: this.props.character
-        };
         //Object.assign(this.state.pc_selected, {[field]: value})
+        console.log(props);
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -26,18 +31,17 @@ export class PlayerCharacterForm extends React.Component {
     }
 
     render() {
-        console.log(this.state.character);
-        if(!this.state.character.hasOwnProperty('name')) {
+        if(!this.props.character.hasOwnProperty('name')) {
             return (<p>Select a Character</p>);
         }
         return (
             <form onSubmit={this.handleSubmit}>
-                <Avatar title={this.state.character.name}/>
+                <Avatar title={this.props.character.name}/>
                 <Input
                     type='text'
                     label='Character Name'
                     name='name'
-                    value={this.state.character.name}
+                    value={this.props.character.name}
                     onChange={this.handleChange.bind(this, 'name')}
                 />
             </form>
@@ -75,3 +79,5 @@ export class PlayerCharacterForm extends React.Component {
         */
     }
 }
+
+export default connect(mapStateToProps)(PlayerCharacterForm);

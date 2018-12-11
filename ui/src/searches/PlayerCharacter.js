@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 
 import Search from '../Search.js';
-import {PlayerCharacter} from "../models/PlayerCharacter.js";
 import PlayerCharacterList from "../searches/PlayerCharacterList.js";
 
 const mapStateToProps = state => {
@@ -24,17 +23,7 @@ class PlayerCharacterSearch extends React.Component {
             pc_filter: e
         });
     }
-
-    onCreate = (e) => {
-        this.props.selectCharacter(new PlayerCharacter());
-    }
-
-    handleClick = (character, e) => {
-        let pc = new PlayerCharacter();
-        pc.fromJson(character);
-        this.props.selectCharacter(pc);
-    }
-
+    
     render() {
         return (
             <div>
@@ -45,8 +34,6 @@ class PlayerCharacterSearch extends React.Component {
                 />
                 <PlayerCharacterList
                     filter={this.state.pc_filter}
-                    create={this.onCreate}
-                    listClick={this.handleClick}
                 />
             </div>
         );

@@ -1,8 +1,16 @@
 import fetch from "cross-fetch";
 import {
     PCS_REQUEST_PLAYER_CHARACTERS,
-    PCS_RECEIVE_PLAYER_CHARACTERS
+    PCS_RECEIVE_PLAYER_CHARACTERS,
+    PCS_SELECT_PLAYER_CHARACTER
 } from "../actionTypes.js";
+
+export const selectPlayerCharacter = character => ({
+    type: PCS_SELECT_PLAYER_CHARACTER,
+    payload: {
+        "character": character
+    }
+});
 
 export const requestPlayerCharacters = fetching => ({
     type: PCS_REQUEST_PLAYER_CHARACTERS,

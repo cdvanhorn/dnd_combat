@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import {PlayerCharacterForm} from "../forms/PlayerCharacter.js";
+import PlayerCharacterForm from "../forms/PlayerCharacter.js";
 import {fetchClasses} from "../redux/actions/classes.js";
 import {fetchRaces} from "../redux/actions/races.js";
 
@@ -31,9 +31,7 @@ class PlayerCharacterDetails extends React.Component {
     render() {
         return (
             <div>
-                <PlayerCharacterForm 
-                    character={this.props.selectedPlayerCharacter}   
-                />
+                <PlayerCharacterForm />
             </div>
         );
     }
