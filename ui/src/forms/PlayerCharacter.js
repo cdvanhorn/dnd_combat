@@ -9,7 +9,7 @@ import {Dropdown} from "react-toolbox/lib/dropdown";
 import {
     updateSelectedPlayerCharacter,
     patchPlayerCharacter,
-    fetchPlayerCharacters
+    postPlayerCharacter
 } from "../redux/actions/playerCharacters.js";
 
 const mapStateToProps = state => {
@@ -42,10 +42,16 @@ class PlayerCharacterForm extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.patchPlayerCharacter(
-            'http://localhost:3001/pcs',
-            this.props.character,
-            this.state[this.props.character.id]);
+        if(this.props.character.id) {
+            this.props.patchPlayerCharacter(
+                'http://localhost:3001/pcs',
+                this.props.character,
+                this.state[this.props.character.id]
+            );
+        } else {
+            //new character
+            this.props.postPlayerCharacter('http://localhost:3001/pcs', this.props.character);
+        }
     }
 
     render() {
@@ -110,6 +116,6 @@ export default connect(
     {
         updateSelectedPlayerCharacter,
         patchPlayerCharacter,
-        fetchPlayerCharacters
+        postPlayerCharacter
     }
 )(PlayerCharacterForm);

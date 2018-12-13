@@ -48,6 +48,26 @@ export function patchPlayerCharacter(url, character, fields) {
     };
 }
 
+export function postPlayerCharacter(url, character) {
+    return (dispatch) => {
+        dispatch(savePlayerCharacter());
+        return fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(character)
+        }).then( (response) => response.json())
+        .then( (json) => {
+            let cobj = new PlayerCharacter();
+            cobj.fromJson(json);
+            dispatch(savedPlayerCharacter(cobj));
+            dispatch(fetchPlayerCharacters(url));
+        })
+    };
+}
+
 export const updateSelectedPlayerCharacter = (field, value) => ({
     type: PCS_UPDATE_SELECTED_PLAYER_CHARACTER,
     payload: {
