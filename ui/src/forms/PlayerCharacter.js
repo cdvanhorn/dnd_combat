@@ -6,7 +6,11 @@ import {Button} from "react-toolbox/lib/button";
 import {Input} from "react-toolbox/lib/input";
 import {Dropdown} from "react-toolbox/lib/dropdown";
 
-import {updateSelectedPlayerCharacter} from "../redux/actions/playerCharacters.js";
+import {
+    updateSelectedPlayerCharacter,
+    patchPlayerCharacter,
+    fetchPlayerCharacters
+} from "../redux/actions/playerCharacters.js";
 
 const mapStateToProps = state => {
     return {
@@ -37,8 +41,11 @@ class PlayerCharacterForm extends React.Component {
     }
 
     handleSubmit = (event) => {
-        console.log(this.props.character);
         event.preventDefault();
+        this.props.patchPlayerCharacter(
+            'http://localhost:3001/pcs',
+            this.props.character,
+            this.state[this.props.character.id]);
     }
 
     render() {
@@ -101,6 +108,8 @@ class PlayerCharacterForm extends React.Component {
 export default connect(
     mapStateToProps,
     {
-        updateSelectedPlayerCharacter
+        updateSelectedPlayerCharacter,
+        patchPlayerCharacter,
+        fetchPlayerCharacters
     }
 )(PlayerCharacterForm);
