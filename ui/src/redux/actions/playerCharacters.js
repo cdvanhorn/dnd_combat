@@ -7,7 +7,9 @@ import {
     PCS_SELECT_PLAYER_CHARACTER,
     PCS_UPDATE_SELECTED_PLAYER_CHARACTER,
     PCS_SAVE_PLAYER_CHARACTER,
-    PCS_SAVED_PLAYER_CHARACTER
+    PCS_SAVED_PLAYER_CHARACTER,
+    PCS_REMOVE_PLAYER_CHARACTER,
+    PCS_REMOVED_PLAYER_CHARACTER
 } from "../actionTypes.js";
 import {PlayerCharacter} from "../../models/PlayerCharacter.js";
 
@@ -24,7 +26,40 @@ export const savedPlayerCharacter = (character) => ({
         "is_saving": false,
         "character": character
     }
-})
+});
+
+export const removePlayerCharacter = () => ({
+    type: PCS_REMOVE_PLAYER_CHARACTER,
+    payload: {
+        "is_removing": true
+    }
+});
+
+export const removedPlayerCharacter = (character) => ({
+    type: PCS_REMOVED_PLAYER_CHARACTER,
+    payload: {
+        "is_removing": false,
+        "character": character
+    }
+});
+
+export function deletePlayerCharacter(url, character) {
+    return (dispatch) => {
+        dispatch(removePlayerCharacter());
+        return fetch(url + '/' + character.id, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then( (response) => response.json())
+        .then( (json) => {
+            let cobj = new PlayerCharacter();
+            dispatch(removedPlayerCharacter(cobj));
+            dispatch(fetchPlayerCharacters(url));
+        })
+    };
+}
 
 export function patchPlayerCharacter(url, character, fields) {
     return (dispatch) => {

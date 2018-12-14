@@ -9,7 +9,8 @@ import {Dropdown} from "react-toolbox/lib/dropdown";
 import {
     updateSelectedPlayerCharacter,
     patchPlayerCharacter,
-    postPlayerCharacter
+    postPlayerCharacter,
+    deletePlayerCharacter
 } from "../redux/actions/playerCharacters.js";
 
 const mapStateToProps = state => {
@@ -23,6 +24,7 @@ class PlayerCharacterForm extends React.Component {
         super(props);
         this.state = {}
         this.handleChange = this.handleChange.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     handleChange = (name, value) => {
@@ -54,6 +56,10 @@ class PlayerCharacterForm extends React.Component {
         }
     }
 
+    handleDelete = () => {
+        this.props.deletePlayerCharacter('http://localhost:3001/pcs', this.props.character);
+    }
+
     render() {
         //is something dirty if so activate save button
         let disabled = true;
@@ -75,6 +81,7 @@ class PlayerCharacterForm extends React.Component {
                     onChange={this.handleChange.bind(this, 'name')}
                 />
                 <Button type='submit' icon='save' label='Save' raised primary disabled={disabled}/>
+                <Button icon='delete' label='Delete' raised onClick={this.handleDelete}/>
             </form>
         );
         /*
@@ -116,6 +123,7 @@ export default connect(
     {
         updateSelectedPlayerCharacter,
         patchPlayerCharacter,
-        postPlayerCharacter
+        postPlayerCharacter,
+        deletePlayerCharacter
     }
 )(PlayerCharacterForm);
