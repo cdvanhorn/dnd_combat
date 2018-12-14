@@ -81,7 +81,7 @@ class PlayerCharacterForm extends React.Component {
                     onChange={this.handleChange.bind(this, 'name')}
                 />
                 <Button type='submit' icon='save' label='Save' raised primary disabled={disabled}/>
-                <Button icon='delete' label='Delete' raised onClick={this.handleDelete}/>
+                <Button icon='delete' label='Delete' raised accent onClick={this.handleDelete}/>
             </form>
         );
         /*
