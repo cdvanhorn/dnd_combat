@@ -1,6 +1,8 @@
 import React from "react";
 import { List, ListItem, ListSubHeader, ListDivider } from "react-toolbox/lib/list";
 
+import {rdmCap} from "./Utilities.js";
+
 class Navigation extends React.Component {
     constructor(props) {
         super(props);
@@ -9,32 +11,32 @@ class Navigation extends React.Component {
     render() {
         return (
             <List selectable ripple>
-                <ListSubHeader caption='ComBAt Menu' />
+                <ListSubHeader caption={rdmCap('ComBAt Menu')} />
                 <ListItem
                     leftIcon="security"
                     caption="Combat Tracker"
-                    onClick={(e) => this.props.app.setActivePage("Combat", "Combat Tracker", e)}
+                    onClick={(e) => this.props.app.setActivePage("Combat", rdmCap("Combat Tracker"), e)}
                 />
                 <ListItem
                     leftIcon="group"
                     caption="Encounters"
-                    onClick={(e) => this.props.app.setActivePage("Encounters", "Encounters", e)}
+                    onClick={(e) => this.props.app.setActivePage("Encounters", rdmCap("Encounters"), e)}
                 />
                 <ListItem
                     leftIcon="memory"
                     caption="Non-Player Characters"
-                    onClick={(e) => this.props.app.setActivePage("Npcs", "Non-Player Characters", e)}
+                    onClick={(e) => this.props.app.setActivePage("Npcs", rdmCap("Non-Player Characters"), e)}
                 />
                 <ListItem
                     leftIcon="face"
                     caption="Player Characters"
-                    onClick={(e) => this.props.app.setActivePage("Characters", "Player Characters", e)}
+                    onClick={(e) => this.props.app.setActivePage("Characters", rdmCap("Player Characters"), e)}
                 />
                 <ListItem
                     leftIcon="settings"
                     caption="Settings"
                     legend="Settings, Bitch!"
-                    onClick={(e) => this.props.app.setActivePage("Settings", "Settings", e)}
+                    onClick={(e) => this.props.app.setActivePage("Settings", rdmCap("Settings"), e)}
                 />
             </List>
         );

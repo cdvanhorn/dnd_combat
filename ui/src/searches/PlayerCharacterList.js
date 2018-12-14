@@ -1,6 +1,7 @@
 import React from "react";
 import { List, ListItem, ListDivider } from "react-toolbox/lib/list";
 import { connect } from "react-redux";
+import {rdmCap} from "../Utilities.js";
 
 import { 
     fetchPlayerCharacters,
@@ -40,7 +41,7 @@ class PlayerCharacterList extends React.Component {
         //add a create link
         let create_list_item;
         if(this.props.can_edit) {
-            create_list_item = <ListItem caption='Create' leftIcon='add_circle' onClick={this.onCreate}/>;
+            create_list_item = <ListItem caption={rdmCap('Create')} leftIcon='add_circle' onClick={this.onCreate}/>;
         }
 
         //filter the list items
@@ -54,7 +55,7 @@ class PlayerCharacterList extends React.Component {
         }
 
         //are we still loading
-        let loading_text = 'Loading Characters';
+        let loading_text = rdmCap('Loading Characters');
 
         let list_content;
         if(this.props.is_fetching) {

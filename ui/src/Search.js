@@ -1,5 +1,6 @@
 import React from "react";
 import { Input } from "react-toolbox/lib/input";
+import {rdmCap} from "./Utilities.js";
 
 export default class Search extends React.Component {
     constructor(props) {
@@ -15,7 +16,7 @@ export default class Search extends React.Component {
         return (
             <div>
                 <Input type='text'
-                    label='Search'
+                    label={rdmCap('Search')}
                     icon='search'
                     name='search'
                     value={this.props.filter}
