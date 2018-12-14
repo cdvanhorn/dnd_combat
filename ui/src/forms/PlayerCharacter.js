@@ -5,6 +5,7 @@ import {Avatar} from "react-toolbox/lib/avatar";
 import {Button} from "react-toolbox/lib/button";
 import {Input} from "react-toolbox/lib/input";
 import {Dropdown} from "react-toolbox/lib/dropdown";
+import {Dialog} from "react-toolbox/lib/dialog";
 
 import {
     updateSelectedPlayerCharacter,
@@ -27,9 +28,12 @@ const mapStateToProps = state => {
 class PlayerCharacterForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            active: false
+        }
         this.handleChange = this.handleChange.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.toggleDialog = this.toggleDialog.bind(this);
     }
 
     handleChange = (name, value) => {
@@ -65,7 +69,16 @@ class PlayerCharacterForm extends React.Component {
         }
     }
 
+    toggleDialog = () => {
+        this.setState({
+            active: !this.state.active
+        });
+    }
+
     handleDelete = () => {
+        this.setState({
+            active: !this.state.active
+        });
         this.props.deletePlayerCharacter('http://localhost:3001/pcs', this.props.character);
     }
 
@@ -85,37 +98,54 @@ class PlayerCharacterForm extends React.Component {
         if(!this.props.character.hasOwnProperty('name')) {
             return (<p>Select a Character</p>);
         }
+
+        let actions = [
+            { label: "Cancel", onClick: this.toggleDialog },
+            { label: "Yes", onClick: this.handleDelete }
+        ];
+
         return (
-            <form onSubmit={this.handleSubmit}>
-                <Avatar title={this.props.character.name}/>
-                <Input
-                    type='text'
-                    label='Character Name'
-                    name='name'
-                    value={this.props.character.name}
-                    onChange={this.handleChange.bind(this, 'name')}
-                />
-                <Dropdown
-                    label="Race"
-                    auto
-                    source={this.props.races}
-                    value={this.props.character.race_id}
-                    labelKey={"name"}
-                    valueKey={"id"}
-                    onChange={this.handleChange.bind(this, 'race_id')}
-                />
-                <Dropdown
-                    label="Class"
-                    auto
-                    source={this.props.classes}
-                    value={this.props.character.class_id}
-                    labelKey={"name"}
-                    valueKey={"id"}
-                    onChange={this.handleChange.bind(this, 'class_id')}
-                />
-                <Button type='submit' icon='save' label='Save' raised primary disabled={disabled}/>
-                <Button icon='delete' label='Delete' raised accent onClick={this.handleDelete}/>
-            </form>
+            <React.Fragment>
+                <Dialog
+                    actions={actions}
+                    active={this.state.active}
+                    onEscKeyDown={this.toggleDialog}
+                    onOverlayClick={this.toggleDialog}
+                    title='Confirmation'
+                >
+                    <p>Are you sure you want to delete {this.props.character.name}?</p>
+                </Dialog>
+                <form onSubmit={this.handleSubmit}>
+                    <Avatar title={this.props.character.name}/>
+                    <Input
+                        type='text'
+                        label='Character Name'
+                        name='name'
+                        value={this.props.character.name}
+                        onChange={this.handleChange.bind(this, 'name')}
+                    />
+                    <Dropdown
+                        label="Race"
+                        auto
+                        source={this.props.races}
+                        value={this.props.character.race_id}
+                        labelKey={"name"}
+                        valueKey={"id"}
+                        onChange={this.handleChange.bind(this, 'race_id')}
+                    />
+                    <Dropdown
+                        label="Class"
+                        auto
+                        source={this.props.classes}
+                        value={this.props.character.class_id}
+                        labelKey={"name"}
+                        valueKey={"id"}
+                        onChange={this.handleChange.bind(this, 'class_id')}
+                    />
+                    <Button type='submit' icon='save' label='Save' raised primary disabled={disabled}/>
+                    <Button icon='delete' label='Delete' raised accent onClick={this.toggleDialog}/>
+                </form>
+            </React.Fragment>
         );
     }
 }
