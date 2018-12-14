@@ -55,6 +55,10 @@ class PlayerCharacterForm extends React.Component {
                 this.props.character,
                 this.state[this.props.character.id]
             );
+            //clear the dirty state for this character
+            this.setState({
+                [this.props.character.id]: {}
+            });
         } else {
             //new character
             this.props.postPlayerCharacter('http://localhost:3001/pcs', this.props.character);
