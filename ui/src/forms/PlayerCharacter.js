@@ -104,41 +104,19 @@ class PlayerCharacterForm extends React.Component {
                     valueKey={"id"}
                     onChange={this.handleChange.bind(this, 'race_id')}
                 />
+                <Dropdown
+                    label="Class"
+                    auto
+                    source={this.props.classes}
+                    value={this.props.character.class_id}
+                    labelKey={"name"}
+                    valueKey={"id"}
+                    onChange={this.handleChange.bind(this, 'class_id')}
+                />
                 <Button type='submit' icon='save' label='Save' raised primary disabled={disabled}/>
                 <Button icon='delete' label='Delete' raised accent onClick={this.handleDelete}/>
             </form>
         );
-        /*
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <Avatar title={character.name}/>
-                <Input
-                    type='text'
-                    label='Character Name'
-                    name='name'
-                    value={character.name}
-                    onChange={this.handleChange.bind(this, 'name')}
-                />
-                <Dropdown
-                    label="Race"
-                    auto
-                    source={props.races}
-                    value={props.character.race_id}
-                    labelKey={"name"}
-                    valueKey={"id"}
-                />
-                <Dropdown
-                    label="Class"
-                    auto
-                    source={props.classes}
-                    value={props.character.class_id}
-                    labelKey={"name"}
-                    valueKey={"id"}
-                />
-                
-            </form>
-        )
-        */
     }
 }
 
