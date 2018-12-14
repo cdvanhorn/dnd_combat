@@ -2,25 +2,15 @@ import React from "react";
 import { connect } from "react-redux";
 
 import PlayerCharacterForm from "../forms/PlayerCharacter.js";
-import {fetchClasses} from "../redux/actions/classes.js";
-import {fetchRaces} from "../redux/actions/races.js";
+
 
 const mapStateToProps = state => {
-    return {
-        "classes": state.classes.items,
-        "races": state.races.items
-    };
+    return {};
 };
 
 class PlayerCharacterDetails extends React.Component {
     constructor(props) {
         super(props);
-    }
-
-    componentDidMount = () => {
-        //get the player characters to populate the list
-        this.props.fetchClasses('http://localhost:3001/classes');
-        this.props.fetchRaces('http://localhost:3001/races');
     }
 
     componentWillUnmount = () => {
@@ -38,9 +28,5 @@ class PlayerCharacterDetails extends React.Component {
 }
 
 export default connect(
-    mapStateToProps,
-    {
-        fetchClasses,
-        fetchRaces
-    }
+    mapStateToProps
 )(PlayerCharacterDetails);

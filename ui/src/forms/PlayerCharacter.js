@@ -13,9 +13,14 @@ import {
     deletePlayerCharacter
 } from "../redux/actions/playerCharacters.js";
 
+import {fetchClasses} from "../redux/actions/classes.js";
+import {fetchRaces} from "../redux/actions/races.js";
+
 const mapStateToProps = state => {
     return {
-        "character": state.pcs.ui_selected_character
+        "character": state.pcs.ui_selected_character,
+        "classes": state.classes.items,
+        "races": state.races.items
     };
 };
 
@@ -60,6 +65,12 @@ class PlayerCharacterForm extends React.Component {
         this.props.deletePlayerCharacter('http://localhost:3001/pcs', this.props.character);
     }
 
+    componentDidMount = () => {
+        //get the player characters to populate the list
+        this.props.fetchClasses('http://localhost:3001/classes');
+        this.props.fetchRaces('http://localhost:3001/races');
+    }
+
     render() {
         //is something dirty if so activate save button
         let disabled = true;
@@ -79,6 +90,15 @@ class PlayerCharacterForm extends React.Component {
                     name='name'
                     value={this.props.character.name}
                     onChange={this.handleChange.bind(this, 'name')}
+                />
+                <Dropdown
+                    label="Race"
+                    auto
+                    source={this.props.races}
+                    value={this.props.character.race_id}
+                    labelKey={"name"}
+                    valueKey={"id"}
+                    onChange={this.handleChange.bind(this, 'race_id')}
                 />
                 <Button type='submit' icon='save' label='Save' raised primary disabled={disabled}/>
                 <Button icon='delete' label='Delete' raised accent onClick={this.handleDelete}/>
@@ -124,6 +144,8 @@ export default connect(
         updateSelectedPlayerCharacter,
         patchPlayerCharacter,
         postPlayerCharacter,
-        deletePlayerCharacter
+        deletePlayerCharacter,
+        fetchClasses,
+        fetchRaces
     }
 )(PlayerCharacterForm);
