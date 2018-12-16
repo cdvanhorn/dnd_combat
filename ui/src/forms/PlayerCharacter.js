@@ -1,10 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import {Avatar} from "react-toolbox/lib/avatar";
 import {Button} from "react-toolbox/lib/button";
-import {Input} from "react-toolbox/lib/input";
-import {Dropdown} from "react-toolbox/lib/dropdown";
 import {Dialog} from "react-toolbox/lib/dialog";
 
 import {
@@ -16,6 +13,8 @@ import {
 
 import {fetchClasses} from "../redux/actions/classes.js";
 import {fetchRaces} from "../redux/actions/races.js";
+
+import CharacterHeader from "./elements/CharacterHeader.js";
 
 const mapStateToProps = state => {
     return {
@@ -116,31 +115,11 @@ class PlayerCharacterForm extends React.Component {
                     <p>Are you sure you want to delete {this.props.character.name}?</p>
                 </Dialog>
                 <form onSubmit={this.handleSubmit}>
-                    <Avatar title={this.props.character.name}/>
-                    <Input
-                        type='text'
-                        label='Character Name'
-                        name='name'
-                        value={this.props.character.name}
-                        onChange={this.handleChange.bind(this, 'name')}
-                    />
-                    <Dropdown
-                        label="Race"
-                        auto
-                        source={this.props.races}
-                        value={this.props.character.race_id}
-                        labelKey={"name"}
-                        valueKey={"id"}
-                        onChange={this.handleChange.bind(this, 'race_id')}
-                    />
-                    <Dropdown
-                        label="Class"
-                        auto
-                        source={this.props.classes}
-                        value={this.props.character.class_id}
-                        labelKey={"name"}
-                        valueKey={"id"}
-                        onChange={this.handleChange.bind(this, 'class_id')}
+                    <CharacterHeader
+                        character={this.props.character}
+                        handleChange={this.handleChange}
+                        races={this.props.races}
+                        classes={this.props.classes}
                     />
                     <Button type='submit' icon='save' label='Save' raised primary disabled={disabled}/>
                     <Button icon='delete' label='Delete' raised accent onClick={this.toggleDialog}/>

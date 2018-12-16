@@ -18,6 +18,7 @@ export class PlayerCharacter {
             this.name = json.name;
             this.class_id = json.class_id;
             this.race_id = json.race_id;
+            this.level = json.level;
         }
     }
 }
