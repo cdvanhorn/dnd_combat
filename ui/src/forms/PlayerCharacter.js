@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 
 import {Button} from "react-toolbox/lib/button";
-import {Dialog} from "react-toolbox/lib/dialog";
 
 import {
     updateSelectedPlayerCharacter,
@@ -15,6 +14,7 @@ import {fetchClasses} from "../redux/actions/classes.js";
 import {fetchRaces} from "../redux/actions/races.js";
 
 import CharacterHeader from "./elements/CharacterHeader.js";
+import ConfirmDialog from "./elements/ConfirmDialog.js";
 
 const mapStateToProps = state => {
     return {
@@ -98,22 +98,15 @@ class PlayerCharacterForm extends React.Component {
             return (<p>Select a Character</p>);
         }
 
-        let actions = [
-            { label: "Cancel", onClick: this.toggleDialog },
-            { label: "Yes", onClick: this.handleDelete }
-        ];
-
+        let action_text = "you want to delete " + this.props.character.name;
         return (
             <React.Fragment>
-                <Dialog
-                    actions={actions}
+                <ConfirmDialog
+                    actionText={action_text}
+                    onYes={this.handleDelete}
+                    toggleDialog={this.toggleDialog}
                     active={this.state.active}
-                    onEscKeyDown={this.toggleDialog}
-                    onOverlayClick={this.toggleDialog}
-                    title='Confirmation'
-                >
-                    <p>Are you sure you want to delete {this.props.character.name}?</p>
-                </Dialog>
+                />
                 <form onSubmit={this.handleSubmit}>
                     <CharacterHeader
                         character={this.props.character}
