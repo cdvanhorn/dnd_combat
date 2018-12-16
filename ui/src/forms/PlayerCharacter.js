@@ -15,6 +15,7 @@ import {fetchRaces} from "../redux/actions/races.js";
 
 import CharacterHeader from "./elements/CharacterHeader.js";
 import ConfirmDialog from "./elements/ConfirmDialog.js";
+import AttributeGroup from "./elements/AttributeGroup.js";
 
 const mapStateToProps = state => {
     return {
@@ -114,6 +115,8 @@ class PlayerCharacterForm extends React.Component {
                         races={this.props.races}
                         classes={this.props.classes}
                     />
+                    <hr/>
+                    <AttributeGroup />
                     <Button type='submit' icon='save' label='Save' raised primary disabled={disabled}/>
                     <Button icon='delete' label='Delete' raised accent onClick={this.toggleDialog}/>
                 </form>
