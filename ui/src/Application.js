@@ -1,7 +1,4 @@
 import React from "react";
-import { Layout, Panel, NavDrawer, Sidebar } from "react-toolbox/lib/layout";
-import { IconButton } from "react-toolbox/lib/button";
-import { AppBar } from "react-toolbox/lib/app_bar";
 import Navigation from "./Navigation.js";
 import Characters from "./Characters.js";
 

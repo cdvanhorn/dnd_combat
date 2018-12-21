@@ -1,5 +1,4 @@
 import React from "react";
-import {Dialog} from "react-toolbox/lib/dialog";
 
 export default class ConfirmDialog extends React.Component {
     render() {

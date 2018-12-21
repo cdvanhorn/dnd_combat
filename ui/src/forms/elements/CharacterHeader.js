@@ -1,10 +1,5 @@
 import React from "react";
 
-import {Avatar} from "react-toolbox/lib/avatar";
-import {Input} from "react-toolbox/lib/input";
-import {Dropdown} from "react-toolbox/lib/dropdown";
-import { Grid, Row, Col } from 'react-flexbox-grid';
-
 export default class CharacterHeader extends React.Component {
     render() {
         return (

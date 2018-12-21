@@ -1,5 +1,4 @@
 import React from "react";
-import { Grid, Row, Col } from 'react-flexbox-grid';
 import PlayerCharacterSearch from './searches/PlayerCharacter.js';
 import PlayerCharacterDetails from './details/PlayerCharacter.js';
 

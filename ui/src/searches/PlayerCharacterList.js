@@ -1,5 +1,4 @@
 import React from "react";
-import { List, ListItem, ListDivider } from "react-toolbox/lib/list";
 import { connect } from "react-redux";
 import {rdmCap} from "../Utilities.js";
 

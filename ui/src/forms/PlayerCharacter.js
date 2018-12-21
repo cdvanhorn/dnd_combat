@@ -1,8 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import {Button} from "react-toolbox/lib/button";
-
 import {
     updateSelectedPlayerCharacter,
     patchPlayerCharacter,

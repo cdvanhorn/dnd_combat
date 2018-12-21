@@ -1,6 +1,4 @@
 import React from "react";
-import { List, ListItem, ListSubHeader, ListDivider } from "react-toolbox/lib/list";
-
 import {rdmCap} from "./Utilities.js";
 
 class Navigation extends React.Component {

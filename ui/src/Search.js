@@ -1,5 +1,4 @@
 import React from "react";
-import { Input } from "react-toolbox/lib/input";
 import {rdmCap} from "./Utilities.js";
 
 export default class Search extends React.Component {
