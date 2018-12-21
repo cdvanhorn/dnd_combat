@@ -1,6 +1,12 @@
 import React from "react";
+
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
+
 import PlayerCharacterSearch from './searches/PlayerCharacter.js';
 import PlayerCharacterDetails from './details/PlayerCharacter.js';
+
+import { rdmCap } from "./Utilities";
 
 
 class Characters extends React.Component {
@@ -10,16 +16,19 @@ class Characters extends React.Component {
 
     render() {
         return (
-            <Grid fluid>
+            <React.Fragment>
+                <h3>{rdmCap('Player Characters')}</h3>
                 <Row>
                     <Col sm={4}>
-                        <PlayerCharacterSearch />
+                        Search
+                        {/*<PlayerCharacterSearch />*/}
                     </Col>
                     <Col sm={8}>
-                        <PlayerCharacterDetails />
+                        Details
+                        {/*<PlayerCharacterDetails />*/}
                     </Col>
                 </Row>
-            </Grid>
+            </React.Fragment>
         );
     }
 }

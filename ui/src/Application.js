@@ -40,19 +40,19 @@ class Application extends React.Component {
                 <Navbar expand="lg" variant="dark" bg="dark">
                     <Navbar.Brand>{rdmCap("combat tracker")}</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav"></Navbar.Collapse>
-                    <Nav
-                        className="rm-auto"
-                        activeKey={this.state.activePage}
-                        onSelect={this.setActivePage}
-                    >
-                        {/*security group memory face settings*/}
-                        <Nav.Link eventKey="Combat">Tracker</Nav.Link>
-                        <Nav.Link eventKey="Encounters">Encounters</Nav.Link>
-                        <Nav.Link eventKey="Npcs">Non-Player Characters</Nav.Link>
-                        <Nav.Link eventKey="Characters">Player Characters</Nav.Link>
-                        <Nav.Link eventKey="Settings">Settings</Nav.Link>
-                    </Nav>
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav
+                            activeKey={this.state.activePage}
+                            onSelect={this.setActivePage}
+                        >
+                            {/*security group memory face settings*/}
+                            <Nav.Link eventKey="Combat">Tracker</Nav.Link>
+                            <Nav.Link eventKey="Encounters">Encounters</Nav.Link>
+                            <Nav.Link eventKey="Npcs">Non-Player Characters</Nav.Link>
+                            <Nav.Link eventKey="Characters">Player Characters</Nav.Link>
+                            <Nav.Link eventKey="Settings">Settings</Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
                 </Navbar>
                 <Container style={containerStyle}>
                     {content}
