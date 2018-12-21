@@ -3,7 +3,6 @@ import Navbar from "react-bootstrap/lib/Navbar"
 import Nav from "react-bootstrap/lib/Nav"
 import Container from "react-bootstrap/lib/Container"
 
-import Navigation from "./Navigation.js";
 import Characters from "./Characters.js";
 
 import { rdmCap } from "./Utilities";
