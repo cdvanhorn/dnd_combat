@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import Search from '../Search.js';
+import Search from './Search.js';
 import PlayerCharacterList from "../searches/PlayerCharacterList.js";
 
 const mapStateToProps = state => {
@@ -32,9 +32,11 @@ class PlayerCharacterSearch extends React.Component {
                     filter={this.state.pc_filter}
                     loading={this.props.is_fetching}
                 />
+                {/*
                 <PlayerCharacterList
                     filter={this.state.pc_filter}
                 />
+                */}
             </div>
         );
     }

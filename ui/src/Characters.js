@@ -18,10 +18,10 @@ class Characters extends React.Component {
         return (
             <React.Fragment>
                 <h3>{rdmCap('Player Characters')}</h3>
+                <hr/>
                 <Row>
                     <Col sm={4}>
-                        Search
-                        {/*<PlayerCharacterSearch />*/}
+                        <PlayerCharacterSearch />
                     </Col>
                     <Col sm={8}>
                         Details
