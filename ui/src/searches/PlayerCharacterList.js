@@ -1,5 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
+
+import Nav from "react-bootstrap/lib/Nav";
+
 import {rdmCap} from "../Utilities.js";
 
 import { 
@@ -26,13 +29,15 @@ class PlayerCharacterList extends React.Component {
         this.props.fetchPlayerCharacters('http://localhost:3001/pcs');
     }
 
-    onCreate = (e) => {
-        this.props.selectPlayerCharacter(new PlayerCharacter());
-    }
-
-    listClick = (character) => {
-        let pc = new PlayerCharacter();
-        pc.fromJson(character);
+    listClick = (key) => {
+        let pc = null
+        if(key !== 'create') {
+            pc = this.props.player_characters.find(item => {
+                return item.id == key;
+            });
+        } else {
+            pc = new PlayerCharacter();
+        }
         this.props.selectPlayerCharacter(pc);
     }
 
@@ -40,7 +45,11 @@ class PlayerCharacterList extends React.Component {
         //add a create link
         let create_list_item;
         if(this.props.can_edit) {
-            create_list_item = <ListItem caption={rdmCap('Create')} leftIcon='add_circle' onClick={this.onCreate}/>;
+            create_list_item = (
+                <Nav.Link eventKey="create">
+                    {rdmCap('create')}
+                </Nav.Link>
+            );
         }
 
         //filter the list items
@@ -54,34 +63,36 @@ class PlayerCharacterList extends React.Component {
         }
 
         //are we still loading
-        let loading_text = rdmCap('Loading Characters');
+        let loading_text = rdmCap('Loading Characters') + "...";
 
         let list_content;
         if(this.props.is_fetching) {
-            list_content = <ListItem caption={loading_text + '...'} leftIcon='cloud_download' disabled={true}/>;
+            list_content = (
+                <Nav.Link disabled>
+                    {loading_text}
+                </Nav.Link>
+            );
         } else {
             list_content = items.map( (item) => {
+                console.log(item);
                 return (
-                    <ListItem
-                        caption={item.name}
-                        onClick={this.listClick.bind(this, item)}
-                        key={item.id}
-                        selectabe={true}
-                    />
+                    <Nav.Link className="border" eventKey={item.id} key={item.id}>
+                        {item.name}
+                    </Nav.Link>
                 );
             });
         }
 
         return (
             <div>
-                <div>
-                    <List selectable ripple>
-                        <ListDivider />
-                        { create_list_item }
-                        <ListDivider />
-                        {list_content}
-                    </List>
-                </div>
+                <Nav
+                    variant="pills"
+                    className="flex-column"
+                    onSelect={this.listClick}
+                >
+                    {create_list_item}
+                    {list_content}
+                </Nav>
             </div>
         );
     }

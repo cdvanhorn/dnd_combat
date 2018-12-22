@@ -32,11 +32,9 @@ class PlayerCharacterSearch extends React.Component {
                     filter={this.state.pc_filter}
                     loading={this.props.is_fetching}
                 />
-                {/*
                 <PlayerCharacterList
                     filter={this.state.pc_filter}
                 />
-                */}
             </div>
         );
     }
