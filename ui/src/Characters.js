@@ -24,8 +24,7 @@ class Characters extends React.Component {
                         <PlayerCharacterSearch />
                     </Col>
                     <Col sm={8}>
-                        Details
-                        {/*<PlayerCharacterDetails />*/}
+                        <PlayerCharacterDetails />
                     </Col>
                 </Row>
             </React.Fragment>

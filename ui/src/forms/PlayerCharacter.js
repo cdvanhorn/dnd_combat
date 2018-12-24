@@ -1,6 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import Button from "react-bootstrap/lib/Button";
+import ButtonToolbar from "react-bootstrap/lib/ButtonToolbar";
+
 import {
     updateSelectedPlayerCharacter,
     patchPlayerCharacter,
@@ -34,7 +37,8 @@ class PlayerCharacterForm extends React.Component {
         this.toggleDialog = this.toggleDialog.bind(this);
     }
 
-    handleChange = (name, value) => {
+    handleChange = (name, event) => {
+        let value = event.target.value;
         this.props.updateSelectedPlayerCharacter(name, value);
 
         //update which fields are dirty
@@ -100,12 +104,14 @@ class PlayerCharacterForm extends React.Component {
         let action_text = "you want to delete " + this.props.character.name;
         return (
             <React.Fragment>
+                {/*
                 <ConfirmDialog
                     actionText={action_text}
                     onYes={this.handleDelete}
                     toggleDialog={this.toggleDialog}
                     active={this.state.active}
                 />
+                */}
                 <form onSubmit={this.handleSubmit}>
                     <CharacterHeader
                         character={this.props.character}
@@ -113,10 +119,14 @@ class PlayerCharacterForm extends React.Component {
                         races={this.props.races}
                         classes={this.props.classes}
                     />
+                    {/*
                     <hr/>
                     <AttributeGroup />
-                    <Button type='submit' icon='save' label='Save' raised primary disabled={disabled}/>
-                    <Button icon='delete' label='Delete' raised accent onClick={this.toggleDialog}/>
+                    */}
+                    <ButtonToolbar>
+                        <Button type='submit' variant='primary' disabled={disabled}>Save</Button>
+                        <Button variant='danger' onClick={this.toggleDialog}>Delete</Button>
+                    </ButtonToolbar>
                 </form>
             </React.Fragment>
         );

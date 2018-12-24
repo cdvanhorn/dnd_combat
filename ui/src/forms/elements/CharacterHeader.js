@@ -1,23 +1,32 @@
 import React from "react";
 
+import Container from "react-bootstrap/lib/Container";
+import Row from "react-bootstrap/lib/Row";
+import Col from "react-bootstrap/lib/Col";
+import Form from "react-bootstrap/lib/Form";
+
+import {rdmCap} from "../../Utilities.js";
+
 export default class CharacterHeader extends React.Component {
     render() {
         return (
-            <Grid fluid>
+            <Container>
                 <Row>
                     <Col sm={1}>
-                        <Avatar title={this.props.character.name}/>
                     </Col>
                     <Col sm={11}>
-                        <Input
-                            type='text'
-                            label='Character Name'
-                            name='name'
-                            value={this.props.character.name}
-                            onChange={this.props.handleChange.bind(this, 'name')}
-                        />
+                        <Form.Group as={Col} controlId="formGridSearch">
+                            <Form.Label>Character Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder={rdmCap("character name")}
+                                value={this.props.character.name}
+                                onChange={this.props.handleChange.bind(this, 'name')}
+                            />
+                        </Form.Group>
                     </Col>
                 </Row>
+                {/*
                 <Row>
                     <Col sm={4}>
                         <Input
@@ -51,7 +60,8 @@ export default class CharacterHeader extends React.Component {
                         />
                     </Col>
                 </Row>
-            </Grid>
+                */}
+            </Container>
         );
     }
 }

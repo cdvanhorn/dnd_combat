@@ -74,7 +74,6 @@ class PlayerCharacterList extends React.Component {
             );
         } else {
             list_content = items.map( (item) => {
-                console.log(item);
                 return (
                     <Nav.Link className="border" eventKey={item.id} key={item.id}>
                         {item.name}
