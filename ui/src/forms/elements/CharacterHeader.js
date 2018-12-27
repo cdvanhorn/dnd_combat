@@ -8,8 +8,17 @@ import Form from "react-bootstrap/lib/Form";
 import {rdmCap} from "../../Utilities.js";
 
 export default class CharacterHeader extends React.Component {
+    generateOptions = (objects) => {
+        return objects.map( (obj) => {
+            return (
+                <option value={obj.id}>{obj.name}</option>
+            );
+        });
+    }
+
     render() {
-        let raceOptions = "banana";
+        let race_options = this.generateOptions(this.props.races);
+        let class_options = this.generateOptions(this.props.classes);
         return (
             <Container>
                 <Row>
@@ -46,8 +55,7 @@ export default class CharacterHeader extends React.Component {
                                 value={this.props.character.race_id}
                                 onChange={this.props.handleChange.bind(this, 'race_id')}
                             >
-                                <option>1</option>
-                                <option>2</option>
+                                {race_options}
                             </Form.Control>
                         </Form.Group>
                     </Col>
@@ -59,8 +67,7 @@ export default class CharacterHeader extends React.Component {
                                 value={this.props.character.class_id}
                                 onChange={this.props.handleChange.bind(this, 'class_id')}
                             >
-                                <option>1</option>
-                                <option>2</option>
+                                {class_options}
                             </Form.Control>
                         </Form.Group>
                     </Col>
