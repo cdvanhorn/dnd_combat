@@ -19,6 +19,12 @@ export class PlayerCharacter {
             this.class_id = json.class_id;
             this.race_id = json.race_id;
             this.level = json.level;
+            this.strength = json.strength;
+            this.constitution = json.constitution;
+            this.dexterity = json.dexterity;
+            this.wisdom = json.wisdom;
+            this.intelligence = json.intelligence;
+            this.charisma = json.charisma;
         }
     }
 }

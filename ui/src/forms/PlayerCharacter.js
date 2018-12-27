@@ -39,6 +39,10 @@ class PlayerCharacterForm extends React.Component {
 
     handleChange = (name, event) => {
         let value = event.target.value;
+        //keep numbers as numbers
+        if(!isNaN(value)) {
+            value = parseInt(value);
+        }
         this.props.updateSelectedPlayerCharacter(name, value);
 
         //update which fields are dirty
@@ -117,10 +121,11 @@ class PlayerCharacterForm extends React.Component {
                         races={this.props.races}
                         classes={this.props.classes}
                     />
-                    {/*
                     <hr/>
-                    <AttributeGroup />
-                    */}
+                    <AttributeGroup
+                        character={this.props.character}
+                        handleChange={this.handleChange}
+                    />
                     <ButtonToolbar>
                         <Button type='submit' variant='primary' disabled={disabled}>Save</Button>
                         <Button variant='danger' onClick={this.toggleDialog}>Delete</Button>

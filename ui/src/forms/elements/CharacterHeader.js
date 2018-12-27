@@ -11,7 +11,7 @@ export default class CharacterHeader extends React.Component {
     generateOptions = (objects) => {
         return objects.map( (obj) => {
             return (
-                <option value={obj.id}>{obj.name}</option>
+                <option key={obj.id} value={obj.id}>{obj.name}</option>
             );
         });
     }
