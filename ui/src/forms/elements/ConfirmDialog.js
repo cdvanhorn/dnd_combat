@@ -1,22 +1,23 @@
 import React from "react";
 
+import Modal from "react-bootstrap/lib/Modal";
+import Button from "react-bootstrap/lib/Button";
+
 export default class ConfirmDialog extends React.Component {
     render() {
-        let actions = [
-            { label: "Cancel", onClick: this.props.toggleDialog },
-            { label: "Yes", onClick: this.props.onYes }
-        ];
-
         return (
-            <Dialog
-                    actions={actions}
-                    active={this.props.active}
-                    onEscKeyDown={this.props.toggleDialog}
-                    onOverlayClick={this.props.toggleDialog}
-                    title='Confirmation'
-            >
-                <p>Are you sure {this.props.actionText}?</p>
-            </Dialog>
+            <Modal show={this.props.active}>
+                <Modal.Header>
+                    <Modal.Title>Confirmation</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Do you want to {this.props.actionText}?</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={this.props.toggleDialog}>No</Button>
+                    <Button variant="primary" onClick={this.props.onYes}>Yes</Button>
+                </Modal.Footer>
+            </Modal>
         );
     }
 }

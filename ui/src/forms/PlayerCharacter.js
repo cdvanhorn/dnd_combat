@@ -101,17 +101,15 @@ class PlayerCharacterForm extends React.Component {
             return (<p>Select a Character</p>);
         }
 
-        let action_text = "you want to delete " + this.props.character.name;
+        let action_text = "delete " + this.props.character.name;
         return (
             <React.Fragment>
-                {/*
                 <ConfirmDialog
                     actionText={action_text}
                     onYes={this.handleDelete}
                     toggleDialog={this.toggleDialog}
                     active={this.state.active}
                 />
-                */}
                 <form onSubmit={this.handleSubmit}>
                     <CharacterHeader
                         character={this.props.character}
