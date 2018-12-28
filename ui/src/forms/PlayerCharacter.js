@@ -139,7 +139,6 @@ class PlayerCharacterForm extends React.Component {
                         races={this.props.races}
                         classes={this.props.classes}
                     />
-                    <hr/>
                     <AttributeGroup
                         character={this.props.character}
                         handleChange={this.handleChange}

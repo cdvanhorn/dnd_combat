@@ -97,21 +97,41 @@ export default class AttributeGroup extends React.Component {
         );
     }
 
-    render() {
+    generateAttributes = () => {
         let pc = new PlayerCharacter(this.props.character);
-        let sbblock = this.generateBaseStatBlock("strength", pc);
-        let ssblock = this.generateSkillBlock("strength", pc);
-        return (
-            <Container>
+
+        let stat_rows = [];
+        for(let attribute in ATTRIBUTE_SKILL_MAP) {
+            let baseblock = this.generateBaseStatBlock(attribute, pc);
+            let skillblock = this.generateSkillBlock(attribute, pc);
+            stat_rows.push(
+                <React.Fragment>
+                <hr/>
                 <Row>
                     <Col sm={4}>
-                        {sbblock}
+                        {baseblock}
                     </Col>
                     <Col sm={8}>
-                        {ssblock}
+                        {skillblock}
                     </Col>
                 </Row>
+                </React.Fragment>
+            );
+        }
+
+        return (
+            <Container>
+                {stat_rows}
             </Container>
+        );
+    }
+
+    render() {
+        let attributes = this.generateAttributes();
+        return (
+            <React.Fragment>
+                {attributes}
+            </React.Fragment>
         );
     }
 }
