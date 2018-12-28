@@ -40,11 +40,21 @@ export default class AttributeGroup extends React.Component {
         );
     }
 
+    generateSkill = (attribute, skill, character) => {
+        return (
+            <Form.Check 
+                type='checkbox'
+                id={skill}
+                label={capFirst(skill) + " " + character.skillString(attribute, skill)}
+            />
+        );
+    }
+
     generateSkillBlock = (attribute, character) => {
         //iterate over the skills for this attribute
         let skills = []
         for(const skill of ATTRIBUTE_SKILL_MAP[attribute]) {
-            skills.push(<Col sm={6}>{skill}</Col>)
+            skills.push(this.generateSkill(attribute, skill, character));
         }
         let rows = [];
         let count = 0;

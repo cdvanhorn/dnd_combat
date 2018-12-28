@@ -9,7 +9,9 @@ const FIELDS = [
     'dexterity',
     'wisdom',
     'intelligence',
-    'charisma'
+    'charisma',
+    'proficiencies',
+    'proficiency_bonus'
 ];
 
 export class PlayerCharacter {
@@ -24,6 +26,8 @@ export class PlayerCharacter {
     wisdom = 0;
     intelligence = 0;
     charisma = 0;
+    proficiencies = [];
+    proficiency_bonus = 0;
 
     constructor(json) {
         this.fromJson(json);
@@ -37,14 +41,26 @@ export class PlayerCharacter {
         }
     }
 
+    skillString = (attribute, skill) => {
+        let skill_value = this.calculateModifier(attribute);
+        if(this.proficiencies.includes(skill)) {
+            skill_value = skill_value + this.proficiency_bonus;
+        }
+        return this.signedNumberString(skill_value);
+    }
+
+    signedNumberString = (number) => {
+        if(number > 0) {
+            number = "+" + number.toString();
+        } else if(number < 0) {
+            number = number.toString();
+        }
+        return number;
+    }
+
     modifierString = (attribute) => {
         let modifier = this.calculateModifier(attribute);
-        if(modifier > 0) {
-            modifier = "+" + modifier.toString();
-        } else if(modifier < 0) {
-            modifier = modifier.toString();
-        }
-        return modifier;
+        return this.signedNumberString(modifier);
     }
 
     calculateModifier = (attribute) => {
