@@ -105,7 +105,7 @@ export default class AttributeGroup extends React.Component {
             let baseblock = this.generateBaseStatBlock(attribute, pc);
             let skillblock = this.generateSkillBlock(attribute, pc);
             stat_rows.push(
-                <React.Fragment>
+                <React.Fragment key={attribute + "_row"}>
                 <hr/>
                 <Row>
                     <Col sm={4}>
