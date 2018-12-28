@@ -41,12 +41,54 @@ export default class AttributeGroup extends React.Component {
     }
 
     generateSkillBlock = (attribute, character) => {
-
+        //iterate over the skills for this attribute
+        let skills = []
+        for(const skill of ATTRIBUTE_SKILL_MAP[attribute]) {
+            skills.push(<Col sm={6}>{skill}</Col>)
+        }
+        let rows = [];
+        let count = 0;
+        while(count < skills.length) {
+            let first_skill = skills[count];
+            let second_skill = null;
+            if(count + 1 < skills.length) {
+                second_skill = skills[count + 1];
+            }
+            if(second_skill) {
+                rows.push(
+                    <Row key={attribute + count}>
+                        <Col sm={6}>
+                            {first_skill}
+                        </Col>
+                        <Col sm={6}>
+                            {second_skill}
+                        </Col>
+                    </Row>
+                );
+            } else {
+                rows.push(
+                    <Row key={attribute + count}>
+                        <Col sm={6}>
+                            {first_skill}
+                        </Col>
+                        <Col sm={6}>
+                        </Col>
+                    </Row>
+                );
+            }
+            count = count + 2;
+        }
+        return (
+            <React.Fragment>
+            {rows}
+            </React.Fragment>
+        );
     }
 
     render() {
         let pc = new PlayerCharacter(this.props.character);
         let sbblock = this.generateBaseStatBlock("strength", pc);
+        let ssblock = this.generateSkillBlock("strength", pc);
         return (
             <Container>
                 <Row>
@@ -54,22 +96,7 @@ export default class AttributeGroup extends React.Component {
                         {sbblock}
                     </Col>
                     <Col sm={8}>
-                        <Row>
-                            <Col sm={6}>
-                                Athletics +5
-                            </Col>
-                            <Col sm={6}>
-                                Acrobatics +7
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col sm={6}>
-                                Athletics +5
-                            </Col>
-                            <Col sm={6}>
-                                Acrobatics +7
-                            </Col>
-                        </Row>
+                        {ssblock}
                     </Col>
                 </Row>
             </Container>

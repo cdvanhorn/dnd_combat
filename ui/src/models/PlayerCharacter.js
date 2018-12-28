@@ -1,17 +1,18 @@
+const FIELDS = [
+    'id',
+    'name',
+    'class_id',
+    'race_id',
+    'level',
+    'strength',
+    'constitution',
+    'dexterity',
+    'wisdom',
+    'intelligence',
+    'charisma'
+];
+
 export class PlayerCharacter {
-    fields = [
-        'id',
-        'name',
-        'class_id',
-        'race_id',
-        'level',
-        'strength',
-        'constitution',
-        'dexterity',
-        'wisdom',
-        'intelligence',
-        'charisma'
-    ];
     id;
     name = "";
     class_id = 1;
@@ -30,7 +31,7 @@ export class PlayerCharacter {
 
     fromJson = (json) => {
         if(json) {
-            for(const field of this.fields) {
+            for(const field of FIELDS) {
                 this[field] = json[field];
             }
         }
