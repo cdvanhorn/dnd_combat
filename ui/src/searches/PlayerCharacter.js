@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import Search from '../Search.js';
+import Search from './Search.js';
 import PlayerCharacterList from "../searches/PlayerCharacterList.js";
 
 const mapStateToProps = state => {

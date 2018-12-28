@@ -1,3 +1,18 @@
+const FIELDS = [
+    'id',
+    'name',
+    'class_id',
+    'race_id',
+    'level',
+    'strength',
+    'constitution',
+    'dexterity',
+    'wisdom',
+    'intelligence',
+    'charisma',
+    'proficiencies',
+    'proficiency_bonus'
+];
 
 export class PlayerCharacter {
     id;
@@ -11,14 +26,50 @@ export class PlayerCharacter {
     wisdom = 0;
     intelligence = 0;
     charisma = 0;
+    proficiencies = [];
+    proficiency_bonus = 0;
+
+    constructor(json) {
+        this.fromJson(json);
+    }
 
     fromJson = (json) => {
         if(json) {
-            this.id = json.id;
-            this.name = json.name;
-            this.class_id = json.class_id;
-            this.race_id = json.race_id;
-            this.level = json.level;
+            for(const field of FIELDS) {
+                this[field] = json[field];
+            }
         }
+    }
+
+    proficient = (skill) => {
+        return this.proficiencies.includes(skill);
+    }
+
+    skillString = (attribute, skill) => {
+        let skill_value = this.calculateModifier(attribute);
+        if(this.proficiencies.includes(skill)) {
+            skill_value = skill_value + this.proficiency_bonus;
+        }
+        return this.signedNumberString(skill_value);
+    }
+
+    signedNumberString = (number) => {
+        if(number > 0) {
+            number = "+" + number.toString();
+        } else if(number < 0) {
+            number = number.toString();
+        }
+        return number;
+    }
+
+    modifierString = (attribute) => {
+        let modifier = this.calculateModifier(attribute);
+        return this.signedNumberString(modifier);
+    }
+
+    calculateModifier = (attribute) => {
+        let modifier = (this[attribute] - 10) / 2;
+        modifier = Math.floor(modifier);
+        return modifier;
     }
 }

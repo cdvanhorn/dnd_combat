@@ -1,10 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import {Button} from "react-toolbox/lib/button";
+import Button from "react-bootstrap/lib/Button";
+import ButtonToolbar from "react-bootstrap/lib/ButtonToolbar";
 
 import {
     updateSelectedPlayerCharacter,
+    addSelectedPlayerCharacterProficiency,
+    removeSelectedPlayerCharacterProficiency,
     patchPlayerCharacter,
     postPlayerCharacter,
     deletePlayerCharacter
@@ -36,8 +39,29 @@ class PlayerCharacterForm extends React.Component {
         this.toggleDialog = this.toggleDialog.bind(this);
     }
 
-    handleChange = (name, value) => {
-        this.props.updateSelectedPlayerCharacter(name, value);
+    handleChange = (name, event) => {
+        let value = event.target.value;
+        if(event.target.type === 'checkbox') {
+            value = event.target.checked;
+        }
+        //keep numbers as numbers
+        if(!isNaN(value) && typeof value !== "boolean" && value.length > 0) {
+            value = parseInt(value);
+        }
+        //updating proficiences works differently
+        if(name === 'proficiencies') {
+            let skill = event.target.id;
+            console.log(value);
+            if(value === true) {
+                //add proficiency
+                this.props.addSelectedPlayerCharacterProficiency(skill);
+            } else if(value === false){
+                //remove proficiency
+                this.props.removeSelectedPlayerCharacterProficiency(skill);
+            }
+        } else {
+            this.props.updateSelectedPlayerCharacter(name, value);
+        }
 
         //update which fields are dirty
         if(this.state[this.props.character.id]) {
@@ -99,7 +123,7 @@ class PlayerCharacterForm extends React.Component {
             return (<p>Select a Character</p>);
         }
 
-        let action_text = "you want to delete " + this.props.character.name;
+        let action_text = "delete " + this.props.character.name;
         return (
             <React.Fragment>
                 <ConfirmDialog
@@ -115,10 +139,15 @@ class PlayerCharacterForm extends React.Component {
                         races={this.props.races}
                         classes={this.props.classes}
                     />
-                    <hr/>
-                    <AttributeGroup />
-                    <Button type='submit' icon='save' label='Save' raised primary disabled={disabled}/>
-                    <Button icon='delete' label='Delete' raised accent onClick={this.toggleDialog}/>
+                    <AttributeGroup
+                        character={this.props.character}
+                        handleChange={this.handleChange}
+                    />
+                    <br />
+                    <ButtonToolbar className="justify-content-end">
+                        <Button type='submit' variant='primary' disabled={disabled}>Save</Button>
+                        <Button variant='danger' onClick={this.toggleDialog}>Delete</Button>
+                    </ButtonToolbar>
                 </form>
             </React.Fragment>
         );
@@ -129,6 +158,8 @@ export default connect(
     mapStateToProps,
     {
         updateSelectedPlayerCharacter,
+        addSelectedPlayerCharacterProficiency,
+        removeSelectedPlayerCharacterProficiency,
         patchPlayerCharacter,
         postPlayerCharacter,
         deletePlayerCharacter,
