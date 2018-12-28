@@ -1,5 +1,17 @@
-
 export class PlayerCharacter {
+    fields = [
+        'id',
+        'name',
+        'class_id',
+        'race_id',
+        'level',
+        'strength',
+        'constitution',
+        'dexterity',
+        'wisdom',
+        'intelligence',
+        'charisma'
+    ];
     id;
     name = "";
     class_id = 1;
@@ -12,19 +24,31 @@ export class PlayerCharacter {
     intelligence = 0;
     charisma = 0;
 
+    constructor(json) {
+        this.fromJson(json);
+    }
+
     fromJson = (json) => {
         if(json) {
-            this.id = json.id;
-            this.name = json.name;
-            this.class_id = json.class_id;
-            this.race_id = json.race_id;
-            this.level = json.level;
-            this.strength = json.strength;
-            this.constitution = json.constitution;
-            this.dexterity = json.dexterity;
-            this.wisdom = json.wisdom;
-            this.intelligence = json.intelligence;
-            this.charisma = json.charisma;
+            for(const field of this.fields) {
+                this[field] = json[field];
+            }
         }
+    }
+
+    modifierString = (attribute) => {
+        let modifier = this.calculateModifier(attribute);
+        if(modifier > 0) {
+            modifier = "+" + modifier.toString();
+        } else if(modifier < 0) {
+            modifier = modifier.toString();
+        }
+        return modifier;
+    }
+
+    calculateModifier = (attribute) => {
+        let modifier = (this[attribute] - 10) / 2;
+        modifier = Math.floor(modifier);
+        return modifier;
     }
 }

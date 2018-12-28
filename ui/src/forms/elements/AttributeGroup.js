@@ -5,28 +5,23 @@ import Row from "react-bootstrap/lib/Row";
 import Col from "react-bootstrap/lib/Col";
 import Form from "react-bootstrap/lib/Form";
 
+import {capFirst} from "../../Utilities";
+import {PlayerCharacter} from "../../models/PlayerCharacter";
+
 const ATTRIBUTE_SKILL_MAP = {
-    strength: ["Athletics"],
-    dexterity: ["Acrobatics", "Sleight of Hand", "Stealth"],
-    intelligence: ["Arcana", "History", "Investigation", "Nature", "Religion"],
-    wisdom: ["Animal Handling", "Insight", "Medicine", "Perception", "Survival"],
-    charisma: ["Deception", "Intimidation", "Performance", "Persuasion"]
+    strength: ["athletics"],
+    dexterity: ["acrobatics", "sleight_of_hand", "stealth"],
+    intelligence: ["arcana", "history", "investigation", "nature", "religion"],
+    wisdom: ["animal_handling", "insight", "medicine", "perception", "survival"],
+    charisma: ["deception", "intimidation", "performance", "persuasion"]
 }
 
 export default class AttributeGroup extends React.Component {
     generateBaseStatBlock = (attribute, character) => {
-        let cap_attr = attribute.charAt(0).toUpperCase() + attribute.slice(1);
-        let modifier = (character[attribute] - 10) / 2;
-        modifier = Math.floor(modifier);
-        if(modifier > 0) {
-            modifier = "+" + modifier.toString();
-        } else if(modifier < 0) {
-            modifier = modifier.toString();
-        }
         return (
             <React.Fragment>
             <Row>
-                <Col>{cap_attr}</Col>
+                <Col>{capFirst(attribute)}</Col>
             </Row>
             <hr />
             <Row>
@@ -38,15 +33,20 @@ export default class AttributeGroup extends React.Component {
                     />
                 </Col>
                 <Col sm={6}>
-                    {modifier}
+                    {character.modifierString(attribute)}
                 </Col>
             </Row>
             </React.Fragment>
         );
     }
 
+    generateSkillBlock = (attribute, character) => {
+
+    }
+
     render() {
-        let sbblock = this.generateBaseStatBlock("strength", this.props.character);
+        let pc = new PlayerCharacter(this.props.character);
+        let sbblock = this.generateBaseStatBlock("strength", pc);
         return (
             <Container>
                 <Row>
