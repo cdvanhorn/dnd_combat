@@ -6,6 +6,8 @@ import ButtonToolbar from "react-bootstrap/lib/ButtonToolbar";
 
 import {
     updateSelectedPlayerCharacter,
+    addSelectedPlayerCharacterProficiency,
+    removeSelectedPlayerCharacterProficiency,
     patchPlayerCharacter,
     postPlayerCharacter,
     deletePlayerCharacter
@@ -39,11 +41,27 @@ class PlayerCharacterForm extends React.Component {
 
     handleChange = (name, event) => {
         let value = event.target.value;
+        if(event.target.type === 'checkbox') {
+            value = event.target.checked;
+        }
         //keep numbers as numbers
-        if(!isNaN(value)) {
+        if(!isNaN(value) && typeof value !== "boolean") {
             value = parseInt(value);
         }
-        this.props.updateSelectedPlayerCharacter(name, value);
+        //updating proficiences works differently
+        if(name === 'proficiencies') {
+            let skill = event.target.id;
+            console.log(value);
+            if(value === true) {
+                //add proficiency
+                this.props.addSelectedPlayerCharacterProficiency(skill);
+            } else if(value === false){
+                //remove proficiency
+                this.props.removeSelectedPlayerCharacterProficiency(skill);
+            }
+        } else {
+            this.props.updateSelectedPlayerCharacter(name, value);
+        }
 
         //update which fields are dirty
         if(this.state[this.props.character.id]) {
@@ -140,6 +158,8 @@ export default connect(
     mapStateToProps,
     {
         updateSelectedPlayerCharacter,
+        addSelectedPlayerCharacterProficiency,
+        removeSelectedPlayerCharacterProficiency,
         patchPlayerCharacter,
         postPlayerCharacter,
         deletePlayerCharacter,

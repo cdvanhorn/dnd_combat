@@ -46,6 +46,8 @@ export default class AttributeGroup extends React.Component {
                 type='checkbox'
                 id={skill}
                 label={capFirst(skill) + " " + character.skillString(attribute, skill)}
+                onChange={this.props.handleChange.bind(this, 'proficiencies')}
+                checked={character.proficient(skill)}
             />
         );
     }

@@ -41,6 +41,10 @@ export class PlayerCharacter {
         }
     }
 
+    proficient = (skill) => {
+        return this.proficiencies.includes(skill);
+    }
+
     skillString = (attribute, skill) => {
         let skill_value = this.calculateModifier(attribute);
         if(this.proficiencies.includes(skill)) {

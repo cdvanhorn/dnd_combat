@@ -9,7 +9,9 @@ import {
     PCS_SAVE_PLAYER_CHARACTER,
     PCS_SAVED_PLAYER_CHARACTER,
     PCS_REMOVE_PLAYER_CHARACTER,
-    PCS_REMOVED_PLAYER_CHARACTER
+    PCS_REMOVED_PLAYER_CHARACTER,
+    PCS_UPDATE_SELECTED_PLAYER_CHARACTER_ADD_PROFICIENCY,
+    PCS_UPDATE_SELECTED_PLAYER_CHARACTER_REMOVE_PROFICIENCY
 } from "../actionTypes.js";
 import {PlayerCharacter} from "../../models/PlayerCharacter.js";
 
@@ -108,6 +110,20 @@ export const updateSelectedPlayerCharacter = (field, value) => ({
     payload: {
         "field": field,
         "value": value
+    }
+});
+
+export const addSelectedPlayerCharacterProficiency = (skill) => ({
+    type: PCS_UPDATE_SELECTED_PLAYER_CHARACTER_ADD_PROFICIENCY,
+    payload: {
+        "proficiency": skill
+    }
+});
+
+export const removeSelectedPlayerCharacterProficiency = (skill) => ({
+    type: PCS_UPDATE_SELECTED_PLAYER_CHARACTER_REMOVE_PROFICIENCY,
+    payload: {
+        "proficiency": skill
     }
 });
 
