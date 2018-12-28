@@ -45,7 +45,7 @@ class PlayerCharacterForm extends React.Component {
             value = event.target.checked;
         }
         //keep numbers as numbers
-        if(!isNaN(value) && typeof value !== "boolean") {
+        if(!isNaN(value) && typeof value !== "boolean" && value.length > 0) {
             value = parseInt(value);
         }
         //updating proficiences works differently
