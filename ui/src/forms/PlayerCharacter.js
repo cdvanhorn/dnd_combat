@@ -144,7 +144,7 @@ class PlayerCharacterForm extends React.Component {
                         handleChange={this.handleChange}
                     />
                     <br />
-                    <ButtonToolbar>
+                    <ButtonToolbar className="justify-content-end">
                         <Button type='submit' variant='primary' disabled={disabled}>Save</Button>
                         <Button variant='danger' onClick={this.toggleDialog}>Delete</Button>
                     </ButtonToolbar>

@@ -40,7 +40,7 @@ class Application extends React.Component {
                 <Navbar expand="lg" variant="dark" bg="dark">
                     <Navbar.Brand>{rdmCap("combat tracker")}</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
+                    <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
                         <Nav
                             activeKey={this.state.activePage}
                             onSelect={this.setActivePage}
