@@ -143,6 +143,7 @@ class PlayerCharacterForm extends React.Component {
                         character={this.props.character}
                         handleChange={this.handleChange}
                     />
+                    <br />
                     <ButtonToolbar>
                         <Button type='submit' variant='primary' disabled={disabled}>Save</Button>
                         <Button variant='danger' onClick={this.toggleDialog}>Delete</Button>

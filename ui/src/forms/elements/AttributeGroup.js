@@ -11,6 +11,7 @@ import {PlayerCharacter} from "../../models/PlayerCharacter";
 const ATTRIBUTE_SKILL_MAP = {
     strength: ["athletics"],
     dexterity: ["acrobatics", "sleight_of_hand", "stealth"],
+    constitution: [],
     intelligence: ["arcana", "history", "investigation", "nature", "religion"],
     wisdom: ["animal_handling", "insight", "medicine", "perception", "survival"],
     charisma: ["deception", "intimidation", "performance", "persuasion"]
