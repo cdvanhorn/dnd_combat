@@ -1,5 +1,10 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import Select from "react-select";
+import Table from "react-bootstrap/lib/Table";
+
+import {fetchActions} from "../../redux/actions/actions.js";
 
 const options = [
     { value: 'chocolate', label: 'Chocolate' },
@@ -7,7 +12,13 @@ const options = [
     { value: 'vanilla', label: 'Vanilla' }
 ];
 
-export default class ActionList extends React.Component {
+const mapStateToProps = state => {
+    return {
+        "actions": state.actions.items
+    };
+};
+
+class ActionList extends React.Component {
     state = {
         selectedOption: null,
     }
@@ -17,18 +28,58 @@ export default class ActionList extends React.Component {
         console.log(`Option selected:`, selectedOption);
     }
 
+    componentDidMount = () => {
+        //get the player characters to populate the list
+        this.props.fetchActions('http://localhost:3001/actions');
+    }
+
     render() {
         const { selectedOption } = this.state;
+        console.log(this.props.character.actions);
 
         //table of actions option to remove action
         //then select to add new action
         return (
-
+            <React.Fragment>
+            <Table striped bordered hover size="sm">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Source Effects</th>
+                        <th>Target Effects</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Larry the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                </tbody>
+            </Table>
             <Select
                 value={selectedOption}
                 onChange={this.handleChange}
                 options={options}
             />
+            </React.Fragment>
         );
     }
 }
+
+export default connect(
+    mapStateToProps,
+    {
+        fetchActions
+    }
+)(ActionList);

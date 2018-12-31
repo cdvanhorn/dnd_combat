@@ -13,7 +13,8 @@
             "intelligence": 18,
             "charisma": 18,
             "proficiency_bonus": 2,
-            "proficiencies": ["athletics", "sleight_of_hand", "arcana"]
+            "proficiencies": ["athletics", "sleight_of_hand", "arcana"],
+            "actions": [1]
         }
     ],
     "classes": [

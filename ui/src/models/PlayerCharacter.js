@@ -11,7 +11,8 @@ const FIELDS = [
     'intelligence',
     'charisma',
     'proficiencies',
-    'proficiency_bonus'
+    'proficiency_bonus',
+    'actions'
 ];
 
 export class PlayerCharacter {
@@ -28,6 +29,7 @@ export class PlayerCharacter {
     charisma = 0;
     proficiencies = [];
     proficiency_bonus = 0;
+    actions = [];
 
     constructor(json) {
         this.fromJson(json);
