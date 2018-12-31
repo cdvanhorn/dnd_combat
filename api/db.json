@@ -35,5 +35,24 @@
             "id": 2,
             "name": "Dwarf"
         }
+    ],
+    "actions": [
+        {
+            "id": 1,
+            "name": "attack",
+            "source_effects": [],
+            "target_effects": [],
+            "succeed_roll": "foo",
+            "succeed_compare": "bar"
+        }
+    ],
+    "effects": [
+        {
+            "id": 1,
+            "name": "damage",
+            "damage_type": "slashing",
+            "damage_amount": "1d6",
+            "damage_attribute": "strength"
+        }
     ]
 }

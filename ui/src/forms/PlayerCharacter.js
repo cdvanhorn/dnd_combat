@@ -19,6 +19,7 @@ import {fetchRaces} from "../redux/actions/races.js";
 import CharacterHeader from "./elements/CharacterHeader.js";
 import ConfirmDialog from "./elements/ConfirmDialog.js";
 import AttributeGroup from "./elements/AttributeGroup.js";
+import ActionList from "./elements/ActionList.js";
 
 const mapStateToProps = state => {
     return {
@@ -133,15 +134,25 @@ class PlayerCharacterForm extends React.Component {
                     active={this.state.active}
                 />
                 <form onSubmit={this.handleSubmit}>
+                    <h3>Basics</h3>
+                    <hr />
                     <CharacterHeader
                         character={this.props.character}
                         handleChange={this.handleChange}
                         races={this.props.races}
                         classes={this.props.classes}
                     />
+                    <br/>
+                    <h3>Attributes</h3>
                     <AttributeGroup
                         character={this.props.character}
                         handleChange={this.handleChange}
+                    />
+                    <br/>
+                    <h3>Actions</h3>
+                    <hr />
+                    <ActionList
+                        character={this.props.character}
                     />
                     <br />
                     <ButtonToolbar className="justify-content-end">
