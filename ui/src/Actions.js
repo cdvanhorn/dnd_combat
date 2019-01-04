@@ -3,9 +3,8 @@ import React from "react";
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 
-import PlayerCharacterSearch from './searches/PlayerCharacter.js';
-import PlayerCharacterDetails from './details/PlayerCharacter.js';
-
+import ActionList from './forms/elements/ActionList.js';
+import Search from './forms/Search.js';
 import { rdmCap } from "./Utilities";
 
 
@@ -21,7 +20,9 @@ class Actions extends React.Component {
                 <hr/>
                 <Row>
                     <Col sm={4}>
-                        <PlayerCharacterSearch />
+                        <Search>
+                            <ActionList />
+                        </Search>
                     </Col>
                     <Col sm={8}>
                         Action Details
