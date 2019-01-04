@@ -8,6 +8,8 @@ import {
     updateSelectedPlayerCharacter,
     addSelectedPlayerCharacterProficiency,
     removeSelectedPlayerCharacterProficiency,
+    addSelectedPlayerCharacterAction,
+    removeSelectedPlayerCharacterAction,
     patchPlayerCharacter,
     postPlayerCharacter,
     deletePlayerCharacter
@@ -41,9 +43,14 @@ class PlayerCharacterForm extends React.Component {
     }
 
     handleChange = (name, event) => {
-        let value = event.target.value;
-        if(event.target.type === 'checkbox') {
-            value = event.target.checked;
+        let value = null;
+        if(name === 'actions') {
+            value = event;
+        } else {
+            let value = event.target.value;
+            if(event.target.type === 'checkbox') {
+                value = event.target.checked;
+            }
         }
         //keep numbers as numbers
         if(!isNaN(value) && typeof value !== "boolean" && value.length > 0) {
@@ -59,6 +66,10 @@ class PlayerCharacterForm extends React.Component {
             } else if(value === false){
                 //remove proficiency
                 this.props.removeSelectedPlayerCharacterProficiency(skill);
+            }
+        } else if(name === 'actions') {
+            if(value.add === true) {
+                this.props.addSelectedPlayerCharacterAction(value.id);
             }
         } else {
             this.props.updateSelectedPlayerCharacter(name, value);
@@ -153,6 +164,7 @@ class PlayerCharacterForm extends React.Component {
                     <hr />
                     <ActionList
                         character={this.props.character}
+                        updateCharacter={this.handleChange}
                     />
                     <br />
                     <ButtonToolbar className="justify-content-end">
@@ -171,6 +183,8 @@ export default connect(
         updateSelectedPlayerCharacter,
         addSelectedPlayerCharacterProficiency,
         removeSelectedPlayerCharacterProficiency,
+        addSelectedPlayerCharacterAction,
+        removeSelectedPlayerCharacterAction,
         patchPlayerCharacter,
         postPlayerCharacter,
         deletePlayerCharacter,

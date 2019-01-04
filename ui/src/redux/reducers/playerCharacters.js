@@ -8,7 +8,9 @@ import {
     PCS_REMOVE_PLAYER_CHARACTER,
     PCS_REMOVED_PLAYER_CHARACTER,
     PCS_UPDATE_SELECTED_PLAYER_CHARACTER_ADD_PROFICIENCY,
-    PCS_UPDATE_SELECTED_PLAYER_CHARACTER_REMOVE_PROFICIENCY
+    PCS_UPDATE_SELECTED_PLAYER_CHARACTER_REMOVE_PROFICIENCY,
+    PCS_UPDATE_SELECTED_PLAYER_CHARACTER_ADD_ACTION,
+    PCS_UPDATE_SELECTED_PLAYER_CHARACTER_REMOVE_ACTION
 } from "../actionTypes.js";
 
 const initialState = {
@@ -66,6 +68,30 @@ export default function(state = initialState, action) {
                     {
                         proficiencies: state.ui_selected_character.proficiencies.filter( (proficiency) => {
                             return proficiency !== payload.proficiency;
+                        })
+                    }
+                )
+            };
+        case PCS_UPDATE_SELECTED_PLAYER_CHARACTER_ADD_ACTION:
+            payload = action.payload;
+            return {
+                ...state,
+                ui_selected_character: Object.assign(
+                    state.ui_selected_character,
+                    {
+                        actions: [...state.ui_selected_character.actions, payload.action]
+                    }
+                )
+            };
+        case PCS_UPDATE_SELECTED_PLAYER_CHARACTER_REMOVE_ACTION:
+            payload = action.payload;
+            return {
+                ...state,
+                ui_selected_character: Object.assign(
+                    state.ui_selected_character,
+                    {
+                        actions: state.ui_selected_character.actions.filter( (act) => {
+                            return act !== payload.action;
                         })
                     }
                 )
