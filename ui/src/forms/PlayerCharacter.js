@@ -70,6 +70,8 @@ class PlayerCharacterForm extends React.Component {
         } else if(name === 'actions') {
             if(value.add === true) {
                 this.props.addSelectedPlayerCharacterAction(value.id);
+            } else {
+                this.props.removeSelectedPlayerCharacterAction(value.id);
             }
         } else {
             this.props.updateSelectedPlayerCharacter(name, value);

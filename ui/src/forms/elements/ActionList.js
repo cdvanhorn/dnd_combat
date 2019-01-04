@@ -26,6 +26,11 @@ class ActionList extends React.Component {
         this.props.updateCharacter('actions', {add: true, id: selectedOption.id});
     }
 
+    removeAction = (action_id) => {
+        this.setState({ selectedOption: null });
+        this.props.updateCharacter('actions', {add: false, id: action_id});
+    }
+
     componentDidMount = () => {
         //get the player characters to populate the list
         this.props.fetchActions('http://localhost:3001/actions');
@@ -57,7 +62,7 @@ class ActionList extends React.Component {
                     <td>{action.name}</td>
                     <td>{action.source_effects}</td>
                     <td>{action.target_effects}</td>
-                    <td><Button variant='danger'>Remove</Button></td>
+                    <td><Button variant='danger' onClick={this.removeAction.bind(this, action.id)}>Remove</Button></td>
                 </tr>
             );
         });
