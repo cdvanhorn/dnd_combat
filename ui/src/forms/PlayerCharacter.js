@@ -43,11 +43,11 @@ class PlayerCharacterForm extends React.Component {
     }
 
     handleChange = (name, event) => {
-        let value = null;
+        let value = undefined;
         if(name === 'actions') {
             value = event;
         } else {
-            let value = event.target.value;
+            value = event.target.value;
             if(event.target.type === 'checkbox') {
                 value = event.target.checked;
             }
