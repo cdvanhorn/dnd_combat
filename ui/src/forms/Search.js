@@ -6,13 +6,13 @@ export default class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            pc_filter: ""
+            filter: ""
         };
     }
 
     filterList = (e) => {
         this.setState({
-            pc_filter: e
+            filter: e
         });
     }
     
@@ -21,11 +21,10 @@ export default class Search extends React.Component {
             <React.Fragment>
                 <SearchInput
                     filterList={this.filterList}
-                    filter={this.state.pc_filter}
-                    loading={this.props.is_fetching}
+                    filter={this.state.filter}
                 />
                 {React.cloneElement(this.props.children, {
-                    filter: this.state.pc_filter
+                    filter: this.state.filter
                 })}
             </React.Fragment>
         );
