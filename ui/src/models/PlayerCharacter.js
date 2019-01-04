@@ -28,7 +28,7 @@ export class PlayerCharacter {
     intelligence = 0;
     charisma = 0;
     proficiencies = [];
-    proficiency_bonus = 0;
+    proficiency_bonus = 2;
     actions = [];
 
     constructor(json) {
