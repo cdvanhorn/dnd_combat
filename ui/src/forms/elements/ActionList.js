@@ -37,10 +37,22 @@ class ActionList extends React.Component {
 
     render() {
         const { selectedOption } = this.state;
-        console.log(this.props.character.actions);
 
+        //filter the major list of actions to just actions pc has
+        let pc_actions = this.props.actions.filter( (action) => {
+            return this.props.character.actions.includes(action.id);
+        });
+        let action_rows = pc_actions.map( (action) => {
+            return (
+                <tr key={action.id}>
+                    <td>{action.name}</td>
+                    <td>{action.source_effects}</td>
+                    <td>{action.target_effects}</td>
+                </tr>
+            );
+        });
+        
         //table of actions option to remove action
-        let action_rows = [];
         //then select to add new action
         return (
             <React.Fragment>
@@ -53,21 +65,7 @@ class ActionList extends React.Component {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Larry the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
+                    {action_rows}
                 </tbody>
             </Table>
             <Select
