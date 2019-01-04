@@ -3,7 +3,7 @@ import React from "react";
 import Form from "react-bootstrap/lib/Form";
 import Col from "react-bootstrap/lib/Col";
 
-import {rdmCap} from "../Utilities.js";
+import {rdmCap} from "../../Utilities.js";
 
 export default class Search extends React.Component {
     constructor(props) {

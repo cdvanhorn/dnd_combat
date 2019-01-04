@@ -2,11 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 
 import Search from '../forms/elements/Search.js';
-import PlayerCharacterList from "../searches/PlayerCharacterList.js";
+//import PlayerCharacterList from "../searches/PlayerCharacterList.js";
 
 const mapStateToProps = state => {
     return {
-        "is_fetching": state.pcs.ui_is_fetching
+        "is_fetching": state.actions.ui_is_fetching
     };
 };
 
