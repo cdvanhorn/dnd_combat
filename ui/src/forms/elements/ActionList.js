@@ -22,15 +22,8 @@ class ActionList extends React.Component {
     }
 
     handleChange = (selectedOption) => {
-        this.setState({ selectedOption });
-        console.log(selectedOption);
-    }
-
-    addCharacter = () => {
-        this.setState({
-            selectedOption: null
-        });
-        this.props.updateCharacter('actions', {add: true, id: this.state.selectedOption.id});
+        this.setState({ selectedOption: null });
+        this.props.updateCharacter('actions', {add: true, id: selectedOption.id});
     }
 
     componentDidMount = () => {
@@ -48,6 +41,11 @@ class ActionList extends React.Component {
 
     render() {
         const { selectedOption } = this.state;
+
+        //filter out actions the pc can already do
+        let options = this.props.actions.filter( (action) => {
+            return !this.props.character.actions.includes(action.id);
+        });
 
         //filter the major list of actions to just actions pc has
         let pc_actions = this.props.actions.filter( (action) => {
@@ -81,22 +79,13 @@ class ActionList extends React.Component {
                     {action_rows}
                 </tbody>
             </Table>
-            <Container>
-                <Row>
-                    <Col sm={10}>
-                        <Select
-                            value={selectedOption}
-                            onChange={this.handleChange}
-                            options={this.props.actions}
-                            getOptionLabel={this.getOptionLabel}
-                            getOptionValue={this.getOptionValue}
-                        />
-                    </Col>
-                    <Col sm={2}>
-                        <Button variant='primary' onClick={this.addCharacter}>Add</Button>
-                    </Col>
-                </Row>
-            </Container>
+            <Select
+                value={selectedOption}
+                onChange={this.handleChange}
+                options={options}
+                getOptionLabel={this.getOptionLabel}
+                getOptionValue={this.getOptionValue}
+            />
             </React.Fragment>
         );
     }
