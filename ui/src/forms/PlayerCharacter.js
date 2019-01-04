@@ -21,7 +21,7 @@ import {fetchRaces} from "../redux/actions/races.js";
 import CharacterHeader from "./elements/CharacterHeader.js";
 import ConfirmDialog from "./elements/ConfirmDialog.js";
 import AttributeGroup from "./elements/AttributeGroup.js";
-import ActionList from "./elements/ActionList.js";
+import ActionList from "./elements/CharacterActionList.js";
 
 const mapStateToProps = state => {
     return {
@@ -164,7 +164,7 @@ class PlayerCharacterForm extends React.Component {
                     <br/>
                     <h3>Actions</h3>
                     <hr />
-                    <ActionList
+                    <CharacterActionList
                         character={this.props.character}
                         updateCharacter={this.handleChange}
                     />

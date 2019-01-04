@@ -4,9 +4,6 @@ import { connect } from "react-redux";
 import Select from "react-select";
 import Table from "react-bootstrap/lib/Table";
 import Button from "react-bootstrap/lib/Button";
-import Container from "react-bootstrap/lib/Container";
-import Row from "react-bootstrap/lib/Row";
-import Col from "react-bootstrap/lib/Col";
 
 import {fetchActions} from "../../redux/actions/actions.js";
 
@@ -16,7 +13,7 @@ const mapStateToProps = state => {
     };
 };
 
-class ActionList extends React.Component {
+class CharacterActionList extends React.Component {
     state = {
         selectedOption: null,
     }
@@ -101,4 +98,4 @@ export default connect(
     {
         fetchActions
     }
-)(ActionList);
+)(CharacterActionList);
