@@ -1,10 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import Nav from "react-bootstrap/lib/Nav";
-
-import {rdmCap} from "../../Utilities.js";
-
+import SearchList from "./SearchList.js";
 import { 
     fetchPlayerCharacters,
     selectPlayerCharacter
@@ -25,11 +22,10 @@ class PlayerCharacterList extends React.Component {
     }
 
     componentDidMount = () => {
-        //get the player characters to populate the list
         this.props.fetchPlayerCharacters('http://localhost:3001/pcs');
     }
 
-    listClick = (key) => {
+    itemClick = (key) => {
         let pc = null
         if(key !== 'create') {
             pc = this.props.player_characters.find(item => {
@@ -42,57 +38,14 @@ class PlayerCharacterList extends React.Component {
     }
 
     render() {
-        //add a create link
-        let create_list_item;
-        if(this.props.can_edit) {
-            create_list_item = (
-                <Nav.Link eventKey="create">
-                    {rdmCap('create')}
-                </Nav.Link>
-            );
-        }
-
-        //filter the list items
-        let items = [];
-        if(this.props.filter) {
-            items = this.props.player_characters.filter(item => {
-                return item.name.toLowerCase().includes(this.props.filter.toLowerCase())
-            });
-        } else {
-            items = this.props.player_characters;
-        }
-
-        //are we still loading
-        let loading_text = rdmCap('Loading Characters') + "...";
-
-        let list_content;
-        if(this.props.is_fetching) {
-            list_content = (
-                <Nav.Link disabled>
-                    {loading_text}
-                </Nav.Link>
-            );
-        } else {
-            list_content = items.map( (item) => {
-                return (
-                    <Nav.Link className="border" eventKey={item.id} key={item.id}>
-                        {item.name}
-                    </Nav.Link>
-                );
-            });
-        }
-
         return (
-            <div>
-                <Nav
-                    variant="pills"
-                    className="flex-column"
-                    onSelect={this.listClick}
-                >
-                    {create_list_item}
-                    {list_content}
-                </Nav>
-            </div>
+            <SearchList 
+                items={this.props.player_characters}
+                itemClick={this.itemClick}
+                canEdit={this.props.can_edit}
+                isFetching={this.props.is_fetching}
+                filter={this.props.filter}
+            />
         );
     }
 }
