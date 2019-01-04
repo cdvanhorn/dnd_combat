@@ -21,7 +21,7 @@ import {fetchRaces} from "../redux/actions/races.js";
 import CharacterHeader from "./elements/CharacterHeader.js";
 import ConfirmDialog from "./elements/ConfirmDialog.js";
 import AttributeGroup from "./elements/AttributeGroup.js";
-import ActionList from "./elements/CharacterActionList.js";
+import CharacterActionList from "./elements/CharacterActionList.js";
 
 const mapStateToProps = state => {
     return {
