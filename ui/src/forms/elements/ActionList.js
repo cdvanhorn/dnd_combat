@@ -27,6 +27,9 @@ class ActionList extends React.Component {
     }
 
     addCharacter = () => {
+        this.setState({
+            selectedOption: null
+        });
         this.props.updateCharacter('actions', {add: true, id: this.state.selectedOption.id});
     }
 
