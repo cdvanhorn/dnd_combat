@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 
 import Nav from "react-bootstrap/lib/Nav";
 
-import {rdmCap} from "../Utilities.js";
+import {rdmCap} from "../../Utilities.js";
 
 import { 
     fetchPlayerCharacters,
     selectPlayerCharacter
-} from "../redux/actions/playerCharacters.js";
-import {PlayerCharacter} from "../models/PlayerCharacter.js";
+} from "../../redux/actions/playerCharacters.js";
+import {PlayerCharacter} from "../../models/PlayerCharacter.js";
 
 const mapStateToProps = state => {
     return { 

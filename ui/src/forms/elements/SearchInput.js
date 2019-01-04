@@ -5,7 +5,7 @@ import Col from "react-bootstrap/lib/Col";
 
 import {rdmCap} from "../../Utilities.js";
 
-export default class Search extends React.Component {
+export default class SearchInput extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
