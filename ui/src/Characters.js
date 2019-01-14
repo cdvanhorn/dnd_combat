@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/lib/Col';
 
 import PlayerCharacterList from './forms/elements/PlayerCharacterList.js';
 import Search from './forms/Search.js';
-import PlayerCharacterDetails from './details/PlayerCharacter.js';
+import PlayerCharacterForm from "./forms/PlayerCharacter.js";
 
 import { rdmCap } from "./Utilities";
 
@@ -27,7 +27,7 @@ class Characters extends React.Component {
                         </Search>
                     </Col>
                     <Col sm={8}>
-                        <PlayerCharacterDetails />
+                        <PlayerCharacterForm />
                     </Col>
                 </Row>
             </React.Fragment>
