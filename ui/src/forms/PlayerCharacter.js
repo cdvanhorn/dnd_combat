@@ -1,9 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import Button from "react-bootstrap/lib/Button";
-import ButtonToolbar from "react-bootstrap/lib/ButtonToolbar";
-
 import {
     updateSelectedPlayerCharacter,
     addSelectedPlayerCharacterProficiency,
@@ -18,8 +15,8 @@ import {
 import {fetchClasses} from "../redux/actions/classes.js";
 import {fetchRaces} from "../redux/actions/races.js";
 
+import BaseForm from "./Base.js";
 import CharacterHeader from "./elements/CharacterHeader.js";
-import ConfirmDialog from "./elements/ConfirmDialog.js";
 import AttributeGroup from "./elements/AttributeGroup.js";
 import CharacterActionList from "./elements/CharacterActionList.js";
 
@@ -34,12 +31,8 @@ const mapStateToProps = state => {
 class PlayerCharacterForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            active: false
-        }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
-        this.toggleDialog = this.toggleDialog.bind(this);
+        this.state = {};
+        this.isDisabled = this.isDisabled.bind(this);
     }
 
     handleChange = (name, event) => {
@@ -89,8 +82,7 @@ class PlayerCharacterForm extends React.Component {
         }
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault();
+    handleSave = (event) => {
         if(this.props.character.id) {
             this.props.patchPlayerCharacter(
                 'http://localhost:3001/pcs',
@@ -107,16 +99,7 @@ class PlayerCharacterForm extends React.Component {
         }
     }
 
-    toggleDialog = () => {
-        this.setState({
-            active: !this.state.active
-        });
-    }
-
     handleDelete = () => {
-        this.setState({
-            active: !this.state.active
-        });
         this.props.deletePlayerCharacter('http://localhost:3001/pcs', this.props.character);
     }
 
@@ -126,55 +109,45 @@ class PlayerCharacterForm extends React.Component {
         this.props.fetchRaces('http://localhost:3001/races');
     }
 
-    render() {
-        //is something dirty if so activate save button
-        let disabled = true;
+    isDisabled = () => {
         if(this.state[this.props.character.id]) {
-            disabled = !Object.keys(this.state[this.props.character.id]).length > 0;
+            return !Object.keys(this.state[this.props.character.id]).length > 0;
+        } else {
+            return true;
         }
+    }
 
-        if(!this.props.character.hasOwnProperty('name')) {
-            return (<p>Select a Character</p>);
-        }
-
-        let action_text = "delete " + this.props.character.name;
+    render() {
         return (
-            <React.Fragment>
-                <ConfirmDialog
-                    actionText={action_text}
-                    onYes={this.handleDelete}
-                    toggleDialog={this.toggleDialog}
-                    active={this.state.active}
+            <BaseForm 
+                saveDisabled={this.isDisabled()}
+                object={this.props.character}
+                handleDelete={this.handleDelete}
+                handleChange={this.handleChange}
+                handleSave={this.handleSave}
+            >
+                <h3>Basics</h3>
+                <hr />
+                <CharacterHeader
+                    character={this.props.character}
+                    handleChange={this.handleChange}
+                    races={this.props.races}
+                    classes={this.props.classes}
                 />
-                <form onSubmit={this.handleSubmit}>
-                    <h3>Basics</h3>
-                    <hr />
-                    <CharacterHeader
-                        character={this.props.character}
-                        handleChange={this.handleChange}
-                        races={this.props.races}
-                        classes={this.props.classes}
-                    />
-                    <br/>
-                    <h3>Attributes</h3>
-                    <AttributeGroup
-                        character={this.props.character}
-                        handleChange={this.handleChange}
-                    />
-                    <br/>
-                    <h3>Actions</h3>
-                    <hr />
-                    <CharacterActionList
-                        character={this.props.character}
-                        updateCharacter={this.handleChange}
-                    />
-                    <br />
-                    <ButtonToolbar className="justify-content-end">
-                        <Button type='submit' variant='primary' disabled={disabled}>Save</Button>
-                        <Button variant='danger' onClick={this.toggleDialog}>Delete</Button>
-                    </ButtonToolbar>
-                </form>
-            </React.Fragment>
+                <br/>
+                <h3>Attributes</h3>
+                <AttributeGroup
+                    character={this.props.character}
+                    handleChange={this.handleChange}
+                />
+                <br/>
+                <h3>Actions</h3>
+                <hr />
+                <CharacterActionList
+                    character={this.props.character}
+                    updateCharacter={this.handleChange}
+                />
+            </BaseForm>
         );
     }
 }
