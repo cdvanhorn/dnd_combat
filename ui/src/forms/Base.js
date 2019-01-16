@@ -60,7 +60,7 @@ export default class BaseForm extends React.Component {
                     {this.props.children}
                     <br />
                     <ButtonToolbar className="justify-content-end">
-                        <Button type='submit' variant='primary' disabled={this.props.disabled}>Save</Button>
+                        <Button type='submit' variant='primary' disabled={this.props.saveDisabled}>Save</Button>
                         <Button variant='danger' onClick={this.toggleDialog}>Delete</Button>
                     </ButtonToolbar>
                 </form>
