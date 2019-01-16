@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/lib/Col';
 
 import ActionList from './forms/elements/ActionList.js';
 import Search from './forms/Search.js';
+import ActionForm from './forms/Actions.js';
 import { rdmCap } from "./Utilities";
 
 
@@ -25,7 +26,7 @@ class Actions extends React.Component {
                         </Search>
                     </Col>
                     <Col sm={8}>
-                        Action Details
+                        <ActionForm />
                     </Col>
                 </Row>
             </React.Fragment>

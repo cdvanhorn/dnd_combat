@@ -3,8 +3,10 @@ import { connect } from "react-redux";
 
 import SearchList from "./SearchList.js";
 import {
-    fetchActions
+    fetchActions,
+    selectAction
 } from "../../redux/actions/actions.js";
+import Action from "../../models/Action.js";
 
 const mapStateToProps = state => {
     return { 
@@ -24,7 +26,15 @@ class ActionList extends React.Component {
     }
 
     itemClick = (key) => {
-        console.log(key);
+        let act = null;
+        if(key !== 'create') {
+            act = this.props.actions.find(item => {
+                return item.id == key;
+            });
+        } else {
+            act = new Action();
+        }
+        this.props.selectAction(act);
     }
 
     render() {
@@ -43,6 +53,7 @@ class ActionList extends React.Component {
 export default connect(
     mapStateToProps,
     {
-        fetchActions
+        fetchActions,
+        selectAction
     }
 )(ActionList);

@@ -1,8 +1,16 @@
 import fetch from "cross-fetch";
 import {
     ACT_RECEIVE_ACTIONS,
-    ACT_REQUEST_ACTIONS
+    ACT_REQUEST_ACTIONS,
+    ACT_SELECT_ACTION
 } from "../actionTypes.js";
+
+export const selectAction = action => ({
+    type: ACT_SELECT_ACTION,
+    payload: {
+        "action": action
+    }
+});
 
 export const requestActions = fetching => ({
     type: ACT_REQUEST_ACTIONS,
