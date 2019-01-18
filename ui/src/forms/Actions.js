@@ -1,7 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import Container from "react-bootstrap/lib/Container";
+import Row from "react-bootstrap/lib/Row";
+import Col from "react-bootstrap/lib/Col";
+import Form from "react-bootstrap/lib/Form";
+
 import BaseForm from "./Base.js";
+import {rdmCap} from "../Utilities.js";
 
 const mapStateToProps = state => {
     return {
@@ -55,9 +61,69 @@ class ActionForm extends React.Component {
                 handleChange={this.handleChange}
                 handleSave={this.handleSave}
             >
-                <h3>Basics</h3>
+                <h3>Action Information</h3>
                 <hr />
-                {this.props.action.id}
+                <Container>
+                    <Row>
+                        <Col sm={12}>
+                            <Form.Group as={Col} controlId="formGridActionName">
+                                <Form.Label>Action Name</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder={rdmCap("action name")}
+                                    value={this.props.action.name}
+                                    onChange={this.handleChange.bind(this, 'name')}
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col sm={3}>
+                            <Form.Group as={Col} controlId="formGridActionRoll">
+                                <Form.Label>Roll</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    value={this.props.action.succeed_roll}
+                                    onChange={this.handleChange.bind(this, 'succeed_roll')}
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col sm={3}>
+                            <Form.Group controlId="formGridActionAgainst">
+                                <Form.Label>Against</Form.Label>
+                                <Form.Control
+                                    as="select"
+                                    onChange={this.handleChange.bind(this, 'against')}
+                                >
+                                    <option value="source">Source</option>
+                                    <option value="target">Target</option>
+                                </Form.Control>
+                            </Form.Group>
+                        </Col>
+                        <Col sm={3}>
+                            <Form.Group controlId="formGridActionCompare">
+                                <Form.Label>Attribute</Form.Label>
+                                <Form.Control
+                                    as="select"
+                                    value={this.props.action.succeed_compare}
+                                    onChange={this.handleChange.bind(this, 'succeed_compare')}
+                                >
+                                    <option value="armorclass">Armor Class</option>
+                                </Form.Control>
+                            </Form.Group>
+                        </Col>
+                        <Col sm={3}>
+                            <Form.Group as={Col} controlId="formGridActionDC">
+                                <Form.Label>DC</Form.Label>
+                                <Form.Control
+                                    type="number"
+                                    value={this.props.action.succeed_dc}
+                                    onChange={this.handleChange.bind(this, 'succeed_dc')}
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                </Container>
             </BaseForm>
         );
     }

@@ -3,8 +3,11 @@ const FIELDS = [
     'name',
     'source_effects',
     'target_effects',
+    'fail_source_effects',
+    'fail_target_effects',
     'succeed_roll',
-    'succeed_compare'
+    'succeed_compare',
+    'succeed_dc'
 ];
 
 export default class Action {
@@ -12,8 +15,11 @@ export default class Action {
     name = "";
     source_effects = [];
     target_effects = [];
+    fail_source_effects = [];
+    fail_target_effects = [];
     succeed_roll = '';
     succeed_compare = '';
+    succeed_dc = 0;
 
     constructor(json) {
         this.fromJson(json);
