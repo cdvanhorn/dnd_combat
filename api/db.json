@@ -43,6 +43,8 @@
             "name": "attack",
             "source_effects": [],
             "target_effects": [],
+            "fail_source_effects": [],
+            "fail_target_effects": [],
             "succeed_roll": "foo",
             "succeed_compare": "bar"
         }
