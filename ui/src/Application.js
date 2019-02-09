@@ -6,6 +6,7 @@ import NavDropdown from "react-bootstrap/lib/NavDropdown";
 
 import Characters from "./Characters.js";
 import Actions from "./Actions.js";
+import Effects from "./Effects.js";
 
 import { rdmCap } from "./Utilities";
 
@@ -38,6 +39,8 @@ class Application extends React.Component {
             content = React.createElement(Characters, {app: this}, null);
         } else if(this.state.activePage == "Actions") {
             content = React.createElement(Actions, {app: this}, null);
+        } else if(this.state.activePage == "Effects") {
+            content = React.createElement(Effects, {app: this}, null);
         } else {
             content = <h3>Unknown Page, {this.state.activePage}</h3>;
         }
@@ -62,6 +65,7 @@ class Application extends React.Component {
                                 <NavDropdown.Item eventKey="Characters">Player Characters</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item eventKey="Actions">Player Actions</NavDropdown.Item>
+                                <NavDropdown.Item eventKey="Effects">Effects</NavDropdown.Item>
                             </NavDropdown>
                             <Nav.Link eventKey="Settings">Settings</Nav.Link>
                         </Nav>

@@ -3,44 +3,44 @@ import { connect } from "react-redux";
 
 import SearchList from "./SearchList.js";
 import {
-    fetchActions,
-    selectAction
-} from "../../redux/actions/actions.js";
-import Action from "../../models/Action.js";
+    fetchEffects,
+    selectEffect
+} from "../../redux/actions/effects.js";
+import Effect from "../../models/Effect.js";
 
 const mapStateToProps = state => {
     return { 
         "can_edit": state.ui.can_edit,
-        "actions": state.actions.items,
-        "is_fetching": state.actions.ui_is_fetching
+        "effects": state.effects.items,
+        "is_fetching": state.effects.ui_is_fetching
     };
 };
 
-class ActionList extends React.Component {
+class EffectList extends React.Component {
     constructor(props) {
         super(props);
     }
 
     componentDidMount = () => {
-        this.props.fetchActions('http://localhost:3001/effects');
+        this.props.fetchEffects('http://localhost:3001/effects');
     }
 
     itemClick = (key) => {
-        let act = null;
+        let eff = null;
         if(key !== 'create') {
-            act = this.props.actions.find(item => {
+            eff = this.props.effects.find(item => {
                 return item.id == key;
             });
         } else {
-            act = new Action();
+            eff = new Effect();
         }
-        this.props.selectAction(act);
+        this.props.selectEffect(eff);
     }
 
     render() {
         return (
             <SearchList 
-                items={this.props.actions}
+                items={this.props.effects}
                 itemClick={this.itemClick}
                 canEdit={this.props.can_edit}
                 isFetching={this.props.is_fetching}
@@ -53,7 +53,7 @@ class ActionList extends React.Component {
 export default connect(
     mapStateToProps,
     {
-        fetchActions,
-        selectAction
+        fetchEffects,
+        selectEffect
     }
-)(ActionList);
+)(EffectList);
