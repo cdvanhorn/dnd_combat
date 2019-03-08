@@ -8,10 +8,13 @@ import Form from "react-bootstrap/lib/Form";
 
 import BaseForm from "./Base.js";
 import {rdmCap} from "../Utilities.js";
+import {fetchEffects} from "../redux/actions/effects.js";
+import ActionEffectList from "./elements/ActionEffectList.js";
 
 const mapStateToProps = state => {
     return {
-        "action": state.actions.ui_selected_action
+        "action": state.actions.ui_selected_action,
+        "effects": state.effects.items
     };
 };
 
@@ -20,6 +23,10 @@ class ActionForm extends React.Component {
         super(props);
         this.state = {};
         this.isDisabled = this.isDisabled.bind(this);
+    }
+
+    componentDidMount = () => {
+        this.props.fetchEffects('http://localhost:3001/effects');
     }
 
     handleChange = (name, event) => {
@@ -123,6 +130,12 @@ class ActionForm extends React.Component {
                             </Form.Group>
                         </Col>
                     </Row>
+                    <h3>Source Effects</h3>
+                    <hr />
+                    <ActionEffectList/>
+                    <h3>Target Effects</h3>
+                    <hr />
+                    <ActionEffectList/>
                 </Container>
             </BaseForm>
         );
@@ -132,5 +145,6 @@ class ActionForm extends React.Component {
 export default connect(
     mapStateToProps,
     {
+        fetchEffects
     }
 )(ActionForm);
