@@ -1,9 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import Select from "react-select";
-import Table from "react-bootstrap/lib/Table";
-import Button from "react-bootstrap/lib/Button";
+import FormList from "./FormList.js";
 
 import {fetchActions} from "../../redux/actions/actions.js";
 
@@ -18,14 +16,12 @@ class CharacterActionList extends React.Component {
         selectedOption: null,
     }
 
-    handleChange = (selectedOption) => {
-        this.setState({ selectedOption: null });
-        this.props.updateCharacter('actions', {add: true, id: selectedOption.id});
+    addRow = (id) => {
+        this.props.updateCharacter('actions', {add: true, id: id});
     }
 
-    removeAction = (action_id) => {
-        this.setState({ selectedOption: null });
-        this.props.updateCharacter('actions', {add: false, id: action_id});
+    removeRow = (id) => {
+        this.props.updateCharacter('actions', {add: false, id: id});
     }
 
     componentDidMount = () => {
@@ -33,17 +29,7 @@ class CharacterActionList extends React.Component {
         this.props.fetchActions('http://localhost:3001/actions');
     }
 
-    getOptionValue = (option) => {
-        return option.id;
-    }
-
-    getOptionLabel = (option) => {
-        return option.name;
-    }
-
     render() {
-        const { selectedOption } = this.state;
-
         //filter out actions the pc can already do
         let options = this.props.actions.filter( (action) => {
             return !this.props.character.actions.includes(action.id);
@@ -59,36 +45,28 @@ class CharacterActionList extends React.Component {
                     <td>{action.name}</td>
                     <td>{action.source_effects}</td>
                     <td>{action.target_effects}</td>
-                    <td><Button variant='danger' onClick={this.removeAction.bind(this, action.id)}>Remove</Button></td>
                 </tr>
             );
         });
+
+        let header = <tr>
+           <th>Name</th>
+           <th>Source Effects</th>
+           <th>Target Effects</th>
+           <th></th>
+        </tr>
         
         //table of actions option to remove action
         //then select to add new action
         return (
-            <React.Fragment>
-            <Table striped bordered hover size="sm">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Source Effects</th>
-                        <th>Target Effects</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {action_rows}
-                </tbody>
-            </Table>
-            <Select
-                value={selectedOption}
-                onChange={this.handleChange}
+            <FormList 
                 options={options}
-                getOptionLabel={this.getOptionLabel}
-                getOptionValue={this.getOptionValue}
+                header={header}
+                rows={action_rows}
+                removeRow={this.removeRow}
+                addRow={this.addRow}
+                field="actions"
             />
-            </React.Fragment>
         );
     }
 }
