@@ -44,8 +44,6 @@ export default class ActionEffectList extends React.Component {
             );
         });
 
-        //have to add callback for selecting someting and removing something
-
         return (
             <FormList 
                 options={options}
