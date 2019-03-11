@@ -9,16 +9,18 @@ export default class FormList extends React.Component {
         selectedOption: null,
     }
 
-    /*
     handleChange = (selectedOption) => {
-        this.setState({ selectedOption: null });
-        this.props.updateCharacter('actions', {add: true, id: selectedOption.id});
+        this.setState({ selectedOption: selectedOption});
+        //this.setState({ selectedOption: null });
+        //this.props.updateCharacter('actions', {add: true, id: selectedOption.id});
     }
 
+    /*
     removeAction = (action_id) => {
         this.setState({ selectedOption: null });
         this.props.updateCharacter('actions', {add: false, id: action_id});
     }
+    */
 
     getOptionValue = (option) => {
         return option.id;
@@ -27,7 +29,6 @@ export default class FormList extends React.Component {
     getOptionLabel = (option) => {
         return option.name;
     }
-    */
 
     render() {
         /*
@@ -82,12 +83,14 @@ export default class FormList extends React.Component {
             </React.Fragment>
         );
         */
+        const { selectedOption } = this.state;
+
         let table_header = <tr>
            <th>Name</th>
            <th></th>
         </tr>
         let object_rows = <tr>
-           <th>Bill</th>
+          <th>Bill</th>
            <th>Florida</th>
         </tr>
         return (
@@ -100,6 +103,14 @@ export default class FormList extends React.Component {
                         {object_rows}
                     </tbody>
                 </Table>
+                <Select
+                    value={selectedOption}
+                    onChange={this.handleChange}
+                    options={this.props.options}
+                    getOptionLabel={this.getOptionLabel}
+                    getOptionValue={this.getOptionValue}
+                />
+                <br />
             </React.Fragment>
         );
     }

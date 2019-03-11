@@ -8,8 +8,20 @@ export default class ActionEffectList extends React.Component {
     }
 
     render() {
+        //need to provide options
+        let options = this.props.all_effects.filter( (effect) => {
+            return !this.props.effects.includes(effect.id);
+        });
+
+        //need to provide headers
+
+        //need to provide rows
+
+        //have to add callback for 
+
         return (
             <FormList 
+                options={options}
             />
         );
     }
