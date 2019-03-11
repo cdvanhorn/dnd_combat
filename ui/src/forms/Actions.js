@@ -135,24 +135,28 @@ class ActionForm extends React.Component {
                     <ActionEffectList
                         all_effects={this.props.effects}
                         effects={this.props.action.source_effects}
+                        field="source_effects"
                     />
                     <h3>Target Effects</h3>
                     <hr />
                     <ActionEffectList
                         all_effects={this.props.effects}
                         effects={this.props.action.target_effects}
+                        field="target_effects"
                     />
                     <h3>Failure Source Effects</h3>
                     <hr />
                     <ActionEffectList
                         all_effects={this.props.effects}
                         effects={this.props.action.fail_source_effects}
+                        field="fail_source_effects"
                     />
                     <h3>Failure Target Effects</h3>
                     <hr />
                     <ActionEffectList
                         all_effects={this.props.effects}
                         effects={this.props.action.fail_target_effects}
+                        field="fail_target_effects"
                     />
                 </Container>
             </BaseForm>

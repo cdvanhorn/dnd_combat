@@ -1,10 +1,19 @@
 import React from "react";
-import { connect } from "react-redux";
 import FormList from "./FormList.js";
+
+import Effect from "../../models/Effect.js";
 
 export default class ActionEffectList extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    removeRow = (id, field) => {
+        console.log("remove row with id " + id + " for field " + field);
+    }
+
+    addRow = (id, field) => {
+        console.log("add a new row " + id + " to " + field);
     }
 
     render() {
@@ -20,16 +29,17 @@ export default class ActionEffectList extends React.Component {
            <th></th>
         </tr>
 
-        //<td><Button variant='danger' onClick={this.removeAction.bind(this, effect.id)}>Remove</Button></td>
         //need to provide rows, need to load actual effects
         let effect_objects = this.props.all_effects.filter( (effect) => {
             return this.props.effects.includes(effect.id);
         });
         let effect_rows = effect_objects.map( (effect) => {
+            let eobj = new Effect();
+            eobj.fromJson(effect)
             return (
-                <tr key={effect.id}>
-                    <td>{effect.name}</td>
-                    <td>Banana</td>
+                <tr key={eobj.id}>
+                    <td>{eobj.name}</td>
+                    <td>{eobj.getDescription()}</td>
                 </tr>
             );
         });
@@ -41,6 +51,9 @@ export default class ActionEffectList extends React.Component {
                 options={options}
                 header={header}
                 rows={effect_rows}
+                removeRow={this.removeRow}
+                addRow={this.addRow}
+                field={this.props.field}
             />
         );
     }

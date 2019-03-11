@@ -10,17 +10,16 @@ export default class FormList extends React.Component {
     }
 
     handleChange = (selectedOption) => {
-        this.setState({ selectedOption: selectedOption});
-        //this.setState({ selectedOption: null });
+        this.setState({ selectedOption: null });
+        this.props.addRow(selectedOption.id, this.props.field);
         //this.props.updateCharacter('actions', {add: true, id: selectedOption.id});
     }
 
-    /*
-    removeAction = (action_id) => {
+    removeRow = (id) => {
         this.setState({ selectedOption: null });
-        this.props.updateCharacter('actions', {add: false, id: action_id});
+        this.props.removeRow(id, this.props.field);
+        //this.props.updateCharacter('actions', {add: false, id: action_id});
     }
-    */
 
     getOptionValue = (option) => {
         return option.id;
@@ -33,13 +32,17 @@ export default class FormList extends React.Component {
     render() {
         const { selectedOption } = this.state;
 
-        //iterate list of rows
+        //iterate list of rows add delete button to the row
         let new_rows = React.Children.map(this.props.rows, (row) => {
             //need to clone this row with an additional child
-            let extra_row = React.createElement("td", {"key": "fred"}, "australia");
+            let delete_button = React.createElement(Button, {
+                "variant": "danger",
+                "onClick": this.removeRow.bind(this, row.key)
+            }, "Remove");
+            let extra_column = React.createElement("td", {"key": row.key + "remove"}, delete_button);
             return React.cloneElement(row, row.props, [
                 ...row.props.children,
-                extra_row
+                extra_column
             ]);
         });
 

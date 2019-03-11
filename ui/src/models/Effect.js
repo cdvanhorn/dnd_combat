@@ -24,4 +24,10 @@ export default class Effect {
             }
         }
     }
+
+    getDescription = () => {
+        if(this.damage_type && this.damage_amount) {
+            return "does " + this.damage_amount + " " + this.damage_type + " damage to target";
+        }
+    }
 }
