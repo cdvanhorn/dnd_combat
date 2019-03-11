@@ -31,76 +31,26 @@ export default class FormList extends React.Component {
     }
 
     render() {
-        /*
         const { selectedOption } = this.state;
 
-        //filter out actions the pc can already do
-        let options = this.props.actions.filter( (action) => {
-            return !this.props.character.actions.includes(action.id);
+        //iterate list of rows
+        let new_rows = React.Children.map(this.props.rows, (row) => {
+            //need to clone this row with an additional child
+            let extra_row = React.createElement("td", {"key": "fred"}, "australia");
+            return React.cloneElement(row, row.props, [
+                ...row.props.children,
+                extra_row
+            ]);
         });
 
-        //filter the major list of actions to just actions pc has
-        let pc_actions = this.props.actions.filter( (action) => {
-            return this.props.character.actions.includes(action.id);
-        });
-        let action_rows = pc_actions.map( (action) => {
-            return (
-                <tr key={action.id}>
-                    <td>{action.name}</td>
-                    <td>{action.source_effects}</td>
-                    <td>{action.target_effects}</td>
-                    <td><Button variant='danger' onClick={this.removeAction.bind(this, action.id)}>Remove</Button></td>
-                </tr>
-            );
-        });
-        */
-        
-        //table of actions option to remove action
-        //then select to add new action
-        /*
-        return (
-            <React.Fragment>
-            <Table striped bordered hover size="sm">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Source Effects</th>
-                        <th>Target Effects</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {action_rows}
-                </tbody>
-            </Table>
-            <Select
-                value={selectedOption}
-                onChange={this.handleChange}
-                options={options}
-                getOptionLabel={this.getOptionLabel}
-                getOptionValue={this.getOptionValue}
-            />
-            </React.Fragment>
-        );
-        */
-        const { selectedOption } = this.state;
-
-        let table_header = <tr>
-           <th>Name</th>
-           <th></th>
-        </tr>
-        let object_rows = <tr>
-          <th>Bill</th>
-           <th>Florida</th>
-        </tr>
         return (
             <React.Fragment>
                 <Table striped bordered hover size="sm">
                     <thead>
-                        {table_header}
+                        {this.props.header}
                     </thead>
                     <tbody>
-                        {object_rows}
+                        {new_rows}
                     </tbody>
                 </Table>
                 <Select
