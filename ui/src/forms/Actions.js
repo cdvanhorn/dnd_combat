@@ -30,6 +30,18 @@ class ActionForm extends React.Component {
     }
 
     handleChange = (name, event) => {
+        let value = undefined;
+        if(name === 'source_effects' || name === 'target_effects' || name === 'fail_source_effects' || name === 'fail_target_effects') {
+            value = event;
+        } else {
+            value = event.target.value;
+            /*
+            if(event.target.type === 'checkbox') {
+                value = event.target.checked;
+            }
+            */
+        }
+        console.log(value);
         //update which fields are dirty
         if(this.state[this.props.action.id]) {
             this.setState({
@@ -136,6 +148,7 @@ class ActionForm extends React.Component {
                         all_effects={this.props.effects}
                         effects={this.props.action.source_effects}
                         field="source_effects"
+                        updateAction={this.handleChange}
                     />
                     <h3>Target Effects</h3>
                     <hr />
@@ -143,6 +156,7 @@ class ActionForm extends React.Component {
                         all_effects={this.props.effects}
                         effects={this.props.action.target_effects}
                         field="target_effects"
+                        updateAction={this.handleChange}
                     />
                     <h3>Failure Source Effects</h3>
                     <hr />
@@ -150,6 +164,7 @@ class ActionForm extends React.Component {
                         all_effects={this.props.effects}
                         effects={this.props.action.fail_source_effects}
                         field="fail_source_effects"
+                        updateAction={this.handleChange}
                     />
                     <h3>Failure Target Effects</h3>
                     <hr />
@@ -157,6 +172,7 @@ class ActionForm extends React.Component {
                         all_effects={this.props.effects}
                         effects={this.props.action.fail_target_effects}
                         field="fail_target_effects"
+                        updateAction={this.handleChange}
                     />
                 </Container>
             </BaseForm>
