@@ -14,13 +14,11 @@ export default class FormList extends React.Component {
             selectedOption: null
         });
         this.props.addRow(selectedOption.id, this.props.field);
-        //this.props.updateCharacter('actions', {add: true, id: selectedOption.id});
     }
 
     removeRow = (id) => {
         this.setState({ selectedOption: null });
         this.props.removeRow(id, this.props.field);
-        //this.props.updateCharacter('actions', {add: false, id: action_id});
     }
 
     getOptionValue = (option) => {
