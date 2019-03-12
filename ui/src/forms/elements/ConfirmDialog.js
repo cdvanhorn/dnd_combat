@@ -1,7 +1,7 @@
 import React from "react";
 
-import Modal from "react-bootstrap/lib/Modal";
-import Button from "react-bootstrap/lib/Button";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 export default class ConfirmDialog extends React.Component {
     render() {

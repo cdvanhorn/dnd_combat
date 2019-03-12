@@ -1,8 +1,8 @@
 import React from "react";
-import Navbar from "react-bootstrap/lib/Navbar";
-import Nav from "react-bootstrap/lib/Nav";
-import Container from "react-bootstrap/lib/Container";
-import NavDropdown from "react-bootstrap/lib/NavDropdown";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import Container from "react-bootstrap/Container";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 import Characters from "./Characters.js";
 import Actions from "./Actions.js";

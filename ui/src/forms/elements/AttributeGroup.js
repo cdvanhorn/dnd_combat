@@ -1,9 +1,9 @@
 import React from "react";
 
-import Container from "react-bootstrap/lib/Container";
-import Row from "react-bootstrap/lib/Row";
-import Col from "react-bootstrap/lib/Col";
-import Form from "react-bootstrap/lib/Form";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
 
 import {capFirst} from "../../Utilities";
 import {PlayerCharacter} from "../../models/PlayerCharacter";

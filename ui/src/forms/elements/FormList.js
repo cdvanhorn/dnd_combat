@@ -1,8 +1,8 @@
 import React from "react";
 
 import Select from "react-select";
-import Table from "react-bootstrap/lib/Table";
-import Button from "react-bootstrap/lib/Button";
+import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
 
 export default class FormList extends React.Component {
     state = {

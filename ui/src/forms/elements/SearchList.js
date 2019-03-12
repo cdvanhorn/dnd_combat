@@ -1,5 +1,5 @@
 import React from "react";
-import Nav from "react-bootstrap/lib/Nav";
+import Nav from "react-bootstrap/Nav";
 
 import {rdmCap} from "../../Utilities.js";
 

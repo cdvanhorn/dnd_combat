@@ -1,7 +1,7 @@
 import React from "react";
 
-import Form from "react-bootstrap/lib/Form";
-import Col from "react-bootstrap/lib/Col";
+import Form from "react-bootstrap/Form";
+import Col from "react-bootstrap/Col";
 
 import {rdmCap} from "../../Utilities.js";
 

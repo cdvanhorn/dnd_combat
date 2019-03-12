@@ -1,7 +1,7 @@
 import React from "react";
 
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import ActionList from './forms/elements/ActionList.js';
 import Search from './forms/Search.js';
