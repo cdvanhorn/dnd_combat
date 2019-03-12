@@ -8,12 +8,22 @@ export default class ActionEffectList extends React.Component {
         super(props);
     }
 
+    state = {
+        action: null
+    }
+
     removeRow = (id, field) => {
-        console.log("remove row with id " + id + " for field " + field);
+        this.setState({
+            action: "remove" + id
+        });
+        this.props.updateAction(field, {add: false, id: id});
     }
 
     addRow = (id, field) => {
-        console.log("add a new row " + id + " to " + field);
+        this.setState({
+            action: "add" + id
+        });
+        this.props.updateAction(field, {add: true, id: id});
     }
 
     render() {

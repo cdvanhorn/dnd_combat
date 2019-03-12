@@ -18,14 +18,14 @@ class CharacterActionList extends React.Component {
 
     addRow = (id) => {
         this.setState({
-            action: "add"
+            action: "add" + id
         });
         this.props.updateCharacter('actions', {add: true, id: id});
     }
 
     removeRow = (id) => {
         this.setState({
-            action: "remove"
+            action: "remove" + id
         });
         this.props.updateCharacter('actions', {add: false, id: id});
     }
