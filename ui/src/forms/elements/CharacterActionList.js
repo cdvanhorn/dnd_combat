@@ -13,14 +13,20 @@ const mapStateToProps = state => {
 
 class CharacterActionList extends React.Component {
     state = {
-        selectedOption: null,
+        action: null
     }
 
     addRow = (id) => {
+        this.setState({
+            action: "add"
+        });
         this.props.updateCharacter('actions', {add: true, id: id});
     }
 
     removeRow = (id) => {
+        this.setState({
+            action: "remove"
+        });
         this.props.updateCharacter('actions', {add: false, id: id});
     }
 

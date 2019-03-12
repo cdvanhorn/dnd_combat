@@ -6,11 +6,13 @@ import Button from "react-bootstrap/lib/Button";
 
 export default class FormList extends React.Component {
     state = {
-        selectedOption: null,
+        selectedOption: null
     }
 
     handleChange = (selectedOption) => {
-        this.setState({ selectedOption: null });
+        this.setState({
+            selectedOption: null
+        });
         this.props.addRow(selectedOption.id, this.props.field);
         //this.props.updateCharacter('actions', {add: true, id: selectedOption.id});
     }

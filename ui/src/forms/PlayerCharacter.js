@@ -52,7 +52,6 @@ class PlayerCharacterForm extends React.Component {
         //updating proficiences works differently
         if(name === 'proficiencies') {
             let skill = event.target.id;
-            console.log(value);
             if(value === true) {
                 //add proficiency
                 this.props.addSelectedPlayerCharacterProficiency(skill);
@@ -62,9 +61,9 @@ class PlayerCharacterForm extends React.Component {
             }
         } else if(name === 'actions') {
             if(value.add === true) {
-                this.props.addSelectedPlayerCharacterAction(value.id);
+                this.props.addSelectedPlayerCharacterAction(parseInt(value.id));
             } else {
-                this.props.removeSelectedPlayerCharacterAction(value.id);
+                this.props.removeSelectedPlayerCharacterAction(parseInt(value.id));
             }
         } else {
             this.props.updateSelectedPlayerCharacter(name, value);
