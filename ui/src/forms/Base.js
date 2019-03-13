@@ -19,26 +19,29 @@ export default class BaseForm extends React.Component {
     }
 
     handleChange = (name, event) => {
-        console.log("base handle change");
-        this.props.handleChange(name, event);
-        /*
         //update which fields are dirty
-        if(this.state[this.props.character.id]) {
+        if(this.state[this.props.object.id]) {
             this.setState({
-                [this.props.character.id]: Object.assign(this.state[this.props.character.id], {[name]: true})
+                [this.props.object.id]: Object.assign(this.state[this.props.object.id], {[name]: true})
             })
         } else {
             this.setState({
-                [this.props.character.id]: {[name]: true}
+                [this.props.object.id]: {[name]: true}
             })
         }
-        */
+
+        this.props.handleChange(name, event);
     }
 
     handleSave = (event) => {
         event.preventDefault();
-        //save the selected object or post a new obect
-        this.props.handleSave();
+        //need to pass dirty fields to save handler
+        let dirtyfields = this.state[this.props.object.id];
+        this.props.handleSave(dirtyfields);
+        //clear state
+        this.setState({
+            [this.props.object.id]: {}
+        });
     }
 
     toggleDialog = () => {
@@ -52,6 +55,14 @@ export default class BaseForm extends React.Component {
         //what to do if confirm delete
         this.toggleDialog();
         this.props.handleDelete();
+    }
+
+    isSaveDisabled = () => {
+        if(this.state[this.props.object.id]) {
+            return !Object.keys(this.state[this.props.object.id]).length > 0;
+        } else {
+            return true;
+        }
     }
 
     render() {
@@ -83,7 +94,7 @@ export default class BaseForm extends React.Component {
                     {content}
                     <br />
                     <ButtonToolbar className="justify-content-end">
-                        <Button type='submit' variant='primary' disabled={this.props.saveDisabled}>Save</Button>
+                        <Button type='submit' variant='primary' disabled={this.isSaveDisabled()}>Save</Button>
                         <Button variant='danger' onClick={this.toggleDialog}>Delete</Button>
                     </ButtonToolbar>
                 </form>

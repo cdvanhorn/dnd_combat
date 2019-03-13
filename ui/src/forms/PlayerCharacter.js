@@ -71,37 +71,19 @@ class PlayerCharacterForm extends React.Component {
         this.setState({
             dirty: true
         });
-
-        /*
-        //update which fields are dirty
-        if(this.state[this.props.character.id]) {
-            this.setState({
-                [this.props.character.id]: Object.assign(this.state[this.props.character.id], {[name]: true})
-            })
-        } else {
-            this.setState({
-                [this.props.character.id]: {[name]: true}
-            })
-        }
-        */
     }
 
-    handleSave = (event) => {
+    handleSave = (dirtyfields) => {
         if(this.props.character.id) {
             this.props.patchPlayerCharacter(
                 'http://localhost:3001/pcs',
                 this.props.character,
-                this.state[this.props.character.id]
+                dirtyfields
             );
             //clear the dirty state for this character
             this.setState({
                 dirty: false
             });
-            /*
-            this.setState({
-                [this.props.character.id]: {}
-            });
-            */
         } else {
             //new character
             this.props.postPlayerCharacter('http://localhost:3001/pcs', this.props.character);
@@ -118,18 +100,9 @@ class PlayerCharacterForm extends React.Component {
         this.props.fetchRaces('http://localhost:3001/races');
     }
 
-    isDisabled = () => {
-        if(this.state[this.props.character.id]) {
-            return !Object.keys(this.state[this.props.character.id]).length > 0;
-        } else {
-            return true;
-        }
-    }
-
     render() {
         return (
-            <BaseForm 
-                saveDisabled={this.isDisabled()}
+            <BaseForm
                 object={this.props.character}
                 handleDelete={this.handleDelete}
                 handleChange={this.handleChange}
