@@ -13,14 +13,26 @@ export default class BaseForm extends React.Component {
         this.state = {
             active: false
         }
-        this.handleChange = this.handleChange.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.toggleDialog = this.toggleDialog.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange = (name, event) => {
-        //handle change in form, update selected object
-        this.props.handleChange();
+        console.log("base handle change");
+        this.props.handleChange(name, event);
+        /*
+        //update which fields are dirty
+        if(this.state[this.props.character.id]) {
+            this.setState({
+                [this.props.character.id]: Object.assign(this.state[this.props.character.id], {[name]: true})
+            })
+        } else {
+            this.setState({
+                [this.props.character.id]: {[name]: true}
+            })
+        }
+        */
     }
 
     handleSave = (event) => {
@@ -47,6 +59,17 @@ export default class BaseForm extends React.Component {
             return (<p>{rdmCap('Select Something Asshole')}!</p>);
         }
 
+        let content = React.Children.map(this.props.children, (child) => {
+            if('hasinputs' in child.props) {
+                return React.cloneElement(child, {
+                    ...child.props,
+                    handleChange: this.handleChange
+                }, child.children);
+            } else {
+                return child;
+            }
+        });
+
         let action_text = "delete " + this.props.object.name;
         return (
             <React.Fragment>
@@ -57,7 +80,7 @@ export default class BaseForm extends React.Component {
                     active={this.state.active}
                 />
                 <form onSubmit={this.handleSave}>
-                    {this.props.children}
+                    {content}
                     <br />
                     <ButtonToolbar className="justify-content-end">
                         <Button type='submit' variant='primary' disabled={this.props.saveDisabled}>Save</Button>

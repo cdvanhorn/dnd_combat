@@ -20,14 +20,14 @@ class CharacterActionList extends React.Component {
         this.setState({
             action: "add" + id
         });
-        this.props.updateCharacter('actions', {add: true, id: id});
+        this.props.handleChange('actions', {add: true, id: id});
     }
 
     removeRow = (id) => {
         this.setState({
             action: "remove" + id
         });
-        this.props.updateCharacter('actions', {add: false, id: id});
+        this.props.handleChange('actions', {add: false, id: id});
     }
 
     componentDidMount = () => {

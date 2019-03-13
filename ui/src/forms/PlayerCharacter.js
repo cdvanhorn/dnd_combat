@@ -68,7 +68,11 @@ class PlayerCharacterForm extends React.Component {
         } else {
             this.props.updateSelectedPlayerCharacter(name, value);
         }
+        this.setState({
+            dirty: true
+        });
 
+        /*
         //update which fields are dirty
         if(this.state[this.props.character.id]) {
             this.setState({
@@ -79,6 +83,7 @@ class PlayerCharacterForm extends React.Component {
                 [this.props.character.id]: {[name]: true}
             })
         }
+        */
     }
 
     handleSave = (event) => {
@@ -90,8 +95,13 @@ class PlayerCharacterForm extends React.Component {
             );
             //clear the dirty state for this character
             this.setState({
+                dirty: false
+            });
+            /*
+            this.setState({
                 [this.props.character.id]: {}
             });
+            */
         } else {
             //new character
             this.props.postPlayerCharacter('http://localhost:3001/pcs', this.props.character);
@@ -129,22 +139,22 @@ class PlayerCharacterForm extends React.Component {
                 <hr />
                 <CharacterHeader
                     character={this.props.character}
-                    handleChange={this.handleChange}
                     races={this.props.races}
                     classes={this.props.classes}
+                    hasinputs={true}
                 />
                 <br/>
                 <h3>Attributes</h3>
                 <AttributeGroup
                     character={this.props.character}
-                    handleChange={this.handleChange}
+                    hasinputs={true}
                 />
                 <br/>
                 <h3>Actions</h3>
                 <hr />
                 <CharacterActionList
                     character={this.props.character}
-                    updateCharacter={this.handleChange}
+                    hasinputs={true}
                 />
             </BaseForm>
         );
