@@ -16,14 +16,14 @@ export default class ActionEffectList extends React.Component {
         this.setState({
             action: "remove" + id
         });
-        this.props.updateAction(field, {add: false, id: id});
+        this.props.handleChange(field, {add: false, id: id});
     }
 
     addRow = (id, field) => {
         this.setState({
             action: "add" + id
         });
-        this.props.updateAction(field, {add: true, id: id});
+        this.props.handleChange(field, {add: true, id: id});
     }
 
     render() {
