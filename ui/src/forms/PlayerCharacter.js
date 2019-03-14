@@ -32,7 +32,6 @@ class PlayerCharacterForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.isDisabled = this.isDisabled.bind(this);
     }
 
     handleChange = (name, event) => {

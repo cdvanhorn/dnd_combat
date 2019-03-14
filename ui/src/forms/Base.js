@@ -16,6 +16,7 @@ export default class BaseForm extends React.Component {
         this.handleDelete = this.handleDelete.bind(this);
         this.toggleDialog = this.toggleDialog.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.isSaveDisabled = this.isSaveDisabled.bind(this);
     }
 
     handleChange = (name, event) => {
