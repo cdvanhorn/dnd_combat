@@ -1,7 +1,8 @@
 import { 
     ACT_RECEIVE_ACTIONS,
     ACT_REQUEST_ACTIONS,
-    ACT_SELECT_ACTION
+    ACT_SELECT_ACTION,
+    ACT_UPDATE_SELECTED_ACTION
 } from "../actionTypes.js";
 
 const initialState = {
@@ -30,6 +31,12 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 ui_selected_action: payload.action
+            };
+        case ACT_UPDATE_SELECTED_ACTION:
+            payload = action.payload;
+            return {
+                ...state,
+                ui_selected_action: Object.assign(state.ui_selected_action, {[payload.field]: payload.value})
             };
         default:
             return state;

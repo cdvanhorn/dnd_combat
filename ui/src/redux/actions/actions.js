@@ -2,8 +2,17 @@ import fetch from "cross-fetch";
 import {
     ACT_RECEIVE_ACTIONS,
     ACT_REQUEST_ACTIONS,
-    ACT_SELECT_ACTION
+    ACT_SELECT_ACTION,
+    ACT_UPDATE_SELECTED_ACTION
 } from "../actionTypes.js";
+
+export const updateSelectedAction = (field, value) => ({
+    type: ACT_UPDATE_SELECTED_ACTION,
+    payload: {
+        "field": field,
+        "value": value
+    }
+});
 
 export const selectAction = action => ({
     type: ACT_SELECT_ACTION,

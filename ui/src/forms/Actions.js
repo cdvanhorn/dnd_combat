@@ -6,6 +6,8 @@ import {fetchEffects} from "../redux/actions/effects.js";
 import ActionHeader from "./elements/ActionHeader.js";
 import ActionEffectList from "./elements/ActionEffectList.js";
 
+import { updateSelectedAction } from "../redux/actions/actions.js";
+
 const mapStateToProps = state => {
     return {
         "action": state.actions.ui_selected_action,
@@ -29,13 +31,23 @@ class ActionForm extends React.Component {
             value = event;
         } else {
             value = event.target.value;
-            /*
-            if(event.target.type === 'checkbox') {
-                value = event.target.checked;
-            }
-            */
+        }
+        //keep numbers as numbers
+        if(!isNaN(value) && typeof value !== "boolean" && value.length > 0) {
+            value = parseInt(value);
         }
         console.log(value);
+        if(name === 'source_effects') {
+    
+        } else if(name === 'target_effects') {
+
+        } else if(name === 'fail_source_effects') {
+
+        } else if(name === 'fail_target_effects') {
+
+        } else {
+            this.props.updateSelectedAction(name, value);
+        }
         this.setState({
             dirty: true
         });
@@ -107,6 +119,7 @@ class ActionForm extends React.Component {
 export default connect(
     mapStateToProps,
     {
-        fetchEffects
+        fetchEffects,
+        updateSelectedAction
     }
 )(ActionForm);
