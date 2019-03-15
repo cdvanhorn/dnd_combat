@@ -6,7 +6,11 @@ import {fetchEffects} from "../redux/actions/effects.js";
 import ActionHeader from "./elements/ActionHeader.js";
 import ActionEffectList from "./elements/ActionEffectList.js";
 
-import { updateSelectedAction } from "../redux/actions/actions.js";
+import { 
+    updateSelectedAction,
+    addSelectedActionEffect,
+    removeSelectedActionEffect
+} from "../redux/actions/actions.js";
 
 const mapStateToProps = state => {
     return {
@@ -37,14 +41,12 @@ class ActionForm extends React.Component {
             value = parseInt(value);
         }
         console.log(value);
-        if(name === 'source_effects') {
-    
-        } else if(name === 'target_effects') {
-
-        } else if(name === 'fail_source_effects') {
-
-        } else if(name === 'fail_target_effects') {
-
+        if(name === 'source_effects' || name === 'target_effects' || name === 'fail_source_effects' || name === 'fail_target_effects') {
+            if(value.add === true) {
+                this.props.addSelectedActionEffect(name, parseInt(value.id));
+            } else {
+                this.props.removeSelectedActionEffect(name, parseInt(value.id));
+            }
         } else {
             this.props.updateSelectedAction(name, value);
         }
@@ -120,6 +122,8 @@ export default connect(
     mapStateToProps,
     {
         fetchEffects,
-        updateSelectedAction
+        updateSelectedAction,
+        addSelectedActionEffect,
+        removeSelectedActionEffect
     }
 )(ActionForm);

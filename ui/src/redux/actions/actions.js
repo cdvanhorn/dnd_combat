@@ -3,8 +3,26 @@ import {
     ACT_RECEIVE_ACTIONS,
     ACT_REQUEST_ACTIONS,
     ACT_SELECT_ACTION,
-    ACT_UPDATE_SELECTED_ACTION
+    ACT_UPDATE_SELECTED_ACTION,
+    ACT_UPDATE_SELECTED_ACTION_ADD_EFFECT,
+    ACT_UPDATE_SELECTED_ACTION_REMOVE_EFFECT
 } from "../actionTypes.js";
+
+export const addSelectedActionEffect = (field, effect) => ({
+    type: ACT_UPDATE_SELECTED_ACTION_ADD_EFFECT,
+    payload: {
+        "field": field,
+        "effect": effect
+    }
+});
+
+export const removeSelectedActionEffect = (field, effect) => ({
+    type: ACT_UPDATE_SELECTED_ACTION_REMOVE_EFFECT,
+    payload: {
+        "field": field,
+        "effect": effect
+    }
+});
 
 export const updateSelectedAction = (field, value) => ({
     type: ACT_UPDATE_SELECTED_ACTION,

@@ -2,7 +2,9 @@ import {
     ACT_RECEIVE_ACTIONS,
     ACT_REQUEST_ACTIONS,
     ACT_SELECT_ACTION,
-    ACT_UPDATE_SELECTED_ACTION
+    ACT_UPDATE_SELECTED_ACTION,
+    ACT_UPDATE_SELECTED_ACTION_ADD_EFFECT,
+    ACT_UPDATE_SELECTED_ACTION_REMOVE_EFFECT
 } from "../actionTypes.js";
 
 const initialState = {
@@ -37,6 +39,30 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 ui_selected_action: Object.assign(state.ui_selected_action, {[payload.field]: payload.value})
+            };
+        case ACT_UPDATE_SELECTED_ACTION_ADD_EFFECT:
+            payload= action.payload;
+            return {
+                ...state,
+                ui_selected_action: Object.assign(
+                    state.ui_selected_action,
+                    {
+                        [payload.field]: [...state.ui_selected_action[payload.field], payload.effect]
+                    }
+                )
+            };
+        case ACT_UPDATE_SELECTED_ACTION_REMOVE_EFFECT:
+            payload = action.payload;
+            return {
+                ...state,
+                ui_selected_action: Object.assign(
+                    state.ui_selected_action,
+                    {
+                        [payload.field]: state.ui_selected_action[payload.field].filter( (effect) => {
+                            return effect !== payload.effect
+                        })
+                    }
+                )
             };
         default:
             return state;
