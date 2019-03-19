@@ -75,7 +75,7 @@ class PlayerCharacterForm extends React.Component {
     handleSave = (dirtyfields) => {
         if(this.props.character.id) {
             this.props.patchPlayerCharacter(
-                'http://localhost:3001/pcs',
+                'http://localhost:3001/actors',
                 this.props.character,
                 dirtyfields
             );
@@ -85,12 +85,12 @@ class PlayerCharacterForm extends React.Component {
             });
         } else {
             //new character
-            this.props.postPlayerCharacter('http://localhost:3001/pcs', this.props.character);
+            this.props.postPlayerCharacter('http://localhost:3001/actors', this.props.character);
         }
     }
 
     handleDelete = () => {
-        this.props.deletePlayerCharacter('http://localhost:3001/pcs', this.props.character);
+        this.props.deletePlayerCharacter('http://localhost:3001/actors', this.props.character);
     }
 
     componentDidMount = () => {

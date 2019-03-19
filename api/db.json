@@ -1,7 +1,8 @@
 {
-  "pcs": [
+  "actors": [
     {
       "id": 1,
+      "type": "pc",
       "name": "Steve Stephen Stevenson",
       "race_id": 1,
       "class_id": 1,

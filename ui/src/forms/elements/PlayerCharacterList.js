@@ -22,7 +22,7 @@ class PlayerCharacterList extends React.Component {
     }
 
     componentDidMount = () => {
-        this.props.fetchPlayerCharacters('http://localhost:3001/pcs');
+        this.props.fetchPlayerCharacters('http://localhost:3001/actors?type=pc');
     }
 
     itemClick = (key) => {
