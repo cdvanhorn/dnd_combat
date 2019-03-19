@@ -1,61 +1,67 @@
 {
-    "pcs": [
-        {
-            "id": 1,
-            "name": "Steve Stephen Stevenson",
-            "race_id": 1,
-            "class_id": 1,
-            "level": 1,
-            "strength": 18,
-            "constitution": 18,
-            "dexterity": 18,
-            "wisdom": 18,
-            "intelligence": 18,
-            "charisma": 18,
-            "proficiency_bonus": 2,
-            "proficiencies": ["athletics", "sleight_of_hand", "arcana"],
-            "actions": [1]
-        }
-    ],
-    "classes": [
-        {
-            "id": 1,
-            "name": "Fighter"
-        },
-        {
-            "id": 2,
-            "name": "Barbarian"
-        }
-    ],
-    "races": [
-        {
-            "id": 1,
-            "name": "Human"
-        },
-        {
-            "id": 2,
-            "name": "Dwarf"
-        }
-    ],
-    "actions": [
-        {
-            "id": 1,
-            "name": "attack",
-            "source_effects": [],
-            "target_effects": [],
-            "fail_source_effects": [],
-            "fail_target_effects": [],
-            "succeed_roll": "foo",
-            "succeed_compare": "bar"
-        }
-    ],
-    "effects": [
-        {
-            "id": 1,
-            "name": "damage",
-            "damage_type": "slashing",
-            "damage_amount": "1d6",
-            "damage_attribute": "strength"
-        }
-    ]
+  "pcs": [
+    {
+      "id": 1,
+      "name": "Steve Stephen Stevenson",
+      "race_id": 1,
+      "class_id": 1,
+      "level": 1,
+      "strength": 18,
+      "constitution": 18,
+      "dexterity": 18,
+      "wisdom": 18,
+      "intelligence": 18,
+      "charisma": 18,
+      "proficiency_bonus": 2,
+      "proficiencies": [
+        "athletics",
+        "sleight_of_hand",
+        "arcana"
+      ],
+      "actions": []
+    }
+  ],
+  "classes": [
+    {
+      "id": 1,
+      "name": "Fighter"
+    },
+    {
+      "id": 2,
+      "name": "Barbarian"
+    }
+  ],
+  "races": [
+    {
+      "id": 1,
+      "name": "Human"
+    },
+    {
+      "id": 2,
+      "name": "Dwarf"
+    }
+  ],
+  "actions": [
+    {
+      "id": 1,
+      "name": "attack",
+      "source_effects": [
+        1
+      ],
+      "target_effects": [],
+      "fail_source_effects": [],
+      "fail_target_effects": [],
+      "succeed_roll": "foo",
+      "succeed_compare": "bar"
+    }
+  ],
+  "effects": [
+    {
+      "id": 1,
+      "name": "damage",
+      "damage_type": "slashing",
+      "damage_amount": "1d6",
+      "damage_attribute": "strength"
+    }
+  ]
 }
