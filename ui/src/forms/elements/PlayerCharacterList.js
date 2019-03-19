@@ -6,7 +6,7 @@ import {
     fetchPlayerCharacters,
     selectPlayerCharacter
 } from "../../redux/actions/playerCharacters.js";
-import {PlayerCharacter} from "../../models/PlayerCharacter.js";
+import {Actor} from "../../models/Actor.js";
 
 const mapStateToProps = state => {
     return { 
@@ -32,7 +32,8 @@ class PlayerCharacterList extends React.Component {
                 return item.id == key;
             });
         } else {
-            pc = new PlayerCharacter();
+            pc = new Actor();
+            pc.type = "pc";
         }
         this.props.selectPlayerCharacter(pc);
     }

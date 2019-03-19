@@ -1,5 +1,6 @@
 const FIELDS = [
     'id',
+    'type',
     'name',
     'class_id',
     'race_id',
@@ -15,8 +16,9 @@ const FIELDS = [
     'actions'
 ];
 
-export class PlayerCharacter {
+export class Actor {
     id;
+    type = "";
     name = "";
     class_id = 1;
     race_id = 1;

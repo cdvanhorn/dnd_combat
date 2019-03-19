@@ -15,7 +15,7 @@ import {
     PCS_UPDATE_SELECTED_PLAYER_CHARACTER_ADD_ACTION,
     PCS_UPDATE_SELECTED_PLAYER_CHARACTER_REMOVE_ACTION
 } from "../actionTypes.js";
-import {PlayerCharacter} from "../../models/PlayerCharacter.js";
+import {Actor} from "../../models/Actor.js";
 
 export const savePlayerCharacter = () => ({
     type: PCS_SAVE_PLAYER_CHARACTER,
@@ -58,7 +58,7 @@ export function deletePlayerCharacter(url, character) {
             }
         }).then( (response) => response.json())
         .then( (json) => {
-            let cobj = new PlayerCharacter();
+            let cobj = new Actor();
             dispatch(removedPlayerCharacter(cobj));
             dispatch(fetchPlayerCharacters(url));
         })
@@ -79,7 +79,7 @@ export function patchPlayerCharacter(url, character, fields) {
             body: JSON.stringify(content)
         }).then( (response) => response.json())
         .then( (json) => {
-            let cobj = new PlayerCharacter();
+            let cobj = new Actor();
             cobj.fromJson(json);
             dispatch(savedPlayerCharacter(cobj));
             dispatch(fetchPlayerCharacters(url));
@@ -99,7 +99,7 @@ export function postPlayerCharacter(url, character) {
             body: JSON.stringify(character)
         }).then( (response) => response.json())
         .then( (json) => {
-            let cobj = new PlayerCharacter();
+            let cobj = new Actor();
             cobj.fromJson(json);
             dispatch(savedPlayerCharacter(cobj));
             dispatch(fetchPlayerCharacters(url));

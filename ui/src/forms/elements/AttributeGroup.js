@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 
 import {capFirst} from "../../Utilities";
-import {PlayerCharacter} from "../../models/PlayerCharacter";
+import {Actor} from "../../models/Actor.js";
 
 const ATTRIBUTE_SKILL_MAP = {
     strength: ["athletics"],
@@ -99,7 +99,7 @@ export default class AttributeGroup extends React.Component {
     }
 
     generateAttributes = () => {
-        let pc = new PlayerCharacter(this.props.character);
+        let pc = new Actor(this.props.character);
 
         let stat_rows = [];
         for(let attribute in ATTRIBUTE_SKILL_MAP) {
